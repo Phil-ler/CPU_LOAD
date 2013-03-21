@@ -3,7 +3,7 @@ Created on 20/mar/2013
 
 @author: phil
 '''
-import Core
+from Core import *
 import psutil
 class Host():
     '''
@@ -19,13 +19,13 @@ class Host():
         self.core = []
         
         for i in range(self.Num_Cores):
-            self.core.append(Core.Core(10))
+            self.core.append(Core(i))
             print("Core creato n°",i)
             
     def fill (self,percent):
-        for c in range(self.Num_Cores):
-            print("Ciao",c) 
-            
+        for i in range(self.Num_Cores):
+            #print ("Carico del processore ",percent[c])
+            self.core[i].load(percent[i])
                             
     def Run(self,timer):
         #while(True):
