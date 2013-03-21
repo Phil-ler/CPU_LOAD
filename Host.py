@@ -24,7 +24,7 @@ class Host():
             
     def fill (self,percent):
         for c in range(self.Num_Cores):
-            print("Ciao",c)
+            print("Ciao",c) 
             
                             
     def Run(self,timer):
