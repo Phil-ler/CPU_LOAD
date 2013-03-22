@@ -41,7 +41,7 @@ class Ui_frmHost(object):
         for self.core in range (psutil.NUM_CPUS):
         
             lcdNumber = QtGui.QLCDNumber(frmHost)
-            lcdNumber.setObjectName(_fromUtf8("lcd{}".format(self.core)))
+            lcdNumber.setObjectName(_fromUtf8("lcd{}".format(self.core))) 
             self.lcd.append(lcdNumber)
             self.verticalLayout.addWidget(lcdNumber)
         
