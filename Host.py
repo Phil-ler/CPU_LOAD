@@ -30,6 +30,7 @@ class Host():
     def Run(self,timer):
         #while(True):
             percent=psutil.cpu_percent(interval=timer, percpu=True)
-            print(percent)
+           # print(percent)
             self.fill(percent)
+            return percent
         

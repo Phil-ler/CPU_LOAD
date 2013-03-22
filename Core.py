@@ -29,5 +29,6 @@ class Core(object):
         else: self.colore="rosso"
         
         self.perc_carico=carico
-        print ("Core #=",self.number," carico= ",self.perc_carico," colore= ",self.colore)
+       # print ("Core #=",self.number," carico= ",self.perc_carico," colore= ",self.colore)
+        
         
