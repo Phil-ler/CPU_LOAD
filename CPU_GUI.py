@@ -10,8 +10,6 @@
 from PyQt4 import QtCore, QtGui
 import psutil
 
-import Host
-
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -27,8 +25,7 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_frmHost(object):
-    def DIO (self):
-        print("DIOCANE")
+
     def setupUi(self, frmHost):
         frmHost.setObjectName(_fromUtf8("frmHost"))
         frmHost.resize(470, 367)
