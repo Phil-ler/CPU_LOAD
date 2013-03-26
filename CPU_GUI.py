@@ -10,6 +10,8 @@
 from PyQt4 import QtCore, QtGui
 import psutil
 
+import Host
+
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -25,6 +27,8 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_frmHost(object):
+    def DIO (self):
+        print("DIOCANE")
     def setupUi(self, frmHost):
         frmHost.setObjectName(_fromUtf8("frmHost"))
         frmHost.resize(470, 367)
@@ -35,21 +39,23 @@ class Ui_frmHost(object):
         self.lcd =[]
         self.cmd=[]
         #-----------------
-        
+      
         self.verticalLayout = QtGui.QVBoxLayout(frmHost)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         for self.core in range (psutil.NUM_CPUS):
         
             lcdNumber = QtGui.QLCDNumber(frmHost)
             lcdNumber.setObjectName(_fromUtf8("lcd{}".format(self.core))) 
+            lcdNumber.setMinimumSize(QtCore.QSize(0, 0))
+            lcdNumber.setBaseSize(QtCore.QSize(0, 10))
             self.lcd.append(lcdNumber)
             self.verticalLayout.addWidget(lcdNumber)
         
             pushButton = QtGui.QPushButton(frmHost)
-            pushButton.setObjectName(_fromUtf8("cmd{}".format(self.core)))
+            pushButton.setObjectName(_fromUtf8("Core_{}".format(self.core+1)))
             self.cmd.append(pushButton)
             self.verticalLayout.addWidget(pushButton)
-
+        
         self.retranslateUi(frmHost)
         QtCore.QMetaObject.connectSlotsByName(frmHost)
 

@@ -9,6 +9,12 @@ from Host import Host
 from PyQt4 import QtCore,QtGui
 import CPU_GUI
 import sys
+import time
+from test.fork_wait import _thread
+from logging.config import thread
+#from threading import Thread
+
+
 
 
 class MainWindow(QtGui.QMainWindow):
@@ -16,21 +22,12 @@ class MainWindow(QtGui.QMainWindow):
     Classe della finestra principale
     
     """
-    def read(self):
-        #print("Leggo")
-        carico=self.My_Host.Run(0.1)        
-        #self.ui.lcdNumber.display(carico[0])
-        for i in range (self.num_Host):
+    def riempi(self,carico):    
+            
+        for i in range(self.num_Host):
             self.ui.lcd[i].display(carico[i])
         
-        
-    def avvio(self):
-        print("asd")
-        if self.timer.isActive(): 
-            self.timer.stop()
-        else:
-            self.timer.start() 
-        
+      
     def __init__(self):
         """
         Costruttore della classe MainWindow.
@@ -40,27 +37,29 @@ class MainWindow(QtGui.QMainWindow):
         self.setCentralWidget(QtGui.QWidget(self))
         self.ui = CPU_GUI.Ui_frmHost()
         self.ui.setupUi(self.centralWidget())
-        self.timer = QtCore.QTimer()
-        self.timer.setInterval(0)
-        self.timer.timeout.connect(self.read)
-        #self.ui.pushButton.clicked.connect(self.avvio)
         self.num_Host = psutil.NUM_CPUS
-        self.My_Host = Host(self.num_Host)
-        #self.setCentralWidget(self.ui)
-        self.avvio()
-       
-
+        self.My_Host = Host(self.num_Host,0.5)
+        
+        '''
+        crezione thread
+        '''
+        self._thread=QtCore.QThread(self)
+        self.My_Host.moveToThread(self._thread) #muovo la classe Host dentro al thread
+        self._thread.started.connect(self.My_Host.Run,2) #funzione che parte nel thread
+        self.My_Host.ritorno_dati.connect(self.riempi) #quando dentro Host viene lanciato il segnale che son pronti i dati mostra dentro i LED
+        self._thread.start()      
 
 
 def main():
     print("CIAO")
     
     app = QtGui.QApplication(sys.argv)
-
+    
     my_mainWindow = MainWindow()
+    
     my_mainWindow.show()
-
     sys.exit(app.exec_())
+    
     
 if __name__ == '__main__':
     main()
