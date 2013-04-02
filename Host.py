@@ -23,6 +23,7 @@ class Host(QtCore.QObject):
         QtCore.QObject.__init__(self)
         self.Num_Cores=Num_Cores
         self.core = []
+        self.win_core = []
         self.timer = timer
         self.stop=True
         for i in range(self.Num_Cores):

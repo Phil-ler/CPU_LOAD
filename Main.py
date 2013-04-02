@@ -9,24 +9,12 @@ from Host import Host
 from PyQt4 import QtCore,QtGui
 import CPU_GUI
 import sys
-import time
-from test.fork_wait import _thread
-from logging.config import thread
-#from threading import Thread
-
-
-
 
 class MainWindow(QtGui.QMainWindow):
     """
     Classe della finestra principale
     
     """
-    def riempi(self,carico):    
-            
-        for i in range(self.num_Host):
-            self.ui.lcd[i].display(carico[i])
-        
       
     def __init__(self):
         """
@@ -41,6 +29,13 @@ class MainWindow(QtGui.QMainWindow):
         self.My_Host = Host(self.num_Host,0.5)
         
         '''
+        connettore pulsanti
+        mostreranno le finestre dedicate a ogni singolo Core
+        '''
+        
+        for i in range (self.num_Host):   
+            self.ui.cmd[i].clicked.connect(self.My_Host.core[i].show)
+        '''
         crezione thread
         '''
         self._thread=QtCore.QThread(self)
@@ -48,6 +43,15 @@ class MainWindow(QtGui.QMainWindow):
         self._thread.started.connect(self.My_Host.Run,2) #funzione che parte nel thread
         self.My_Host.ritorno_dati.connect(self.riempi) #quando dentro Host viene lanciato il segnale che son pronti i dati mostra dentro i LED
         self._thread.start()      
+        
+    def riempi(self,carico):    
+            
+        for i in range(self.num_Host):
+            self.ui.lcd[i].display(carico[i])
+    
+    def prova(self):
+    
+        print("CIAO2")    
 
 
 def main():
@@ -59,7 +63,6 @@ def main():
     
     my_mainWindow.show()
     sys.exit(app.exec_())
-    
     
 if __name__ == '__main__':
     main()
