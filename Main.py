@@ -10,12 +10,13 @@ from PyQt4 import QtCore,QtGui
 import CPU_GUI
 import sys
 
+
 class MainWindow(QtGui.QMainWindow):
     """
     Classe della finestra principale
     
     """
-      
+    chiusura =QtCore.pyqtSignal()
     def __init__(self):
         """
         Costruttore della classe MainWindow.
@@ -35,7 +36,7 @@ class MainWindow(QtGui.QMainWindow):
         
         for i in range (self.num_Host):   
             self.ui.cmd[i].clicked.connect(self.My_Host.core[i].show)
-        '''
+        '''\
         crezione thread
         '''
         self._thread=QtCore.QThread(self)
@@ -43,6 +44,17 @@ class MainWindow(QtGui.QMainWindow):
         self._thread.started.connect(self.My_Host.Run,2) #funzione che parte nel thread
         self.My_Host.ritorno_dati.connect(self.riempi) #quando dentro Host viene lanciato il segnale che son pronti i dati mostra dentro i LED
         self._thread.start()      
+    
+    def closeEvent(self,event):
+        self.prova()
+        for i in range (self.num_Host):
+            self.My_Host.core[i].hide()
+        print("Finestre secondarie Chiuse")
+        QtGui.QMainWindow.closeEvent(self,event)
+        #ritorno_dati = PyQt4.QtCore.pyqtSignal(list)
+        
+        self.chiusura.emit()
+        
         
     def riempi(self,carico):    
             
@@ -60,8 +72,8 @@ def main():
     app = QtGui.QApplication(sys.argv)
     
     my_mainWindow = MainWindow()
-    
     my_mainWindow.show()
+    #app.quit.connect.closeEvent()    
     sys.exit(app.exec_())
     
 if __name__ == '__main__':

@@ -5,7 +5,7 @@ Created on 20/mar/2013
 '''
 from PyQt4 import QtCore,QtGui
 import CORE_GUI
-import pyqtgraph   
+
 
 class Core(QtGui.QMainWindow):
     '''
