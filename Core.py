@@ -35,6 +35,7 @@ class Core(QtGui.QMainWindow):
         ''' 
         
         '''
+        
         if (carico < 0): self.colore="grigio"  
         elif (carico < 60): self.colore="verde"
         elif (carico < 80): self.colore="giallo"
@@ -43,6 +44,7 @@ class Core(QtGui.QMainWindow):
         self.perc_carico.append(carico)
     
     def traccia (self):
+        self.ui.grafico.setNextPoint(self.perc_carico)
         self.ui.grafico.repaint()
         #print ("Core #=",self.number," carico= ",self.perc_carico," colore= ",self.colore)
         
