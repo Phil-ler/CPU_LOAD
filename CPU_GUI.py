@@ -28,7 +28,7 @@ class Ui_frmHost(object):
 
     def setupUi(self, frmHost):
         frmHost.setObjectName(_fromUtf8("frmHost"))
-        frmHost.resize(470, 367)
+        frmHost.setMinimumSize(200,700)
         #-----------------
         self.ncore=0
         #self.lcd_name="lcd{}".format(self.ncore)

@@ -36,6 +36,7 @@ class MainWindow(QtGui.QMainWindow):
         
         for i in range (self.num_Host):   
             self.ui.cmd[i].clicked.connect(self.My_Host.core[i].show)
+            
         '''\
         crezione thread
         '''
@@ -46,7 +47,6 @@ class MainWindow(QtGui.QMainWindow):
         self._thread.start()      
     
     def closeEvent(self,event):
-        self.prova()
         for i in range (self.num_Host):
             self.My_Host.core[i].hide()
         print("Finestre secondarie Chiuse")
@@ -60,10 +60,11 @@ class MainWindow(QtGui.QMainWindow):
             
         for i in range(self.num_Host):
             self.ui.lcd[i].display(carico[i])
+            self.My_Host.core[i].traccia()
     
     def prova(self):
     
-        print("CIAO2")    
+        print("Sono qui")    
 
 
 def main():
@@ -72,8 +73,7 @@ def main():
     app = QtGui.QApplication(sys.argv)
     
     my_mainWindow = MainWindow()
-    my_mainWindow.show()
-    #app.quit.connect.closeEvent()    
+    my_mainWindow.show()    
     sys.exit(app.exec_())
     
 if __name__ == '__main__':

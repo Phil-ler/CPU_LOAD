@@ -30,6 +30,7 @@ class Core(QtGui.QMainWindow):
         #----------------------------------------------------------
         self.label_core="Core #{}".format(self.number+1)
         self.ui.lbl_core.setText(self.label_core)
+        self.setWindowTitle(self.label_core)
     def load (self,carico):
         ''' 
         
@@ -40,7 +41,9 @@ class Core(QtGui.QMainWindow):
         else: self.colore="rosso"
         self.ui.lbl_carico.setText("{}".format(carico))
         self.perc_carico.append(carico)
-        
+    
+    def traccia (self):
+        self.ui.grafico.repaint()
         #print ("Core #=",self.number," carico= ",self.perc_carico," colore= ",self.colore)
         
         
