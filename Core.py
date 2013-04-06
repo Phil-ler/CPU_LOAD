@@ -21,7 +21,7 @@ class Core(QtGui.QMainWindow):
         self.setCentralWidget(QtGui.QWidget(self))
         self.ui = CORE_GUI.Ui_frm_core()
         self.ui.setupUi(self.centralWidget())
-        
+        self.limite_nodi =35
         
         self.number=n
         self.perc_carico=[] #percentuale del carico
@@ -42,9 +42,16 @@ class Core(QtGui.QMainWindow):
         else: self.colore="rosso"
         self.ui.lbl_carico.setText("{}".format(carico))
         self.perc_carico.append(carico)
-    
+        
     def traccia (self):
-        self.ui.grafico.setNextPoint(self.perc_carico)
+        
+        if (len(self.perc_carico) >= self.limite_nodi):
+            coda_da_disegnare = self.perc_carico[len(self.perc_carico)-self.limite_nodi:len(self.perc_carico)]
+            self.ui.grafico.setNextPoint(coda_da_disegnare)
+        
+        else :
+            self.ui.grafico.setNextPoint(self.perc_carico)
+        
         self.ui.grafico.repaint()
         #print ("Core #=",self.number," carico= ",self.perc_carico," colore= ",self.colore)
         
