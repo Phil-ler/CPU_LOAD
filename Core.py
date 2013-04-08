@@ -7,11 +7,12 @@ from PyQt4 import QtCore,QtGui
 import CORE_GUI
 
 
+
 class Core(QtGui.QMainWindow):
     '''
     classdocs
     '''
-    
+    limite_nodi= 100
 
     def __init__(self,n):
         '''
@@ -21,7 +22,7 @@ class Core(QtGui.QMainWindow):
         self.setCentralWidget(QtGui.QWidget(self))
         self.ui = CORE_GUI.Ui_frm_core()
         self.ui.setupUi(self.centralWidget())
-        self.limite_nodi =35
+        #self.limite_nodi = limite_nodi
         
         self.number=n
         self.perc_carico=[] #percentuale del carico
