@@ -12,7 +12,7 @@ class Core(QtGui.QMainWindow):
     '''
     classdocs
     '''
-    limite_nodi= 100
+    limite_nodi= 50
 
     def __init__(self,n):
         '''

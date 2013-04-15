@@ -36,7 +36,7 @@ class Ui_frmHost(object):
         self.lcd =[]
         self.cmd=[]
         #-----------------
-      
+        #frmHost.settitle("CPU")
         self.verticalLayout = QtGui.QVBoxLayout(frmHost)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         for self.core in range (psutil.NUM_CPUS):

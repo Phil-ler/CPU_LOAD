@@ -32,15 +32,23 @@ class Grafico(QtGui.QWidget):
         self.drawGrid(event, qp)
         qp.save()
         qp.translate(0,self.height())
-        qp.scale(self.width()/Core.Core.limite_nodi-1,-self.height()/100)
+        qp.scale(self.width()/Core.Core.limite_nodi-1,-self.height()/101)
         self.drawline(event,qp)
         qp.restore()
         qp.end()
     
     def drawGrid(self,event,qp):
         
-        qp.setBrush(Qt.QBrush(QtCore.Qt.gray)) #"#c56c00"
+        qp.setBrush(Qt.QBrush(QtCore.Qt.black)) #"#c56c00"
         qp.drawRect(0,0,self.width(),self.height())
+        qp.setPen(QtCore.Qt.white)
+        qp.drawText(0,self.height(),"0")
+        qp.drawText(0,self.height()*0.5,"50")
+        qp.drawText(0,self.height()*0.75,"25")
+        qp.drawText(0,self.height()*0.25,"75")
+        qp.drawText(0,self.height()*0.05,"100")
+        
+        
     
     def drawline (self,event,qp):
         y_init = self.coda[0]
@@ -49,9 +57,9 @@ class Grafico(QtGui.QWidget):
         #print("coda = {}".format(self.coda))
         for i in range (len(self.coda)):
            
-            if (self.coda[i]<20):
+            if (self.coda[i]<50):
                 colore=QtCore.Qt.green
-            elif (self.coda[i]<40):
+            elif (self.coda[i]<80):
                 colore=QtCore.Qt.yellow
             else: colore=QtCore.Qt.red
             #pen = QtGui.QPen(colore, 2, QtCore.Qt.SolidLine)

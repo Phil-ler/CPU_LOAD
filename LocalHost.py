@@ -11,7 +11,7 @@ import CPU_GUI
 import sys
 
 
-class MainWindow(QtGui.QMainWindow):
+class LocalHost(QtGui.QMainWindow):
     """
     Classe della finestra principale
     
@@ -22,12 +22,14 @@ class MainWindow(QtGui.QMainWindow):
         Costruttore della classe MainWindow.
         
         """
-        super(MainWindow, self).__init__()
+        super(LocalHost, self).__init__()
         self.setCentralWidget(QtGui.QWidget(self))
         self.ui = CPU_GUI.Ui_frmHost()
         self.ui.setupUi(self.centralWidget())
         self.num_Host = psutil.NUM_CPUS
-        self.My_Host = Host(self.num_Host,0.5)
+        self.My_Host = Host(self.num_Host,0.1)
+        self.carico_generico = []
+        
         
         '''
         connettore pulsanti
@@ -65,16 +67,3 @@ class MainWindow(QtGui.QMainWindow):
     def prova(self):
     
         print("Sono qui")    
-
-
-def main():
-    print("CIAO")
-    
-    app = QtGui.QApplication(sys.argv)
-    
-    my_mainWindow = MainWindow()
-    my_mainWindow.show()    
-    sys.exit(app.exec_())
-    
-if __name__ == '__main__':
-    main()

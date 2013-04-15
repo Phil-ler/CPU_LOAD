@@ -13,7 +13,7 @@ class Host(QtCore.QObject):
        
     #Questo è il segnale
     ritorno_dati = PyQt4.QtCore.pyqtSignal(list)
-         
+    valore_generico = PyQt4.QtCore.pyqtSignal(float)
     
     def __init__(self,Num_Cores,timer):
         '''
@@ -40,12 +40,15 @@ class Host(QtCore.QObject):
          
     def Run(self):
         while(self.stop):
+            
             percent=psutil.cpu_percent(interval=self.timer, percpu=True)
+            media =psutil.cpu_percent()
             print(percent)
             #riempi ogni singolo Core
             self.fill(percent) 
             
             #emette il segnale, ritornando percent
             self.ritorno_dati.emit(percent)
+            self.valore_generico.emit(media)
             #return percent
         
