@@ -45,8 +45,13 @@ class LocalHost(QtGui.QMainWindow):
         self._thread=QtCore.QThread(self)
         self.My_Host.moveToThread(self._thread) #muovo la classe Host dentro al thread
         self._thread.started.connect(self.My_Host.Run,2) #funzione che parte nel thread
-        self.My_Host.ritorno_dati.connect(self.riempi) #quando dentro Host viene lanciato il segnale che son pronti i dati mostra dentro i LED
-        self._thread.start()      
+        self.My_Host.ritorno_dati.connect(self.riempi) #quando dentro Host viene lanciato il segnale che son pronti i dati mostra dentro i LED    
+    
+    def start_thread (self):
+        self._thread.start()
+    
+    def stop_thread (self):
+        self._thread.stop()
     
     def closeEvent(self,event):
         for i in range (self.num_Host):
@@ -54,7 +59,7 @@ class LocalHost(QtGui.QMainWindow):
         print("Finestre secondarie Chiuse")
         QtGui.QMainWindow.closeEvent(self,event)
         #ritorno_dati = PyQt4.QtCore.pyqtSignal(list)
-        
+        self._thread.quit()
         self.chiusura.emit()
         
         

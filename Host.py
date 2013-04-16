@@ -5,9 +5,10 @@ Created on 20/mar/2013
 '''
 from Core import *
 import psutil
-
+from Analizzatore import Analizzatore
 from PyQt4 import QtCore
 import PyQt4
+import Pyro4
 class Host(QtCore.QObject):
  
        
@@ -25,22 +26,26 @@ class Host(QtCore.QObject):
         self.core = []
         self.win_core = []
         self.timer = timer
-        self.stop=True
+        self.start_T=True
+        self.analizzatore= Analizzatore()
+        
         for i in range(self.Num_Cores):
             self.core.append(Core(i))
             print("Core creato n°",i)
-            
+    
+    
     def fill (self,percent):
         for i in range(self.Num_Cores):
             #print ("Carico del processore ",percent[c])
             self.core[i].load(percent[i])
     
     def set_Stop(self):
-        self.stop=False                   
+        self.start_T=False                   
          
     def Run(self):
-        while(self.stop):
+        while(self.start_T):
             
+            percent = self.analizzatore.get_cores_values()
             percent=psutil.cpu_percent(interval=self.timer, percpu=True)
             media =psutil.cpu_percent()
             print(percent)
