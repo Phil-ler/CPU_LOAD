@@ -27,7 +27,8 @@ class Host(QtCore.QObject):
         self.win_core = []
         self.timer = timer
         self.start_T=True
-        self.analizzatore= Analizzatore()
+        self.analizzatore = Analizzatore()
+        
         
         for i in range(self.Num_Cores):
             self.core.append(Core(i))
@@ -43,11 +44,11 @@ class Host(QtCore.QObject):
         self.start_T=False                   
          
     def Run(self):
-        while(self.start_T):
+        while(True):
             
             percent = self.analizzatore.get_cores_values()
-            percent=psutil.cpu_percent(interval=self.timer, percpu=True)
-            media =psutil.cpu_percent()
+            
+            media =self.analizzatore.get_generic()
             print(percent)
             #riempi ogni singolo Core
             self.fill(percent) 

@@ -26,7 +26,7 @@ class LocalHost(QtGui.QMainWindow):
         self.setCentralWidget(QtGui.QWidget(self))
         self.ui = CPU_GUI.Ui_frmHost()
         self.ui.setupUi(self.centralWidget())
-        self.num_Host = psutil.NUM_CPUS
+        self.num_Host = psutil.NUM_CPUS # va implementato anche da remoto, ovvero fa fatto dopo la connessione
         self.My_Host = Host(self.num_Host,0.1)
         self.carico_generico = []
         
@@ -46,7 +46,7 @@ class LocalHost(QtGui.QMainWindow):
         self.My_Host.moveToThread(self._thread) #muovo la classe Host dentro al thread
         self._thread.started.connect(self.My_Host.Run,2) #funzione che parte nel thread
         self.My_Host.ritorno_dati.connect(self.riempi) #quando dentro Host viene lanciato il segnale che son pronti i dati mostra dentro i LED    
-    
+        
     def start_thread (self):
         self._thread.start()
     
@@ -59,7 +59,7 @@ class LocalHost(QtGui.QMainWindow):
         print("Finestre secondarie Chiuse")
         QtGui.QMainWindow.closeEvent(self,event)
         #ritorno_dati = PyQt4.QtCore.pyqtSignal(list)
-        self._thread.quit()
+       # self._thread.quit()
         self.chiusura.emit()
         
         
