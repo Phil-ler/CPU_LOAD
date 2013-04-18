@@ -19,11 +19,12 @@ class Analizzatore():
         '''
         self.N_CORES =0
         self.carico_core = []
-        self.timer = 0.1
+        self.timer = 0.1 # da mettere nel config
         self.generic = 0        
-    
-    def get_n_core (self):
         self.N_CORES=psutil.NUM_CPUS
+    def get_n_core (self):
+        
+        print("Analizzatore segna #core ->", self.N_CORES)
         return self.N_CORES
     
     def get_cores_values (self):

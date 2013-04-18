@@ -17,25 +17,27 @@ class LocalHost(QtGui.QMainWindow):
     
     """
     chiusura =QtCore.pyqtSignal()
-    def __init__(self):
+    def __init__(self,IP,timer):
         """
         Costruttore della classe MainWindow.
         
         """
+        
         super(LocalHost, self).__init__()
+        
         self.setCentralWidget(QtGui.QWidget(self))
         self.ui = CPU_GUI.Ui_frmHost()
         self.ui.setupUi(self.centralWidget())
-        self.num_Host = psutil.NUM_CPUS # va implementato anche da remoto, ovvero fa fatto dopo la connessione
-        self.My_Host = Host(self.num_Host,0.1)
+        self.timer=timer # selec
+        self.My_Host = Host(self.timer,IP)
         self.carico_generico = []
         
-        
+        self.num_Host = self.My_Host.get_N_cores()
         '''
         connettore pulsanti
         mostreranno le finestre dedicate a ogni singolo Core
         '''
-        
+        #print( self.num_Host)
         for i in range (self.num_Host):   
             self.ui.cmd[i].clicked.connect(self.My_Host.core[i].show)
             
@@ -64,11 +66,13 @@ class LocalHost(QtGui.QMainWindow):
         
         
     def riempi(self,carico):    
-            
+        
+       
         for i in range(self.num_Host):
+            
             self.ui.lcd[i].display(carico[i])
             self.My_Host.core[i].traccia()
     
-    def prova(self):
+    def prova(self,dove):
     
-        print("Sono qui")    
+        print("Sono qui ->"+dove)    
