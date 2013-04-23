@@ -3,12 +3,11 @@ Created on 20/mar/2013
 
 @author: phil
 '''
-from Core import *
-import psutil
 from Analizzatore import Analizzatore
-import Pyro4
+
 
 from PyQt4 import QtCore, QtGui
+import Pyro4
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -20,7 +19,8 @@ class Host(QtCore.QObject):
     #Questo è il segnale
     ritorno_dati = QtCore.pyqtSignal(list)
     valore_generico = QtCore.pyqtSignal(float)
-    
+    connection_lost = QtCore.pyqtSignal()
+    connection_ok =QtCore.pyqtSignal()
     def __init__(self,timer,IP):
         '''
         Constructor
@@ -32,21 +32,32 @@ class Host(QtCore.QObject):
         self.win_core = []
         self.timer = timer
         self.start_T=True
-        
+        print("Prima del naming")
+        self.IP = IP
         if (IP == "LOCAL"):
             self.analizzatore = Analizzatore()
         else:
-            
-            
-            ns = Pyro4.naming.locateNS(host =str(IP))
-            uri=ns.lookup("CPU_LOAD")
-            print("URI PRESO {}".format(uri))
-            (preuri,posturi) = uri.asString().split(sep="@")
-            (address, port ) = posturi.split(sep=":")
-            uri =(preuri +"@"+ str(IP) +":" + port)
-            self.analizzatore = Pyro4.Proxy(uri)
-            #print ("Numero CORE ",thing.get_n_core())
-
+            try:
+                Pyro4.config.COMMTIMEOUT = 1.5
+                #host =str(IP)
+                ns = naming.locateNS(str(IP))
+                #ns._pyroTimeout = 4
+                 #localizza il DNS nell'IP che gli passo, ovvero sulla macchina server
+                print("cercato il nameserver")
+                uri=ns.lookup("CPU_LOAD")
+                print("URI PRESO {}".format(uri))
+                (preuri,posturi) = uri.asString().split(sep="@")
+                (address, port ) = posturi.split(sep=":")
+                uri =(preuri +"@"+ str(IP) +":" + port)
+               
+                self.analizzatore = Proxy(uri)
+                #print ("Numero CORE ",thing.get_n_core())
+            except errors.NamingError:
+                print("NameServer Non trovato")
+                return
+            except TimeoutError:
+                print("TIME OUT")
+                return
         self.Num_Cores= self.analizzatore.get_n_core()
         for i in range(self.Num_Cores):
             self.core.append(Core(i))
@@ -62,23 +73,32 @@ class Host(QtCore.QObject):
         return self.Num_Cores
     
     def set_Stop(self):
-        self.start_T=False                   
-         
+        self.start_T=False            
+    def set_Start (self):
+        self.start_T= True
+               
     def Run(self):
-        while(True):
+        while(self.start_T):
+            try:
+                percent = self.analizzatore.get_cores_values()
             
-            percent = self.analizzatore.get_cores_values()
+                media =self.analizzatore.get_generic()
+                print(percent)
+                #riempi ogni singolo Core
+                self.fill(percent) 
             
-            media =self.analizzatore.get_generic()
-            print(percent)
-            #riempi ogni singolo Core
-            self.fill(percent) 
-            
-            #emette il segnale, ritornando percent
-            self.ritorno_dati.emit(percent)
-            self.valore_generico.emit(media)
-            #return percent
-
+                #emette il segnale, ritornando percent
+                self.ritorno_dati.emit(percent)
+                self.valore_generico.emit(media)
+                self.connection_ok.emit()
+                
+                #return percent
+            except Pyro4.errors.ConnectionClosedError:
+                
+                self.connection_lost.emit()
+                #self.ERRORE("Persa la connessione col server")
+                self.set_Stop()
+                return
 
 
         '''

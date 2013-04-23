@@ -4,11 +4,10 @@ Created on 20/mar/2013
 
 @author: phil
 '''
-import psutil
+
 from Host import Host
 from PyQt4 import QtCore,QtGui
 import CPU_GUI
-import sys
 
 
 class LocalHost(QtGui.QMainWindow):
@@ -45,6 +44,7 @@ class LocalHost(QtGui.QMainWindow):
         crezione thread
         '''
         self._thread=QtCore.QThread(self)
+        self._thread.setTerminationEnabled(True)
         self.My_Host.moveToThread(self._thread) #muovo la classe Host dentro al thread
         self._thread.started.connect(self.My_Host.Run,2) #funzione che parte nel thread
         self.My_Host.ritorno_dati.connect(self.riempi) #quando dentro Host viene lanciato il segnale che son pronti i dati mostra dentro i LED    

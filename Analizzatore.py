@@ -5,8 +5,13 @@ Created on 15/apr/2013
 '''
 import psutil
 import Pyro4
-import sys
 import threading
+import time
+import signal
+
+
+
+
 class Analizzatore():
     '''
     classdocs
@@ -40,9 +45,31 @@ class Analizzatore():
     def set_timer (self,timer):
         self.timer = timer
         
+   
+    
+class Dati_Server ():
+    
+    def __init__(self,Daemon,Thread,NS):
+        '''
+        Constructor
+        '''
+        self.Daemon= Daemon
+        self.Thread = Thread
+        self.NS = NS
+    
+    
+    def signal_handler(self,signal, frame):
+        print ("Chiusura Server")
+        #self.Thread.join(0.1)
+        #print(self.NS.list())
+        #self.Daemon.shutdown()
+        self.Thread._stop()
+        print("Server Chiuso!")
+        
+        sys.exit(0)
 def startNSserverLoop():
         
-    NSThread = threading.Thread(target=Pyro4.naming.main,args=[[]])
+    NSThread = threading.Thread(target=Pyro4.naming.startNSloop,args=[])
     NSThread.start()
     return NSThread
 
@@ -54,39 +81,33 @@ def main():
     """ 
     #analizer = Analizer.Analizer("")
     A=Analizzatore()
+    
+    
     Pyro4.config.HOST = "0.0.0.0"
-    nsThread=startNSserverLoop()
-    ns=Pyro4.naming.locateNS("localhost")
+    try:
+        nsThread=startNSserverLoop()
+        print("Thread creato, ora aspetto 5 secondi")
+        time.sleep(0.5)
+        ns=Pyro4.naming.locateNS("localhost")
     
-    print(ns)
-    ns.ping()
-    print(ns)
+        print(ns)
+        ns.ping()
+        print(ns)
     
-    daemon=Pyro4.Daemon()
-    uri=daemon.register(A)
+        daemon=Pyro4.Daemon()
+        uri=daemon.register(A)
     
-    ns.register("CPU_LOAD",uri)
+        ns.register("CPU_LOAD",uri)
+        D = Dati_Server(daemon,nsThread,ns)
+        signal.signal(signal.SIGINT, D.signal_handler)
     
-    print ("Object uri = {0}".format(uri))
-    print ("Ready")
+        print ("Object uri = {0}".format(uri))
+        print ("Ready")
     
-    daemon.requestLoop()
-    
+        daemon.requestLoop()
+    except Pyro4.errors.CommunicationError:
+        print("ASD!!!")
     
 if __name__ == "__main__":
-    main()
     
-'''
-    ESEMPIO DI CLIENT!!!
-import Pyro4
-Host = "192.168.3.180"
-ns = Pyro4.naming.locateNS(host = Host)
-uri=ns.lookup("CPU_LOAD")
-(preuri,posturi) = uri.asString().split(sep="@")
-(address, port ) = posturi.split(sep=":")
-uri = preuri +"@"+ Host +":" + port
-thing = Pyro4.Proxy(uri)
-print ("Numero CORE ",thing.get_n_core())
-
-
-'''
+    main()
