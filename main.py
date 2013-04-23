@@ -69,7 +69,54 @@ class Host_Widget (QtGui.QPushButton):
         self.repaint()
         #print(("Carico {}".format(carico)))
     
-
+class Combo_Quit(QtGui.QWidget):
+    
+    def __init__(self,main):
+        super(Combo_Quit, self).__init__()
+        self.IP = 0
+        self.point_main = main
+        self.initUI()
+        
+    def initUI(self):      
+        layout = QtGui.QHBoxLayout(self)
+        self.setLayout(layout)
+        self.combo = QtGui.QComboBox(self)
+        
+        cmd_delete = QtGui.QPushButton("Elimina Host")
+        cmd_delete.clicked.connect(self.Ok_click)
+        
+        layout.addWidget(self.combo)
+        layout.addWidget(cmd_delete)
+        #combo.move(50, 50)        
+        self.combo.activated[str].connect(self.onActivated)        
+         
+        self.setGeometry(100,100,200,100)
+        self.setWindowTitle('Elimina Host')
+        self.update_host_list()
+            
+    def onActivated(self, text):
+      
+        self.IP=text
+        print(self.IP)   
+    
+    def Ok_click(self):
+        if (self.IP != 0 and self.IP !="<seleziona host>"):
+            self.hide()
+            print("finestra chiusa, vado dentro a elimina Host")
+            self.point_main.elimina_host(self.IP)
+            
+            
+    def update_host_list (self):
+        
+        #delete all items
+        self.combo.clear()
+        
+        self.combo.addItem("<seleziona host>")
+        for i in range(len(self.point_main.ui.host_w)):
+            print("Nome host".format(self.point_main.ui.host_w[i].IP))
+            if (self.point_main.ui.host_w[i].IP != "LOCAL"):
+                self.combo.addItem(self.point_main.ui.host_w[i].IP)
+        
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class Main(QtGui.QMainWindow):
@@ -84,11 +131,14 @@ class Main(QtGui.QMainWindow):
         self.ui.setupUi(self)
         self.ui.actionAdd_Host.triggered.connect(self.showDialog_in)
         self.ui.actionRemove_Host.triggered.connect(self.showDialog_out)
+        self.ui.actionQuit.triggered.connect(self.quit_prog)
         print("host presenti {}".format(self.ui.gridLayout.count()))   
-        self.combo = Combo_Quit()
+        self.combo = Combo_Quit(self)
         
         
-        
+    def quit_prog (self):
+        print("Programma terminato")
+        sys.exit(0)   
     def showDialog_in(self):
         
         text, ok = QtGui.QInputDialog.getText(self, 'Input Dialog', 
@@ -105,19 +155,17 @@ class Main(QtGui.QMainWindow):
                     self.ui.host_w.append(new_host)
                     self.ui.gridLayout.addWidget(new_host)    
                     print("host presenti {}".format(self.ui.gridLayout.count()))   
-                except TimeoutError:
-                    print("Troppo")
                 except AttributeError:
                     print("Errore! IP non corretto")
     def showDialog_out(self):
-        
-        self.combo.show()
-       
+        self.combo.update_host_list()
+        self.combo.show
     def elimina_host (self,IP):
         
         if (IP==""):
                 print("Errore")
         else:
+                print("indirizzo da cancellare {}".format(IP))
                 i_ip = -1
                 for i in range(len(self.ui.host_w)):
                     if (self.ui.host_w[i].IP==IP):
@@ -138,33 +186,7 @@ class Main(QtGui.QMainWindow):
                     
                 else:
                     print("IP non trovato")
-class Combo_Quit(QtGui.QWidget):
-    
-    def __init__(self):
-        super(Combo_Quit, self).__init__()
-        self.IP = 0
-        self.initUI()
-        
-    def initUI(self):      
-        
-        combo = QtGui.QComboBox(self)
-        
-        combo.addItem("Prova")
-        combo.move(50, 50)        
-        combo.activated[str].connect(self.onActivated)        
-         
-        self.setGeometry(100,100,200,100)
-        self.setWindowTitle('Elimina Host')
-        
-        
-    def onActivated(self, text):
-      
-        self.IP=text     
-    
-    def Ok_click(self):
-        
-        self.hide()
-        
+
         
 def main():
     print("CIAO")

@@ -3,7 +3,10 @@ Created on 20/mar/2013
 
 @author: phil
 '''
+from Core import *
+import psutil
 from Analizzatore import Analizzatore
+from Pyro4 import *
 
 
 from PyQt4 import QtCore, QtGui
@@ -34,15 +37,16 @@ class Host(QtCore.QObject):
         self.start_T=True
         print("Prima del naming")
         self.IP = IP
+        Pyro4.COMMTIMEOUT = 3
         if (IP == "LOCAL"):
             self.analizzatore = Analizzatore()
         else:
             try:
-                Pyro4.config.COMMTIMEOUT = 1.5
+                Pyro4.config.COMMTIMEOUT = 1.5  
                 #host =str(IP)
                 ns = naming.locateNS(str(IP))
                 #ns._pyroTimeout = 4
-                 #localizza il DNS nell'IP che gli passo, ovvero sulla macchina server
+                #localizza il DNS nell'IP che gli passo, ovvero sulla macchina server
                 print("cercato il nameserver")
                 uri=ns.lookup("CPU_LOAD")
                 print("URI PRESO {}".format(uri))
@@ -53,11 +57,9 @@ class Host(QtCore.QObject):
                 self.analizzatore = Proxy(uri)
                 #print ("Numero CORE ",thing.get_n_core())
             except errors.NamingError:
-                print("NameServer Non trovato")
+                print("NameServer non trovato")
                 return
-            except TimeoutError:
-                print("TIME OUT")
-                return
+           
         self.Num_Cores= self.analizzatore.get_n_core()
         for i in range(self.Num_Cores):
             self.core.append(Core(i))
@@ -94,10 +96,10 @@ class Host(QtCore.QObject):
                 
                 #return percent
             except Pyro4.errors.ConnectionClosedError:
-                
+                self.set_Stop()
                 self.connection_lost.emit()
                 #self.ERRORE("Persa la connessione col server")
-                self.set_Stop()
+                
                 return
 
 
