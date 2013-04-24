@@ -24,13 +24,7 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(object):
-    def setupUi_2 (self,MainWindow):
-        self.gridLayout = 0
-        self.gridLayout = QtGui.QGridLayout(self.centralwidget)
-        self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        for i in range (len(self.host_w)):
-            host = main.Host_Widget(self.host_w[i].IP)
-            self.gridLayout.addWidget(host)
+    
     def setupUi(self, MainWindow):
         
         self.host_w = []
@@ -42,7 +36,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         #TExt
        
-        host = main.Host_Widget("LOCAL")
+        host = main.Host_Widget("LOCAL",main.Main)
         self.host_w.append(host)
         self.gridLayout.addWidget(host)
         

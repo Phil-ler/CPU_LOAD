@@ -13,9 +13,11 @@ import LocalHost
 
 class Host_Widget (QtGui.QPushButton):
     
-    def __init__(self,IP):
+    def __init__(self,IP,Main):
         super(Host_Widget, self).__init__()
-     
+        
+        
+        self.Main = Main
         self.IP=IP
         self.ping_True = False
         self.local = LocalHost.LocalHost(self.IP,0.1)
@@ -25,7 +27,7 @@ class Host_Widget (QtGui.QPushButton):
         self.local.My_Host.valore_generico.connect(self.show_generic_load)
         self.carico = 0
         
-        self.local.My_Host.connection_lost.connect(self.Ping_Off)
+        self.local.My_Host.connection_lost.connect(self.Main.elimina_host)
         self.local.My_Host.connection_ok.connect(self.Ping_ON)
         
     def Ping_ON (self):
@@ -103,7 +105,7 @@ class Combo_Quit(QtGui.QWidget):
         if (self.IP != 0 and self.IP !="<seleziona host>"):
             self.hide()
             print("finestra chiusa, vado dentro a elimina Host")
-            self.point_main.elimina_host(self.IP)
+            self.point_main.elimina_host(self.IP,"Host eliminato da Utente")
             
             
     def update_host_list (self):
@@ -134,7 +136,7 @@ class Main(QtGui.QMainWindow):
         self.ui.actionQuit.triggered.connect(self.quit_prog)
         print("host presenti {}".format(self.ui.gridLayout.count()))   
         self.combo = Combo_Quit(self)
-        
+        self.dialogbox = Qt.QErrorMessage()
         
     def quit_prog (self):
         print("Programma terminato")
@@ -147,21 +149,25 @@ class Main(QtGui.QMainWindow):
         if ok:
             if (text==""):
                 print("Errore")
+                self.dialogbox.showMessage("Immettere un IP o un nome per il DNS")
             else:
                 print("IP aggiunto {}".format(text))
                
                 try:
-                    new_host = Host_Widget(text)
+                    new_host = Host_Widget(text,self)
                     self.ui.host_w.append(new_host)
                     self.ui.gridLayout.addWidget(new_host)    
                     print("host presenti {}".format(self.ui.gridLayout.count()))   
                 except AttributeError:
+                    self.dialogbox.showMessage("Errore! IP non corretto")
                     print("Errore! IP non corretto")
     def showDialog_out(self):
         self.combo.update_host_list()
-        self.combo.show
-    def elimina_host (self,IP):
         
+        self.combo.show()
+    def elimina_host (self,IP,msg):
+        
+        self.dialogbox.showMessage(msg)
         if (IP==""):
                 print("Errore")
         else:
@@ -180,6 +186,10 @@ class Main(QtGui.QMainWindow):
                     
                     
                     self.ui.host_w.pop(i_ip)
+                    
+                    
+                    self.dialogbox.show()
+                    print(msg)
                     
                     print("IP removed {}".format(IP))
                     print("Tolto 1 IP, rimanenti host ={}".format(self.ui.gridLayout.count()))

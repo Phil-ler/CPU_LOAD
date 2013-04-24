@@ -22,7 +22,7 @@ class Host(QtCore.QObject):
     #Questo è il segnale
     ritorno_dati = QtCore.pyqtSignal(list)
     valore_generico = QtCore.pyqtSignal(float)
-    connection_lost = QtCore.pyqtSignal()
+    connection_lost = QtCore.pyqtSignal(str,str)
     connection_ok =QtCore.pyqtSignal()
     def __init__(self,timer,IP):
         '''
@@ -97,7 +97,7 @@ class Host(QtCore.QObject):
                 #return percent
             except Pyro4.errors.ConnectionClosedError:
                 self.set_Stop()
-                self.connection_lost.emit()
+                self.connection_lost.emit(self.IP,"Persa la connessione col server - Il collegamento verrà rimosso")
                 #self.ERRORE("Persa la connessione col server")
                 
                 return
@@ -116,5 +116,4 @@ thing = Pyro4.Proxy(uri)
 print ("Numero CORE ",thing.get_n_core())
 
 
-'''
-                
+'''  
