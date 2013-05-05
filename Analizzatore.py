@@ -9,7 +9,7 @@ import threading
 import time
 import signal
 import sys
-
+import argparse
 
 
 class Analizzatore():
@@ -22,11 +22,12 @@ class Analizzatore():
         '''
         Constructor
         '''
-        self.N_CORES =0
         self.carico_core = []
         self.timer = 0.1 # da mettere nel config
-        self.generic = 0        
+        self.generic = []        
         self.N_CORES=psutil.NUM_CPUS
+        
+        
     def get_n_core (self):
         
         print("Analizzatore segna #core ->", self.N_CORES)
@@ -79,15 +80,26 @@ def main():
     Fa partire un Name Server Pyro e ci registra sopra un oggetto ServerProcessor
 
     """ 
+    #PARSER
+    '''
+    parser = argparse.ArgumentParser(description='Server del programma CPU_LOAD per il  monitoraggio remoto')
+    parser.add_argument("-r","--range", help="Sets the IP range that makes the server visible, default Broadcast (0.0.0.0) ", action="store_true")
+    args =parser.parse_args()
+    if  (args.range):
+        IP = input ("Set the IP range ")
+    else:'''
+    
+    IP = "0.0.0.0"
+    
+    print(" IP RANGE =,",IP)
     #analizer = Analizer.Analizer("")
     A=Analizzatore()
     
     
-    Pyro4.config.HOST = "0.0.0.0"
+    Pyro4.config.HOST = IP
     try:
         nsThread=startNSserverLoop()
-        print("Thread creato, ora aspetto 5 secondi")
-        time.sleep(0.5)
+        time.sleep(1)
         ns=Pyro4.naming.locateNS("localhost")
     
         print(ns)
@@ -106,7 +118,7 @@ def main():
     
         daemon.requestLoop()
     except Pyro4.errors.CommunicationError:
-        print("ASD!!!")
+        print("Error! IP Range not correct, Server not started !!!")
     
 if __name__ == "__main__":
     

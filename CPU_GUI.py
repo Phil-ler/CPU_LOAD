@@ -57,7 +57,8 @@ class Ui_frmHost(object):
         QtCore.QMetaObject.connectSlotsByName(frmHost)
 
     def retranslateUi(self, frmHost):
-        frmHost.setWindowTitle(_translate("frmHost", "Form", None))
+                                
+        frmHost.setWindowTitle(_translate("frmHost", "{}", None))
         for but in self.cmd:
             but.setText(_translate("frmHost", but.objectName(), None))
 

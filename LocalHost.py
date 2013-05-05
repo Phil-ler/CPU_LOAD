@@ -2,6 +2,8 @@
 
 Created on 20/mar/2013
 
+In questo modulo è presente
+
 @author: phil
 '''
 
@@ -12,13 +14,13 @@ import CPU_GUI
 
 class LocalHost(QtGui.QMainWindow):
     """
-    Classe della finestra principale
+    Classe della finestra principale dell'host in questione
     
     """
     chiusura =QtCore.pyqtSignal()
     def __init__(self,IP,timer):
         """
-        Costruttore della classe MainWindow.
+        Costruttore della classe 
         
         """
         
@@ -48,6 +50,12 @@ class LocalHost(QtGui.QMainWindow):
         self.My_Host.moveToThread(self._thread) #muovo la classe Host dentro al thread
         self._thread.started.connect(self.My_Host.Run,2) #funzione che parte nel thread
         self.My_Host.ritorno_dati.connect(self.riempi) #quando dentro Host viene lanciato il segnale che son pronti i dati mostra dentro i LED    
+    
+    def set_timer (self,timer):
+        self.timer = timer
+        
+        self.My_Host.set_timer(self.timer)
+            
         
     def start_thread (self):
         self._thread.start()
@@ -60,8 +68,6 @@ class LocalHost(QtGui.QMainWindow):
             self.My_Host.core[i].hide()
         print("Finestre secondarie Chiuse")
         QtGui.QMainWindow.closeEvent(self,event)
-        #ritorno_dati = PyQt4.QtCore.pyqtSignal(list)
-       # self._thread.quit()
         self.chiusura.emit()
         
         

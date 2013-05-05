@@ -7,7 +7,7 @@ from Core import *
 import psutil
 from Analizzatore import Analizzatore
 from Pyro4 import *
-
+import time
 
 from PyQt4 import QtCore, QtGui
 import Pyro4
@@ -78,10 +78,15 @@ class Host(QtCore.QObject):
         self.start_T=False            
     def set_Start (self):
         self.start_T= True
-               
+   
+    def set_timer(self,timer):
+        self.timer = timer
+                   
     def Run(self):
         while(self.start_T):
             try:
+                
+                time.sleep(self.timer)
                 percent = self.analizzatore.get_cores_values()
             
                 media =self.analizzatore.get_generic()

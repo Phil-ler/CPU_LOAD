@@ -4,72 +4,11 @@ Created on 09/apr/2013
 @author: phil
 '''
 
-from PyQt4 import QtCore, QtGui, Qt
+from PyQt4 import QtGui, Qt
 import INTRO_GUI
 import sys
-import LocalHost
-
-
-
-class Host_Widget (QtGui.QPushButton):
-    
-    def __init__(self,IP,Main):
-        super(Host_Widget, self).__init__()
-        
-        
-        self.Main = Main
-        self.IP=IP
-        self.ping_True = False
-        self.local = LocalHost.LocalHost(self.IP,0.1)
-        
-       
-        self.clicked.connect(self.show_window) #BISOGNA CONNETTERLO ALLE FINESTRE! O PERLOMENO LEGGERE I DATI DA REMOTO PER CREARE OGNI VOLTA FINESTRE DIVERSE
-        self.local.My_Host.valore_generico.connect(self.show_generic_load)
-        self.carico = 0
-        
-        self.local.My_Host.connection_lost.connect(self.Main.elimina_host)
-        self.local.My_Host.connection_ok.connect(self.Ping_ON)
-        
-    def Ping_ON (self):
-        
-        self.ping_True= True
-        
-    def Ping_Off (self):
-        self.ping_True = False
-        
-    def paintEvent(self, event):
-        
-       
-        qp = QtGui.QPainter()
-        qp.begin(self)
-        #qp.setRenderHint(QtGui.QPainter.Antialiasing)
-        #qp.setPen(QtCore.Qt.green)
-        #qp.drawText(50,50,"{}".format(percent))
-       
-        if (self.ping_True==False and self.IP != "LOCAL"):
-            qp.setBrush(Qt.QBrush(QtCore.Qt.gray))
-        elif self.carico < 10:
-            qp.setBrush(Qt.QBrush(QtCore.Qt.green))
-        elif self.carico <20:
-            qp.setBrush(Qt.QBrush(QtCore.Qt.yellow))
-        else:
-            qp.setBrush(Qt.QBrush(QtCore.Qt.red))
-  
-        qp.drawRect(0,0,self.width(),self.height())
-        qp.setPen(QtCore.Qt.black)
-        qp.drawText(20,20, "{} - {}".format(self.IP,self.carico))
-        
-    def show_window(self):
-       
-        self.local.start_thread()
-        self.local.My_Host.set_Start()
-        self.local.show()
-        
-    def show_generic_load (self,carico):
-    
-        self.carico= carico
-        self.repaint()
-        #print(("Carico {}".format(carico)))
+import Option
+from Host_Widget import Host_Widget
     
 class Combo_Quit(QtGui.QWidget):
     
@@ -129,18 +68,41 @@ class Main(QtGui.QMainWindow):
         """
         super(Main, self).__init__()
         self.setCentralWidget(QtGui.QWidget(self))
+        self.freq = 0.05
         self.ui = INTRO_GUI.Ui_MainWindow()
         self.ui.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon('Icon.ico'))
+        
+        self.Option = Option.Option(self)
+        
+        
         self.ui.actionAdd_Host.triggered.connect(self.showDialog_in)
         self.ui.actionRemove_Host.triggered.connect(self.showDialog_out)
         self.ui.actionQuit.triggered.connect(self.quit_prog)
+        self.ui.actionGeneral_Options.triggered.connect(self.Option.show)
+        self.ui.actionLoad_Configuration.triggered.connect(self.Option.load_settings)
+        self.ui.actionSave_Configuration.triggered.connect(self.Option.save_settings)
         print("host presenti {}".format(self.ui.gridLayout.count()))   
+        
         self.combo = Combo_Quit(self)
         self.dialogbox = Qt.QErrorMessage()
+        #self.freq
         
+            
     def quit_prog (self):
-        print("Programma terminato")
-        sys.exit(0)   
+        print("Programma terminato con successo")
+        sys.exit(0)  
+    
+    '''
+    Setta la frequenza del timer di aggiornamento dati, lo setta a tutti gli host presenti nell'elenco
+    '''
+    def set_Timer (self,timer):
+        
+        print("SetTimer = ",timer)
+        self.freq = timer
+        for i in range (len(self.ui.host_w)):
+            self.ui.host_w[i].set_freq(self.freq)
+     
     def showDialog_in(self):
         
         text, ok = QtGui.QInputDialog.getText(self, 'Input Dialog', 
@@ -151,16 +113,22 @@ class Main(QtGui.QMainWindow):
                 print("Errore")
                 self.dialogbox.showMessage("Immettere un IP o un nome per il DNS")
             else:
-                print("IP aggiunto {}".format(text))
-               
-                try:
-                    new_host = Host_Widget(text,self)
-                    self.ui.host_w.append(new_host)
-                    self.ui.gridLayout.addWidget(new_host)    
-                    print("host presenti {}".format(self.ui.gridLayout.count()))   
-                except AttributeError:
-                    self.dialogbox.showMessage("Errore! IP non corretto")
-                    print("Errore! IP non corretto")
+                print("Creazione collegamento a {}".format(text))
+                self.crea_conn(text)
+                
+                
+    def crea_conn (self,IP):       
+            try:
+                if (IP == ""):
+                    raise Exception.MissingInputError
+                print("IP=",IP)
+                new_host = Host_Widget(IP,self)
+                self.ui.host_w.append(new_host)
+                self.ui.gridLayout.addWidget(new_host)    
+                print("host presenti {}".format(self.ui.gridLayout.count()))   
+            except AttributeError:
+                self.dialogbox.showMessage("IP non corretto o Server {} non attivo".format(IP))
+                print("Errore")
     def showDialog_out(self):
         self.combo.update_host_list()
         
@@ -196,14 +164,19 @@ class Main(QtGui.QMainWindow):
                     
                 else:
                     print("IP non trovato")
-
+    
+   
+    def closeEvent(self,event):    
+        sys.exit(0)
         
+    
 def main():
     print("CIAO")
     
-    
     app = QtGui.QApplication(sys.argv)
     intro = Main()
+    
+    #NEED LOAD A CFGfile
     intro.show()
     
     sys.exit(app.exec_())

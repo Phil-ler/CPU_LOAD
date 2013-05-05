@@ -9,6 +9,7 @@
 
 from PyQt4 import QtCore, QtGui
 import main
+import Host_Widget
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -34,15 +35,16 @@ class Ui_MainWindow(object):
         self.gridLayout = QtGui.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         MainWindow.setCentralWidget(self.centralwidget)
-        #TExt
+        
        
-        host = main.Host_Widget("LOCAL",main.Main)
+        host = Host_Widget.Host_Widget("LOCAL",MainWindow)
         self.host_w.append(host)
         self.gridLayout.addWidget(host)
         
         #self.lcd.append(lcdNumber)
         # self.verticalLayout.addWidget(lcdNumber)n
         
+        self.lbl_velocità = QtGui.QLabel ("Velocità di aggiornamento 3")
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 512, 27))
         self.menubar.setObjectName(_fromUtf8("menubar"))
@@ -82,12 +84,12 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuSettings.menuAction())
         self.menubar.addAction(self.menu.menuAction())
-
+        
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "CPU_LOAD", None))
         self.menuFile.setTitle(_translate("MainWindow", "Host", None))
         self.menuSettings.setTitle(_translate("MainWindow", "Settings", None))
         self.menu.setTitle(_translate("MainWindow", "?", None))
