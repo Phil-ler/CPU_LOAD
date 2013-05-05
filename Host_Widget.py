@@ -21,11 +21,11 @@ class Host_Widget (QtGui.QPushButton):
         
        
         self.clicked.connect(self.show_window)
-        self.local.My_Host.valore_generico.connect(self.show_generic_load)
+        self.local.Host_Cores.valore_generico.connect(self.show_generic_load)
         self.carico = 0
         
-        self.local.My_Host.connection_lost.connect(self.Main.elimina_host)
-        self.local.My_Host.connection_ok.connect(self.Ping_ON)
+        self.local.Host_Cores.connection_lost.connect(self.Main.elimina_host)
+        self.local.Host_Cores.connection_ok.connect(self.Ping_ON)
         
     def set_freq (self,freq):
         self.timer = freq
@@ -63,7 +63,7 @@ class Host_Widget (QtGui.QPushButton):
     def show_window(self):
        
         self.local.start_thread()
-        self.local.My_Host.set_Start()
+        self.local.Host_Cores.set_Start()
         self.local.show()
         
     def show_generic_load (self,carico):

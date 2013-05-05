@@ -19,10 +19,6 @@ class Host(QtGui.QMainWindow):
     """
     chiusura =QtCore.pyqtSignal()
     def __init__(self,IP,timer):
-        """
-        Costruttore della classe 
-        
-        """
         
         super(Host, self).__init__()
         
@@ -30,55 +26,64 @@ class Host(QtGui.QMainWindow):
         self.ui = CPU_GUI.Ui_frmHost()
         self.ui.setupUi(self.centralWidget())
         self.timer=timer # selec
-        self.My_Host = Core_Wallet(self.timer,IP)
+        self.Host_Cores = Core_Wallet(self.timer,IP)
         self.carico_generico = []
         
-        self.num_Host = self.My_Host.get_N_cores()
-        '''
-        connettore pulsanti
-        mostreranno le finestre dedicate a ogni singolo Core
-        '''
+        self.num_Host = self.Host_Cores.get_N_cores()
+        
+        #connettore pulsanti
+        #mostreranno le finestre dedicate a ogni singolo Core
+        
         #print( self.num_Host)
         for i in range (self.num_Host):   
-            self.ui.cmd[i].clicked.connect(self.My_Host.core[i].show)
+            self.ui.cmd[i].clicked.connect(self.Host_Cores.core[i].show)
             
-        '''\
-        crezione thread
-        '''
+        
+        #crezione thread
+        
         self._thread=QtCore.QThread(self)
         self._thread.setTerminationEnabled(True)
-        self.My_Host.moveToThread(self._thread) #muovo la classe Core_Wallet dentro al thread
-        self._thread.started.connect(self.My_Host.Run,2) #funzione che parte nel thread
-        self.My_Host.ritorno_dati.connect(self.riempi) #quando dentro Core_Wallet viene lanciato il segnale che son pronti i dati mostra dentro i LED    
+        self.Host_Cores.moveToThread(self._thread) #muovo la classe Core_Wallet dentro al thread
+        self._thread.started.connect(self.Host_Cores.Run,2) #funzione che parte nel thread
+        self.Host_Cores.ritorno_dati.connect(self.riempi) #quando dentro Core_Wallet viene lanciato il segnale che son pronti i dati mostra dentro i LED    
+    
+    '''
+    Setta il timer di aggiornamento a tutte le istanze Core presenti nel programma
+    @param timer: Float che indica la frequenza
+    '''
     
     def set_timer (self,timer):
         self.timer = timer
         
-        self.My_Host.set_timer(self.timer)
+        self.Host_Cores.set_timer(self.timer)
             
+    '''
+    Fa partire il thread di monitoraggio
+    '''
         
     def start_thread (self):
         self._thread.start()
-    
+    '''
+    Ferma il thread
+    '''
     def stop_thread (self):
         self._thread.stop()
     
-    def closeEvent(self,event):
+    def __closeEvent(self,event):
         for i in range (self.num_Host):
-            self.My_Host.core[i].hide()
+            self.Host_Cores.core[i].hide()
         print("Finestre secondarie Chiuse")
         QtGui.QMainWindow.closeEvent(self,event)
         self.chiusura.emit()
         
-        
+    '''
+    Funzione che riceve i dati letti del processore
+    @param carico: Lista di valori contenenti i valori letti dalla CPU
+    '''    
     def riempi(self,carico):    
         
        
         for i in range(self.num_Host):
             
             self.ui.lcd[i].display(carico[i])
-            self.My_Host.core[i].traccia()
-    
-    def prova(self,dove):
-    
-        print("Sono qui ->"+dove)    
+            self.Host_Cores.core[i].traccia()
