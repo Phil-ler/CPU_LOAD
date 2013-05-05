@@ -12,7 +12,7 @@ from PyQt4 import QtCore,QtGui
 import CPU_GUI
 
 
-class LocalHost(QtGui.QMainWindow):
+class Host(QtGui.QMainWindow):
     """
     Classe della finestra principale dell'host in questione
     
@@ -24,7 +24,7 @@ class LocalHost(QtGui.QMainWindow):
         
         """
         
-        super(LocalHost, self).__init__()
+        super(Host, self).__init__()
         
         self.setCentralWidget(QtGui.QWidget(self))
         self.ui = CPU_GUI.Ui_frmHost()

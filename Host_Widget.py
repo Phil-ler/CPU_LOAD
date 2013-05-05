@@ -1,5 +1,5 @@
 
-import LocalHost
+import Host
 from PyQt4 import QtCore, QtGui, Qt
 
 '''
@@ -17,7 +17,7 @@ class Host_Widget (QtGui.QPushButton):
         self.IP=IP
         self.timer = self.Main.freq
         self.ping_True = False
-        self.local = LocalHost.LocalHost(self.IP,self.timer)
+        self.local = Host.Host(self.IP,self.timer)
         
        
         self.clicked.connect(self.show_window)

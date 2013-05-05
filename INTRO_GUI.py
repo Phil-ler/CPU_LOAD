@@ -90,11 +90,11 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "CPU_LOAD", None))
-        self.menuFile.setTitle(_translate("MainWindow", "Core_Wallet", None))
+        self.menuFile.setTitle(_translate("MainWindow", "Host", None))
         self.menuSettings.setTitle(_translate("MainWindow", "Settings", None))
         self.menu.setTitle(_translate("MainWindow", "?", None))
-        self.actionAdd_Host.setText(_translate("MainWindow", "Add Core_Wallet", None))
-        self.actionRemove_Host.setText(_translate("MainWindow", "Remove Core_Wallet", None))
+        self.actionAdd_Host.setText(_translate("MainWindow", "Add Host", None))
+        self.actionRemove_Host.setText(_translate("MainWindow", "Remove Host", None))
         self.actionQuit.setText(_translate("MainWindow", "Quit", None))
         self.actionGeneral_Options.setText(_translate("MainWindow", "General Options", None))
         self.actionSave_Configuration.setText(_translate("MainWindow", "Save Configuration", None))

@@ -1,6 +1,8 @@
 '''
 Created on 09/apr/2013
 
+Modulo Principale che contiene il main() del programma
+
 @author: phil
 '''
 
@@ -12,41 +14,49 @@ from Host_Widget import Host_Widget
     
 class Combo_Quit(QtGui.QWidget):
     
+    '''
+        Classe di tipo Qwidget che gestisce la gui per l'eliminazione di un Host dall'elenco
+    
+    '''
+    
     def __init__(self,main):
+        
         super(Combo_Quit, self).__init__()
         self.IP = 0
         self.point_main = main
-        self.initUI()
+        self.__initUI()
         
-    def initUI(self):      
+    def __initUI(self):      
         layout = QtGui.QHBoxLayout(self)
         self.setLayout(layout)
         self.combo = QtGui.QComboBox(self)
         
         cmd_delete = QtGui.QPushButton("Elimina Host")
-        cmd_delete.clicked.connect(self.Ok_click)
+        cmd_delete.clicked.connect(self.__Ok_click)
         
         layout.addWidget(self.combo)
         layout.addWidget(cmd_delete)
         #combo.move(50, 50)        
-        self.combo.activated[str].connect(self.onActivated)        
+        self.combo.activated[str].connect(self.__onActivated)        
          
         self.setGeometry(100,100,200,100)
         self.setWindowTitle('Elimina Host')
         self.update_host_list()
             
-    def onActivated(self, text):
-      
+    def __onActivated(self, text):
+        
         self.IP=text
         print(self.IP)   
     
-    def Ok_click(self):
+    def __Ok_click(self):
         if (self.IP != 0 and self.IP !="<seleziona host>"):
             self.hide()
             print("finestra chiusa, vado dentro a elimina Host")
             self.point_main.elimina_host(self.IP,"Host eliminato da Utente")
             
-            
+    '''
+    Classe che aggiorna la ComboBox per la scelta dell'host da eliminare
+    ''' 
     def update_host_list (self):
         
         #delete all items
@@ -76,8 +86,8 @@ class Main(QtGui.QMainWindow):
         self.Option = Option.Option(self)
         
         
-        self.ui.actionAdd_Host.triggered.connect(self.showDialog_in)
-        self.ui.actionRemove_Host.triggered.connect(self.showDialog_out)
+        self.ui.actionAdd_Host.triggered.connect(self.__showDialog_in)
+        self.ui.actionRemove_Host.triggered.connect(self.__showDialog_out)
         self.ui.actionQuit.triggered.connect(self.quit_prog)
         self.ui.actionGeneral_Options.triggered.connect(self.Option.show)
         self.ui.actionLoad_Configuration.triggered.connect(self.Option.load_settings)
@@ -88,13 +98,16 @@ class Main(QtGui.QMainWindow):
         self.dialogbox = Qt.QErrorMessage()
         #self.freq
         
-            
+    '''
+    Terminazione programma
+    '''
     def quit_prog (self):
         print("Programma terminato con successo")
         sys.exit(0)  
     
     '''
     Setta la frequenza del timer di aggiornamento dati, lo setta a tutti gli host presenti nell'elenco
+    @param timer: numero in float che indica la frequenza di aggiornamento
     '''
     def set_Timer (self,timer):
         
@@ -103,7 +116,7 @@ class Main(QtGui.QMainWindow):
         for i in range (len(self.ui.host_w)):
             self.ui.host_w[i].set_freq(self.freq)
      
-    def showDialog_in(self):
+    def __showDialog_in(self):
         
         text, ok = QtGui.QInputDialog.getText(self, 'Input Dialog', 
             'Ip da aggungere:')
@@ -115,8 +128,11 @@ class Main(QtGui.QMainWindow):
             else:
                 print("Creazione collegamento a {}".format(text))
                 self.crea_conn(text)
-                
-                
+    
+    '''
+    Crea la connessione del programma a un server di monitoraggio
+    @param IP: Indirizzo o nome riconosciuto dal DNS del server    
+    '''         
     def crea_conn (self,IP):       
             try:
                 if (IP == ""):
@@ -129,10 +145,16 @@ class Main(QtGui.QMainWindow):
             except AttributeError:
                 self.dialogbox.showMessage("IP non corretto o Server {} non attivo".format(IP))
                 print("Errore")
-    def showDialog_out(self):
+    
+    def __showDialog_out(self):
         self.combo.update_host_list()
         
         self.combo.show()
+    '''
+    Cancella dall'elenco un IP terminandone la connessione
+    @param IP: Indirizzo del server da togliere
+    @param msg: Messaggio da visualizzare tramite da DialogBox
+    '''
     def elimina_host (self,IP,msg):
         
         self.dialogbox.showMessage(msg)
@@ -166,7 +188,7 @@ class Main(QtGui.QMainWindow):
                     print("IP non trovato")
     
    
-    def closeEvent(self,event):    
+    def __closeEvent(self,event):    
         sys.exit(0)
         
     
