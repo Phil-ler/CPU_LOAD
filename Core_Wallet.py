@@ -16,7 +16,7 @@ try:
 except AttributeError:
     _fromUtf8 = lambda s: s
 
-class Host(QtCore.QObject):
+class Core_Wallet(QtCore.QObject):
  
        
     #Questo è il segnale
@@ -111,12 +111,12 @@ class Host(QtCore.QObject):
         '''
     ESEMPIO DI CLIENT!!!
 import Pyro4
-Host = "192.168.3.180"
-ns = Pyro4.naming.locateNS(host = Host)
+Core_Wallet = "192.168.3.180"
+ns = Pyro4.naming.locateNS(host = Core_Wallet)
 uri=ns.lookup("CPU_LOAD")
 (preuri,posturi) = uri.asString().split(sep="@")
 (address, port ) = posturi.split(sep=":")
-uri = preuri +"@"+ Host +":" + port
+uri = preuri +"@"+ Core_Wallet +":" + port
 thing = Pyro4.Proxy(uri)
 print ("Numero CORE ",thing.get_n_core())
 

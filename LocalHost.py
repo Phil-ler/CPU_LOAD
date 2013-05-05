@@ -7,7 +7,7 @@ In questo modulo è presente
 @author: phil
 '''
 
-from Host import Host
+from Core_Wallet import Core_Wallet
 from PyQt4 import QtCore,QtGui
 import CPU_GUI
 
@@ -30,7 +30,7 @@ class LocalHost(QtGui.QMainWindow):
         self.ui = CPU_GUI.Ui_frmHost()
         self.ui.setupUi(self.centralWidget())
         self.timer=timer # selec
-        self.My_Host = Host(self.timer,IP)
+        self.My_Host = Core_Wallet(self.timer,IP)
         self.carico_generico = []
         
         self.num_Host = self.My_Host.get_N_cores()
@@ -47,9 +47,9 @@ class LocalHost(QtGui.QMainWindow):
         '''
         self._thread=QtCore.QThread(self)
         self._thread.setTerminationEnabled(True)
-        self.My_Host.moveToThread(self._thread) #muovo la classe Host dentro al thread
+        self.My_Host.moveToThread(self._thread) #muovo la classe Core_Wallet dentro al thread
         self._thread.started.connect(self.My_Host.Run,2) #funzione che parte nel thread
-        self.My_Host.ritorno_dati.connect(self.riempi) #quando dentro Host viene lanciato il segnale che son pronti i dati mostra dentro i LED    
+        self.My_Host.ritorno_dati.connect(self.riempi) #quando dentro Core_Wallet viene lanciato il segnale che son pronti i dati mostra dentro i LED    
     
     def set_timer (self,timer):
         self.timer = timer
