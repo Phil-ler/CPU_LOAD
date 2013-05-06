@@ -59,6 +59,7 @@ class Combo_Quit(QtGui.QWidget):
     ''' 
     def update_host_list (self):
         
+        print("Update list")
         #delete all items
         self.combo.clear()
         
@@ -172,9 +173,7 @@ class Main(QtGui.QMainWindow):
                     widget = self.ui.gridLayout.itemAt(i_ip)
                     
                     widget.widget().setParent(None)
-                    self.ui.host_w[i_ip].local.My_Host.set_Stop()
-                    
-                    
+                    self.ui.host_w[i_ip].local.Host_Cores.set_Stop()
                     self.ui.host_w.pop(i_ip)
                     
                     
