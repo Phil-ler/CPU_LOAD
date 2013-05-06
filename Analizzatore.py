@@ -11,7 +11,9 @@ import signal
 import sys
 import argparse
 
-
+'''
+Classe che legge, tramite la libreria psutil, i valori di carico della CPU
+'''
 class Analizzatore():
     '''
     classdocs
@@ -23,31 +25,38 @@ class Analizzatore():
         Constructor
         '''
         self.carico_core = []
-        self.timer = 0.1 # da mettere nel config
+        
         self.generic = []        
         self.N_CORES=psutil.NUM_CPUS
         
-        
+    '''
+    Ritorna il numero di Core di cui è composta la CPU
+    @return: # di Core
+    '''
     def get_n_core (self):
         
         print("Analizzatore segna #core ->", self.N_CORES)
         return self.N_CORES
-    
+    '''
+    Ritorna la lista contenente i valori attuali di tutti i core
+    '''
     def get_cores_values (self):
         
         self.carico_core = psutil.cpu_percent(percpu=True)
     
         return self.carico_core
-    
+    '''
+    Ritorna la lista contenente la media dei valori di tutti i core dell'HOST
+    '''
     def get_generic (self):
         self.generic = psutil.cpu_percent(interval=self.timer, percpu=False)
         return self.generic
-    
-    def set_timer (self,timer):
-        self.timer = timer
+   
         
    
-    
+'''
+Classe che raccoglie i dati del server per la connessione
+'''
 class Dati_Server ():
     
     def __init__(self,Daemon,Thread,NS):
@@ -58,7 +67,9 @@ class Dati_Server ():
         self.Thread = Thread
         self.NS = NS
     
-    
+    '''
+    Chiude il server quando viene mandato il segnale di CTRL-C
+    '''
     def signal_handler(self,signal, frame):
         print ("Chiusura Server")
         #self.Thread.join(0.1)
@@ -68,6 +79,9 @@ class Dati_Server ():
         print("Server Chiuso!")
         
         sys.exit(0)
+'''
+
+'''
 def startNSserverLoop():
         
     NSThread = threading.Thread(target=Pyro4.naming.startNSloop,args=[])
@@ -80,14 +94,7 @@ def main():
     Fa partire un Name Server Pyro e ci registra sopra un oggetto ServerProcessor
 
     """ 
-    #PARSER
-    '''
-    parser = argparse.ArgumentParser(description='Server del programma CPU_LOAD per il  monitoraggio remoto')
-    parser.add_argument("-r","--range", help="Sets the IP range that makes the server visible, default Broadcast (0.0.0.0) ", action="store_true")
-    args =parser.parse_args()
-    if  (args.range):
-        IP = input ("Set the IP range ")
-    else:'''
+    
     
     IP = "0.0.0.0"
     
