@@ -11,7 +11,7 @@ import INTRO_GUI
 import sys
 import Option
 from Host_Widget import Host_Widget
-    
+import argparse    
 class Combo_Quit(QtGui.QWidget):
     
     '''
@@ -129,7 +129,7 @@ class Main(QtGui.QMainWindow):
             else:
                 print("Creazione collegamento a {}".format(text))
                 self.crea_conn(text)
-    
+            
     '''
     Crea la connessione del programma a un server di monitoraggio
     @param IP: Indirizzo o nome riconosciuto dal DNS del server    
@@ -138,7 +138,17 @@ class Main(QtGui.QMainWindow):
             try:
                 if (IP == ""):
                     raise Exception.MissingInputError
+                
                 print("IP=",IP)
+                
+                ctrl = False
+                for i in range (len(self.ui.host_w)):
+                    if (IP == self.ui.host_w[i].IP):
+                        ctrl = True
+                if (ctrl):
+                    self.dialogbox.showMessage("Host {} gia presente in elenco".format(IP))
+                    return
+                
                 new_host = Host_Widget(IP,self)
                 self.ui.host_w.append(new_host)
                 self.ui.gridLayout.addWidget(new_host)    
@@ -192,14 +202,37 @@ class Main(QtGui.QMainWindow):
         
     
 def main():
-    print("CIAO")
+   
     
+    parser = argparse.ArgumentParser(description='Aggiunta di argomenti da startUp')    
+    parser.add_argument("-a","--address",nargs="+", help="Imposta gli IP da caricare all'esecuzione del programma")
+    parser.add_argument("-c","--config",help="Imposta il file di configurazione da caricare all'avvio")
+    parser.add_argument("-t","--timer",help="Imposta il timer di aggiornamento dei valori")
+    args = parser.parse_args()
+    print(args.address)
+    print(args.config)
+    
+    
+    print("CIAO")
     app = QtGui.QApplication(sys.argv)
     intro = Main()
     
+    #usiamo gli argomenti
+    #LISTA IP
+    if (args.address != None):
+        lista_IP = args.address
+        for i in range (len(lista_IP)):
+            intro.crea_conn(lista_IP[i])
     #NEED LOAD A CFGfile
+    if (args.config != None):
+        cfg = args.config
+        intro.Option.load_settings(cfg)
     intro.show()
     
+    if (args.timer != None):
+        timer = args.timer
+        intro.set_Timer(timer)
+        
     sys.exit(app.exec_())
 if __name__ == '__main__':
     main()

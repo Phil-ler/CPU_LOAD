@@ -9,7 +9,7 @@ import threading
 import time
 import signal
 import sys
-import argparse
+
 
 '''
 Classe che legge, tramite la libreria psutil, i valori di carico della CPU
@@ -31,11 +31,10 @@ class Analizzatore():
         
     '''
     Ritorna il numero di Core di cui è composta la CPU
-    @return: # di Core
+    @return: Il numero di Core dell'host connesso
     '''
     def get_n_core (self):
         
-        print("Analizzatore segna #core ->", self.N_CORES)
         return self.N_CORES
     '''
     Ritorna la lista contenente i valori attuali di tutti i core
@@ -48,8 +47,8 @@ class Analizzatore():
     '''
     Ritorna la lista contenente la media dei valori di tutti i core dell'HOST
     '''
-    def get_generic (self):
-        self.generic = psutil.cpu_percent(interval=self.timer, percpu=False)
+    def get_generic (self,timer):
+        self.generic = psutil.cpu_percent(interval=timer, percpu=False)
         return self.generic
    
         

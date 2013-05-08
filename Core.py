@@ -10,7 +10,7 @@ import CORE_GUI
 
 class Core(QtGui.QMainWindow):
     '''
-    classdocs
+    Classe che identifica un singolo Core della CPU
     '''
     limite_nodi= 50
 
@@ -32,18 +32,22 @@ class Core(QtGui.QMainWindow):
         self.label_core="Core #{}".format(self.number+1)
         self.ui.lbl_core.setText(self.label_core)
         self.setWindowTitle(self.label_core)
+    '''
+    Dato il carico, mette il suo valore in coda per essere disegnato
+    @param carico: Carico attuale del core
+    '''
     def load (self,carico):
-        ''' 
-        
-        '''
-        
+               
         if (carico < 0): self.colore="grigio"  
         elif (carico < 60): self.colore="verde"
         elif (carico < 80): self.colore="giallo"
         else: self.colore="rosso"
         self.ui.lbl_carico.setText("{}".format(carico))
         self.perc_carico.append(carico)
-        
+    
+    '''
+    segnala al grafico il prossimo punto da disegnare, passando anche i precedenti
+    '''        
     def traccia (self):
         
         if (len(self.perc_carico) >= self.limite_nodi):

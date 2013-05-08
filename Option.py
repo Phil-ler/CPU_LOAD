@@ -44,10 +44,13 @@ class Option(QtGui.QDialog):
     '''
     Caricamento Impostazioni, legge da file il timer e gli host salvati
     '''
-    def load_settings (self):
+    def load_settings (self,file = None):
         self.__timer =0
         self.__IP_list = []
-        fName = QtGui.QFileDialog.getOpenFileName(self, 'Open file','.',filter ="*.cfg")
+        fName = file
+        if (not(fName)):
+            fName = QtGui.QFileDialog.getOpenFileName(self, 'Open file','.',filter ="*.cfg")
+            
         print("Load ",fName)
         try:
             #READ

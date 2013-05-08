@@ -8,20 +8,22 @@ import Core
 #from test.test_bufio import lengths
 class Grafico(QtGui.QWidget):
     '''
-    classdocs
+    Widget dedicato al disegno del grafico del carico di un singolo core
     '''
 
 
     def __init__(self):
-        '''
-        Constructor
-        '''
         super(Grafico, self).__init__()
-        self.text ="CIAO"
-        self.coda = []
-        
+       
+        self.__coda = []
+    '''
+    Setta la lista aggiornata dentro la variabile interna, dedicata al disegno del grafico
+    '''
     def setNextPoint (self,punto):
-        self.coda=punto
+        self.__coda=punto
+    '''
+    Paint event della classe grafico
+    '''
         
     def paintEvent(self, event):
 
@@ -36,7 +38,9 @@ class Grafico(QtGui.QWidget):
         self.drawline(event,qp)
         qp.restore()
         qp.end()
-    
+    '''
+    Disegna la griglia di fondo del grafico
+    '''
     def drawGrid(self,event,qp):
         
         qp.setBrush(Qt.QBrush(QtCore.Qt.black)) #"#c56c00"
@@ -49,31 +53,24 @@ class Grafico(QtGui.QWidget):
         qp.drawText(0,self.height()*0.05,"100")
         
         
-    
+    '''
+    Disegna l'andamento del grafico
+    @param qp: QPainter
+    '''
     def drawline (self,event,qp):
-        y_init = self.coda[0]
+        y_init = self.__coda[0]
         x_init= -1
         #print("altezza= {}".format(self.height()))
-        #print("coda = {}".format(self.coda))
-        for i in range (len(self.coda)):
+        #print("__coda = {}".format(self.__coda))
+        for i in range (len(self.__coda)):
            
-            if (self.coda[i]<50):
+            if (self.__coda[i]<50):
                 colore=QtCore.Qt.green
-            elif (self.coda[i]<80):
+            elif (self.__coda[i]<80):
                 colore=QtCore.Qt.yellow
             else: colore=QtCore.Qt.red
             #pen = QtGui.QPen(colore, 2, QtCore.Qt.SolidLine)
             pen = QtGui.QPen(colore)
             qp.setPen(pen)
-            qp.drawLine(x_init,y_init,x_init+1,self.coda[i])
-            x_init, y_init= x_init+1, self.coda[i]
-       
-        
-    '''
-    Classe di Test del widget
-    '''
-    def drawText(self, event, qp):
-      
-        qp.setPen(QtGui.QColor(0, 0, 255)) #red green blue
-        qp.setFont(QtGui.QFont('Decorative', 50))
-        qp.drawText(event.rect(), QtCore.Qt.AlignCenter, self.text) 
+            qp.drawLine(x_init,y_init,x_init+1,self.__coda[i])
+            x_init, y_init= x_init+1, self.__coda[i]

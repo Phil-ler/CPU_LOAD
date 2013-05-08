@@ -15,7 +15,6 @@ import CPU_GUI
 class Host(QtGui.QMainWindow):
     """
     Classe della finestra principale dell'host in questione
-    
     """
     chiusura =QtCore.pyqtSignal()
     def __init__(self,IP,timer):

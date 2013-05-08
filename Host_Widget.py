@@ -4,8 +4,10 @@ from PyQt4 import QtCore, QtGui, Qt
 
 '''
 Created on 26/apr/2013
+Classe Host_Widget, estende un Button in quanto facendosi click sopra, si apre la finestra dedicata all'host in questione
 
 @author: phil
+
 '''
 class Host_Widget (QtGui.QPushButton):
     
@@ -26,17 +28,30 @@ class Host_Widget (QtGui.QPushButton):
         
         self.local.Host_Cores.connection_lost.connect(self.Main.elimina_host)
         self.local.Host_Cores.connection_ok.connect(self.Ping_ON)
-        
+    
+    '''
+    Gli viene passata la frequenza di aggiornamento timer dalle impostazioni setta il timer sull'host
+    @param freq: Timer di aggiornamento
+    '''
     def set_freq (self,freq):
         self.timer = freq
         self.local.set_timer(self.timer)
+    '''
+    Se la connessione è attiva fa partire il thread
+    '''
     
     def Ping_ON (self):
         
         self.ping_True= True
-        
+    '''
+    Se la connessione cade blocca il thread di aggiornamento
+    '''
     def Ping_Off (self):
         self.ping_True = False
+    
+    '''
+    Paint-Event di Host_Widget
+    '''
         
     def paintEvent(self, event):
         
@@ -59,13 +74,18 @@ class Host_Widget (QtGui.QPushButton):
         qp.drawRect(0,0,self.width(),self.height())
         qp.setPen(QtCore.Qt.black)
         qp.drawText(20,20, "{} - {}".format(self.IP,self.carico))
-        
+    
+    '''
+    Mostra la finestra con le informazioni dell'host
+    '''    
     def show_window(self):
        
         self.local.start_thread()
         self.local.Host_Cores.set_Start()
         self.local.show()
-        
+    '''
+    Dato il carico generico dell'host, lo mostra a video
+    ''' 
     def show_generic_load (self,carico):
     
         self.carico= carico

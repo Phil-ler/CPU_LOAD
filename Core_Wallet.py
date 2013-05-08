@@ -108,7 +108,7 @@ class Core_Wallet(QtCore.QObject):
                 time.sleep(self.timer)
                 percent = self.analizzatore.get_cores_values()
             
-                media =self.analizzatore.get_generic()
+                media =self.analizzatore.get_generic(self.timer)
                 print(percent)
                 #riempi ogni singolo Core
                 self.fill(percent) 
