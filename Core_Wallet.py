@@ -58,7 +58,7 @@ class Core_Wallet(QtCore.QObject):
                
                 self.analizzatore = Pyro4.Proxy(uri)
                 #print ("Numero CORE ",thing.get_n_core())
-            except Error.NamingError:
+            except Pyro4.errors.NamingError:
                 print("NameServer non trovato")
                 return
            

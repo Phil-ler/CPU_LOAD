@@ -5,11 +5,11 @@ Modulo Principale che contiene il main() del programma
 
 @author: phil
 '''
-
+import Option
 from PyQt4 import QtGui, Qt
 import INTRO_GUI
 import sys
-import Option
+
 from Host_Widget import Host_Widget
 import argparse    
 class Combo_Quit(QtGui.QWidget):
@@ -107,6 +107,20 @@ class Main(QtGui.QMainWindow):
         sys.exit(0)  
     
     '''
+    Vuota la lista degli IP
+    '''
+    def Clear_list (self):
+        n_host=len(self.ui.host_w)
+        for i in range(n_host,0,-1):
+            print("I= ",i-1)
+            if (self.ui.host_w[i-1].IP != "LOCAL"):
+                
+                IP = self.ui.host_w[i-1].IP
+                self.elimina_host(IP, "NO_MSG")
+            else:
+                print("Il local non si cancella, I=",i-1)
+    
+    '''
     Setta la frequenza del timer di aggiornamento dati, lo setta a tutti gli host presenti nell'elenco
     @param timer: numero in float che indica la frequenza di aggiornamento
     '''
@@ -168,7 +182,7 @@ class Main(QtGui.QMainWindow):
     '''
     def elimina_host (self,IP,msg):
         
-        self.dialogbox.showMessage(msg)
+        
         if (IP==""):
                 print("Errore")
         else:
@@ -186,18 +200,19 @@ class Main(QtGui.QMainWindow):
                     self.ui.host_w[i_ip].local.Host_Cores.set_Stop()
                     self.ui.host_w.pop(i_ip)
                     
-                    
-                    self.dialogbox.show()
                     print(msg)
-                    
-                    print("IP removed {}".format(IP))
-                    print("Tolto 1 IP, rimanenti host ={}".format(self.ui.gridLayout.count()))
+                    if (msg != "NO_MSG"):
+                        self.dialogbox.showMessage(msg)
+                        #self.dialogbox.show()
+                        print("IP removed {}".format(IP))
+                        print("Tolto 1 IP, rimanenti host ={}".format(self.ui.gridLayout.count()))
                     
                 else:
                     print("IP non trovato")
     
    
-    def __closeEvent(self,event):    
+    def closeEvent(self,event):    
+        self.quit_prog()
         sys.exit(0)
         
     

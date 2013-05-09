@@ -28,8 +28,10 @@ class Option(QtGui.QDialog):
         
         #self.__timer
     
-    def __set_Timer(self):
+    def set_Opt_Timer(self,timer):
         
+        self.__timer = timer
+        self.ui.doubleSpinBox.setValue(timer)
         self.MainPadre.set_Timer(self.__timer)
     '''
     Tasto Ok dell'interfaccia
@@ -37,8 +39,8 @@ class Option(QtGui.QDialog):
     '''  
     def accept (self):
         #Modifico il __timer
-        self.__timer =self.ui.doubleSpinBox.value()
-        self.__set_Timer()
+        spin_timer =self.ui.doubleSpinBox.value()
+        self.set_Opt_Timer(spin_timer)
         self.hide()
     
     '''
@@ -48,14 +50,23 @@ class Option(QtGui.QDialog):
         self.__timer =0
         self.__IP_list = []
         fName = file
+        
+        #vuotiamo la lista prima di riempirla
+        
+        
         if (not(fName)):
             fName = QtGui.QFileDialog.getOpenFileName(self, 'Open file','.',filter ="*.cfg")
             
         print("Load ",fName)
         try:
+            self.MainPadre.Clear_list()
             #READ
             self.config.read(fName)
-            self.__timer= float(self.config["Timer"]["Timer"])
+            cfg_timer= float(self.config["Timer"]["Timer"])
+            
+            
+            #settiamo il __timer
+            self.set_Opt_Timer(cfg_timer)
             
             N_HOST = int(self.config["IP_LIST"]["num_host"])
             if (N_HOST !=0):
@@ -67,8 +78,6 @@ class Option(QtGui.QDialog):
             print("N HOST",N_HOST)
             
             
-            #settiamo il __timer
-            self.__set_Timer()
             
             print("Lista IP",self.__IP_list)
             #vediamo se son presenti più di un host
