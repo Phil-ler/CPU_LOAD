@@ -67,6 +67,7 @@ class Core_Wallet(QtCore.QObject):
             self.core.append(Core(i))
             print("Core creato n°",i)
     
+   
     '''
     Quando i valori dei core sono stati letti, questa funzione viene chiamata per riempire i vari campi di lettura
     '''    

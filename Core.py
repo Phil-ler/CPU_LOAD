@@ -5,15 +5,28 @@ Created on 20/mar/2013
 '''
 from PyQt4 import QtCore,QtGui
 import CORE_GUI
+from test import test_signal
 
-
-
+''' 
+self.doubleSpinBox = QtGui.Qself.doubleSpinBox(Dialog)
+        self.doubleSpinBox.setGeometry(QtCore.QRect(20, 40, 64, 33))
+        self.doubleSpinBox.setMinimum(0.01)
+        self.doubleSpinBox.setMaximum(2.0)
+        self.doubleSpinBox.setSingleStep(0.01)
+        self.doubleSpinBox.setProperty("value", 0.05)
+        self.doubleSpinBox.setObjectName(_fromUtf8("self.doubleSpinBox"
+'''
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    def _fromUtf8(s):
+        return s
 class Core(QtGui.QMainWindow):
     '''
     Classe che identifica un singolo Core della CPU
     '''
     limite_nodi= 50
-
+    S_Test =QtCore.pyqtSignal(float)
     def __init__(self,n):
         '''
         Constructor
@@ -32,6 +45,28 @@ class Core(QtGui.QMainWindow):
         self.label_core="Core #{}".format(self.number+1)
         self.ui.lbl_core.setText(self.label_core)
         self.setWindowTitle(self.label_core)
+        #TEXT AREA
+        if (self.number== -1):
+            self.doubleSpinBox = QtGui.QDoubleSpinBox()
+            self.doubleSpinBox.setGeometry(QtCore.QRect(20, 40, 64, 33))
+            self.doubleSpinBox.setMinimum(-2)
+            self.doubleSpinBox.setMaximum(105)
+            self.doubleSpinBox.setSingleStep(1)
+            self.doubleSpinBox.setProperty("value", 1)
+            self.doubleSpinBox.setObjectName(_fromUtf8("self.doubleSpinBox2"))
+            self.ui.verticalLayout.addWidget(self.doubleSpinBox) 
+            cmd_disegna = QtGui.QPushButton("Disegna")
+            cmd_disegna.clicked.connect(self.__disegna_test)
+            self.ui.verticalLayout.addWidget(cmd_disegna)
+    
+    def __disegna_test(self):
+        
+        val =self.doubleSpinBox.value()
+        print(val)
+        self.load(val)
+        self.traccia()
+        self.S_Test.emit(val)        
+                    
     '''
     Dato il carico, mette il suo valore in coda per essere disegnato
     @param carico: Carico attuale del core
