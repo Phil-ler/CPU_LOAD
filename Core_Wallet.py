@@ -1,3 +1,4 @@
+# -*- coding: iso-8859-15 -*-
 '''
 Created on 20/mar/2013
 
@@ -14,13 +15,13 @@ try:
 except AttributeError:
     _fromUtf8 = lambda s: s
 
-'''
-Classe che raccoglie i dati da tutti i core presenti nell'Host e li cede alla classe Host per essere visualizzati e alla classe Grafico per essere disegnati
-Inoltre crea la connessione con il server designato se il nome dell'Host è diverso da LOCAL, altrimenti esegue solo una scansione locale senza l'utilizzo del server
-'''
+
 class Core_Wallet(QtCore.QObject):
  
-       
+    '''
+    Classe che raccoglie i dati da tutti i core presenti nell'Host e li cede alla classe Host per essere visualizzati e alla classe Grafico per essere disegnati
+    Inoltre crea la connessione con il server designato se il nome dell'Host è diverso da LOCAL, altrimenti esegue solo una scansione locale senza l'utilizzo del server
+    ''' 
     #Raccolta segnali
     ritorno_dati = QtCore.pyqtSignal(list)
     valore_generico = QtCore.pyqtSignal(float)
@@ -68,41 +69,46 @@ class Core_Wallet(QtCore.QObject):
             print("Core creato n°",i)
     
    
-    '''
-    Quando i valori dei core sono stati letti, questa funzione viene chiamata per riempire i vari campi di lettura
-    '''    
 
     def fill (self,percent):
+        '''
+        Quando i valori dei core sono stati letti, questa funzione viene chiamata per riempire i vari campi di lettura
+        '''    
+
         for i in range(self.__Num_Cores):
             #print ("Carico del processore ",percent[c])
             self.core[i].load(percent[i])
-    '''
-    Ritorna il numero di core presenti nell'Host
-    '''
     
     def get_N_cores (self):
+        '''
+        Ritorna il numero di core presenti nell'Host
+        '''
         return self.__Num_Cores
-    '''
-    Ferma il ciclo di lettura
-    '''
+    
     def set_Stop(self):
+        '''
+        Ferma il ciclo di lettura
+        '''
         self.start_T=False   
-    '''
-    Starta il ciclo di letture
-    '''         
+            
     def set_Start (self):
+        '''
+        Starta il ciclo di letture
+        ''' 
         self.start_T= True
-    '''
-    Setta il timer di frequenza di lettura
-    '''
+
     def set_timer(self,timer):
+        '''
+        Setta il timer di frequenza di lettura
+        '''
         self.timer = timer
     
-    '''
-    Funzione legge dalla classe Analizzatore i carichi delle CPU secondo il timer dato e riempe i campi di lettura con la funzione "fill"
-    '''
      
     def Run(self):
+        '''
+        Funzione legge dalla classe Analizzatore i carichi delle CPU secondo il timer dato e riempe i campi di lettura con la funzione "fill"
+        '''
+    
         while(self.start_T):
             try:
                 

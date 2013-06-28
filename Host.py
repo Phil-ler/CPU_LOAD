@@ -1,5 +1,5 @@
+# -*- coding: iso-8859-15 -*-
 '''
-
 Created on 20/mar/2013
 
 In questo modulo è presente
@@ -27,8 +27,9 @@ class Host(QtGui.QMainWindow):
         self.timer=timer # selec
         self.Host_Cores = Core_Wallet(self.timer,IP)
         self.carico_generico = []
-        
+        self.setWindowIcon(QtGui.QIcon('Icon.ico'))
         self.num_Host = self.Host_Cores.get_N_cores()
+        self.setWindowTitle("Core Pool")
         
         #connettore pulsanti
         #mostreranno le finestre dedicate a ogni singolo Core
@@ -46,26 +47,28 @@ class Host(QtGui.QMainWindow):
         self._thread.started.connect(self.Host_Cores.Run,2) #funzione che parte nel thread
         self.Host_Cores.ritorno_dati.connect(self.riempi) #quando dentro Core_Wallet viene lanciato il segnale che son pronti i dati mostra dentro i LED    
     
-    '''
+   
+    
+    def set_timer (self,timer):
+        '''
     Setta il timer di aggiornamento a tutte le istanze Core presenti nel programma
     @param timer: Float che indica la frequenza
     '''
-    
-    def set_timer (self,timer):
         self.timer = timer
         
         self.Host_Cores.set_timer(self.timer)
             
-    '''
-    Fa partire il thread di monitoraggio
-    '''
         
     def start_thread (self):
-        self._thread.start()
+        '''
+    Fa partire il thread di monitoraggio
     '''
+        self._thread.start()
+
+    def stop_thread (self):
+        '''
     Ferma il thread
     '''
-    def stop_thread (self):
         self._thread.stop()
     
     def __closeEvent(self,event):
@@ -75,12 +78,12 @@ class Host(QtGui.QMainWindow):
         QtGui.QMainWindow.closeEvent(self,event)
         self.chiusura.emit()
         
-    '''
+       
+    def riempi(self,carico):    
+        '''
     Funzione che riceve i dati letti del processore
     @param carico: Lista di valori contenenti i valori letti dalla CPU
-    '''    
-    def riempi(self,carico):    
-        
+    ''' 
        
         for i in range(self.num_Host):
             

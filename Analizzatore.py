@@ -1,22 +1,21 @@
+# -*- coding: iso-8859-15 -*-
 '''
 Created on 15/apr/2013
 
 @author: phil
 '''
-import psutil
+
 import Pyro4
 import threading
 import time
 import signal
 import sys
+import psutil
 
 
-'''
-Classe che legge, tramite la libreria psutil, i valori di carico della CPU
-'''
 class Analizzatore():
     '''
-    classdocs
+    Classe che legge, tramite la libreria psutil, i valori di carico della CPU
     '''
     
 
@@ -29,35 +28,37 @@ class Analizzatore():
         self.generic = []        
         self.N_CORES=psutil.NUM_CPUS
         
-    '''
-    Ritorna il numero di Core di cui è composta la CPU
-    @return: Il numero di Core dell'host connesso
-    '''
     def get_n_core (self):
-        
+        '''
+        Ritorna il numero di Core di cui è composta la CPU
+        return: Il numero di Core dell'host connesso
+        '''
+    
         return self.N_CORES
-    '''
-    Ritorna la lista contenente i valori attuali di tutti i core
-    '''
+    
     def get_cores_values (self):
-        
+        '''
+        Ritorna la lista contenente i valori attuali di tutti i core
+        '''
         self.carico_core = psutil.cpu_percent(percpu=True)
     
         return self.carico_core
-    '''
-    Ritorna la lista contenente la media dei valori di tutti i core dell'HOST
-    '''
+    
     def get_generic (self,timer):
+        '''
+        Ritorna la lista contenente la media dei valori di tutti i core dell'HOST
+        '''
+    
         self.generic = psutil.cpu_percent(interval=timer, percpu=False)
         return self.generic
    
         
    
-'''
-Classe che raccoglie i dati del server per la connessione
-'''
 class Dati_Server ():
-    
+   
+    '''
+    Classe che raccoglie i dati del server per la connessione
+    ''' 
     def __init__(self,Daemon,Thread,NS):
         '''
         Constructor
@@ -66,10 +67,11 @@ class Dati_Server ():
         self.Thread = Thread
         self.NS = NS
     
-    '''
-    Chiude il server quando viene mandato il segnale di CTRL-C
-    '''
     def signal_handler(self,signal, frame):
+        '''
+        Chiude il server quando viene mandato il segnale di CTRL-C
+        '''
+    
         print ("Chiusura Server")
         #self.Thread.join(0.1)
         #print(self.NS.list())
@@ -78,11 +80,11 @@ class Dati_Server ():
         print("Server Chiuso!")
         
         sys.exit(0)
-'''
 
-'''
 def startNSserverLoop():
-        
+    '''
+    Starta il server
+    '''
     NSThread = threading.Thread(target=Pyro4.naming.startNSloop,args=[])
     NSThread.start()
     return NSThread

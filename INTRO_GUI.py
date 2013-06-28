@@ -96,7 +96,7 @@ class Ui_MainWindow(object):
         self.actionAdd_Host.setText(_translate("MainWindow", "Add Host", None))
         self.actionRemove_Host.setText(_translate("MainWindow", "Remove Host", None))
         self.actionQuit.setText(_translate("MainWindow", "Quit", None))
-        self.actionGeneral_Options.setText(_translate("MainWindow", "General Options", None))
+        self.actionGeneral_Options.setText(_translate("MainWindow", "Timer", None))
         self.actionSave_Configuration.setText(_translate("MainWindow", "Save Configuration", None))
         self.actionLoad_Configuration.setText(_translate("MainWindow", "Load Configuration", None))
         self.actionAbout.setText(_translate("MainWindow", "About", None))

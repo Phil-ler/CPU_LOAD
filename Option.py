@@ -1,3 +1,4 @@
+# -*- coding: iso-8859-15 -*-
 '''
 Created on 29/apr/2013
 
@@ -25,7 +26,7 @@ class Option(QtGui.QDialog):
         self.__IP_list =[]
         self.__timer = self.MainPadre.freq
         self.config = configparser.ConfigParser()
-        
+        self.setWindowIcon(QtGui.QIcon('Icon.ico'))
         #self.__timer
     
     def set_Opt_Timer(self,timer):

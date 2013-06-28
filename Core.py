@@ -58,7 +58,22 @@ class Core(QtGui.QMainWindow):
             cmd_disegna = QtGui.QPushButton("Disegna")
             cmd_disegna.clicked.connect(self.__disegna_test)
             self.ui.verticalLayout.addWidget(cmd_disegna)
+            cmd_scala = QtGui.QPushButton("Test")
+            cmd_scala.clicked.connect(self.__scala_test)
+            self.ui.verticalLayout.addWidget(cmd_scala)
     
+    def __scala_test(self):
+            
+            cont = 20
+            j=1
+            val = 0
+            for i in range(13):
+                val+=j*cont
+                self.load(val)
+                self.traccia()
+                self.S_Test.emit(val)
+                if (val == 120):
+                    j = -1
     def __disegna_test(self):
         
         val =self.doubleSpinBox.value()
@@ -67,12 +82,12 @@ class Core(QtGui.QMainWindow):
         self.traccia()
         self.S_Test.emit(val)        
                     
-    '''
-    Dato il carico, mette il suo valore in coda per essere disegnato
-    @param carico: Carico attuale del core
-    '''
+   
     def load (self,carico):
-               
+        '''
+        Dato il carico, mette il suo valore in coda per essere disegnato
+        @param carico: Carico attuale del core
+        '''      
         if (carico < 0): self.colore="grigio"  
         elif (carico < 60): self.colore="verde"
         elif (carico < 80): self.colore="giallo"
@@ -80,11 +95,11 @@ class Core(QtGui.QMainWindow):
         self.ui.lbl_carico.setText("{}".format(carico))
         self.perc_carico.append(carico)
     
-    '''
-    segnala al grafico il prossimo punto da disegnare, passando anche i precedenti
-    '''        
+           
     def traccia (self):
-        
+        '''
+        segnala al grafico il prossimo punto da disegnare, passando anche i precedenti
+        ''' 
         if (len(self.perc_carico) >= self.limite_nodi):
             coda_da_disegnare = self.perc_carico[len(self.perc_carico)-self.limite_nodi:len(self.perc_carico)]
             self.ui.grafico.setNextPoint(coda_da_disegnare)

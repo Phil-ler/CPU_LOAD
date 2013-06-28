@@ -1,4 +1,4 @@
-
+# -*- coding: iso-8859-15 -*-
 import Host
 from PyQt4 import QtCore, QtGui, Qt
 

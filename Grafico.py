@@ -16,17 +16,18 @@ class Grafico(QtGui.QWidget):
         super(Grafico, self).__init__()
        
         self.__coda = []
-    '''
+   
+    def setNextPoint (self,punto):
+        '''
     Setta la lista aggiornata dentro la variabile interna, dedicata al disegno del grafico
     '''
-    def setNextPoint (self,punto):
         self.__coda=punto
-    '''
-    Paint event della classe grafico
-    '''
         
     def paintEvent(self, event):
-
+        '''
+    Paint event della classe grafico
+    '''
+    
         qp = QtGui.QPainter()
         qp.begin(self)
         qp.setRenderHint(QtGui.QPainter.Antialiasing)
@@ -38,11 +39,11 @@ class Grafico(QtGui.QWidget):
         self.drawline(event,qp)
         qp.restore()
         qp.end()
-    '''
+
+    def drawGrid(self,event,qp):
+        '''
     Disegna la griglia di fondo del grafico
     '''
-    def drawGrid(self,event,qp):
-        
         qp.setBrush(Qt.QBrush(QtCore.Qt.black)) #"#c56c00"
         qp.drawRect(0,0,self.width(),self.height())
         qp.setPen(QtCore.Qt.white)
@@ -52,8 +53,7 @@ class Grafico(QtGui.QWidget):
         qp.drawText(0,self.height()*0.25,"75")
         qp.drawText(0,self.height()*0.05,"100")
         
-        
-    '''
+        '''
     Disegna l'andamento del grafico
     @param qp: QPainter
     '''

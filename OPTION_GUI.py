@@ -26,28 +26,23 @@ except AttributeError:
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
-        Dialog.resize(277, 364)
+        Dialog.resize(250, 150)
         self.buttonBox = QtGui.QDialogButtonBox(Dialog)
-        self.buttonBox.setGeometry(QtCore.QRect(10, 300, 221, 41))
+        self.buttonBox.setGeometry(QtCore.QRect(10, 100, 180, 41))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
         self.doubleSpinBox = QtGui.QDoubleSpinBox(Dialog)
-        self.doubleSpinBox.setGeometry(QtCore.QRect(20, 40, 64, 33))
+        self.doubleSpinBox.setGeometry(QtCore.QRect(10, 10, 64, 33))
         self.doubleSpinBox.setMinimum(0.01)
         self.doubleSpinBox.setMaximum(2.0)
         self.doubleSpinBox.setSingleStep(0.01)
         self.doubleSpinBox.setProperty("value", 0.05)
         self.doubleSpinBox.setObjectName(_fromUtf8("doubleSpinBox"))
         self.label = QtGui.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(100, 40, 171, 41))
+        self.label.setGeometry(QtCore.QRect(10, 45, 171, 41))
         self.label.setObjectName(_fromUtf8("label"))
-        self.textEdit = QtGui.QTextEdit(Dialog)
-        self.textEdit.setGeometry(QtCore.QRect(20, 130, 231, 161))
-        self.textEdit.setObjectName(_fromUtf8("txt_IP"))
-        self.label_2 = QtGui.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(20, 90, 171, 21))
-        self.label_2.setObjectName(_fromUtf8("label_2"))
+        
 
         self.retranslateUi(Dialog)
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), Dialog.accept)
@@ -55,8 +50,7 @@ class Ui_Dialog(object):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(_translate("Dialog", "Impostazioni", None))
+        Dialog.setWindowTitle(_translate("Dialog", "Timer", None))
         self.label.setText(_translate("Dialog", "Frequenza di lettura dati", None))
-        self.label_2.setText(_translate("Dialog", "Lista di IP preimpostati", None))
-
+        
     

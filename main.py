@@ -1,3 +1,4 @@
+# -*- coding: iso-8859-15 -*-
 '''
 Created on 09/apr/2013
 
@@ -9,9 +10,10 @@ import Option
 from PyQt4 import QtGui, Qt
 import INTRO_GUI
 import sys
-
+import About
 from Host_Widget import Host_Widget
-import argparse    
+import argparse 
+   
 class Combo_Quit(QtGui.QWidget):
     
     '''
@@ -30,7 +32,7 @@ class Combo_Quit(QtGui.QWidget):
         layout = QtGui.QHBoxLayout(self)
         self.setLayout(layout)
         self.combo = QtGui.QComboBox(self)
-        
+        self.setWindowIcon(QtGui.QIcon('Icon.ico'))
         cmd_delete = QtGui.QPushButton("Elimina Host")
         cmd_delete.clicked.connect(self.__Ok_click)
         
@@ -85,7 +87,7 @@ class Main(QtGui.QMainWindow):
         self.setWindowIcon(QtGui.QIcon('Icon.ico'))
         
         self.Option = Option.Option(self)
-        
+        self.About = About.About()
         
         self.ui.actionAdd_Host.triggered.connect(self.__showDialog_in)
         self.ui.actionRemove_Host.triggered.connect(self.__showDialog_out)
@@ -93,6 +95,7 @@ class Main(QtGui.QMainWindow):
         self.ui.actionGeneral_Options.triggered.connect(self.Option.show)
         self.ui.actionLoad_Configuration.triggered.connect(self.Option.load_settings)
         self.ui.actionSave_Configuration.triggered.connect(self.Option.save_settings)
+        self.ui.actionAbout.triggered.connect(self.About.mostra)
         print("host presenti {}".format(self.ui.gridLayout.count()))   
         
         self.combo = Combo_Quit(self)
