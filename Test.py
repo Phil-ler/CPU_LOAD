@@ -21,10 +21,11 @@ class Test(unittest.TestCase):
         for i in range (self.A.get_n_core()):
             self.media.append(0)
    
-    '''
-    Testa il carico della CPU a PC scarico, effettua 50 letture di carico, e se la media di carico di un Core è superiore alla soglia di 0.2 genera un errore
-    '''
+   
     def test_lower_load(self):
+        '''
+        Testa il carico della CPU a PC scarico, effettua 50 letture di carico, e se la media di carico di un Core è superiore alla soglia di 0.2 genera un errore
+        '''
         print("Test di lettura a macchina scarica, chiudere tutti i programmi")
         input("Premere un tasto per continuare")
        
@@ -44,15 +45,20 @@ class Test(unittest.TestCase):
             self.assertLessEqual(self.media[i], 0.2, "Test Fallito! Computer in uso!")
     
     def check_data(self,val):
+        '''
+        Controlla il valore preso dal segnale
+        se esce dal range di valori concessi, solleva un eccezione
+        @param val: valore da analizzare
+        '''
         print("Valore preso dal segnale",val)
         self.assertGreaterEqual(val, 0.00, "Valore oltre la scala inferiore")
         self.assertLessEqual(val, 100.00, "Valore oltre la scala superiore")
-    '''
-    Viene creato un core fittizio dove è possibile inserire manualmente dei valori che verranno disegnati sul grafico
-    '''
+   
     def test_graph(self):
-        
-        
+        '''
+        Viene creato un core fittizio dove è possibile inserire manualmente dei valori che verranno disegnati sul grafico
+        '''
+            
         self.app = QtGui.QApplication(sys.argv)
         
         self.C = Core.Core(-1)

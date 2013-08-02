@@ -1,21 +1,12 @@
 '''
-Created on 20/mar/2013
-
-@author: phil
+Modulo Core
+Contiene le informazioni di un singolo Core della CPU e usa i valori contenuti per disegnare il grafico inerente
+@author: Filippo Verucchi
 '''
 from PyQt4 import QtCore,QtGui
 import CORE_GUI
 from test import test_signal
 
-''' 
-self.doubleSpinBox = QtGui.Qself.doubleSpinBox(Dialog)
-        self.doubleSpinBox.setGeometry(QtCore.QRect(20, 40, 64, 33))
-        self.doubleSpinBox.setMinimum(0.01)
-        self.doubleSpinBox.setMaximum(2.0)
-        self.doubleSpinBox.setSingleStep(0.01)
-        self.doubleSpinBox.setProperty("value", 0.05)
-        self.doubleSpinBox.setObjectName(_fromUtf8("self.doubleSpinBox"
-'''
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -28,9 +19,7 @@ class Core(QtGui.QMainWindow):
     limite_nodi= 50
     S_Test =QtCore.pyqtSignal(float)
     def __init__(self,n):
-        '''
-        Constructor
-        '''
+       
         super(Core, self).__init__()
         self.setCentralWidget(QtGui.QWidget(self))
         self.ui = CORE_GUI.Ui_frm_core()

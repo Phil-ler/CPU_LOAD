@@ -16,9 +16,7 @@ class Option(QtGui.QDialog):
     '''
 
     def __init__(self,Main):
-        '''
-        Constructor
-        '''
+       
         super(Option, self).__init__()
         self.ui = OPTION_GUI.Ui_Dialog()
         self.ui.setupUi(self)
@@ -30,24 +28,29 @@ class Option(QtGui.QDialog):
         #self.__timer
     
     def set_Opt_Timer(self,timer):
-        
+        '''
+        Setta il timer di aggiornamento preso dal valore della SpinBox
+        '''
         self.__timer = timer
         self.ui.doubleSpinBox.setValue(timer)
         self.MainPadre.set_Timer(self.__timer)
-    '''
-    Tasto Ok dell'interfaccia
-    Salva nel programma il valore del timer selezionato
-    '''  
+    
     def accept (self):
+        
+        '''
+        Tasto Ok dell'interfaccia
+        Salva nel programma il valore del timer selezionato
+        ''' 
         #Modifico il __timer
         spin_timer =self.ui.doubleSpinBox.value()
         self.set_Opt_Timer(spin_timer)
         self.hide()
     
-    '''
-    Caricamento Impostazioni, legge da file il timer e gli host salvati
-    '''
+
     def load_settings (self,file = None):
+        '''
+        Caricamento Impostazioni, legge da file il timer e gli host salvati
+        '''
         self.__timer =0
         self.__IP_list = []
         fName = file

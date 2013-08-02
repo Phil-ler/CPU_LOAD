@@ -5,20 +5,20 @@ Created on 09/apr/2013
 Modulo Principale che contiene il main() del programma
 
 @author: phil
+
 '''
 import Option
 from PyQt4 import QtGui, Qt
 import INTRO_GUI
 import sys
 import About
+
 from Host_Widget import Host_Widget
 import argparse 
    
 class Combo_Quit(QtGui.QWidget):
-    
     '''
-        Classe di tipo Qwidget che gestisce la gui per l'eliminazione di un Host dall'elenco
-    
+    Classe di tipo Qwidget che gestisce la gui per l'eliminazione di un Host dall'elenco
     '''
     
     def __init__(self,main):
@@ -72,13 +72,14 @@ class Combo_Quit(QtGui.QWidget):
                 self.combo.addItem(self.point_main.ui.host_w[i].IP)
         
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 class Main(QtGui.QMainWindow):
+    '''
+    Classi Main
+    Qui viene inizializzato il programma
+    
+    '''
     def __init__(self):
-        """
-        Costruttore della classe MainWindow.
-     
-        """
+        
         super(Main, self).__init__()
         self.setCentralWidget(QtGui.QWidget(self))
         self.freq = 0.05
@@ -89,6 +90,7 @@ class Main(QtGui.QMainWindow):
         self.Option = Option.Option(self)
         self.About = About.About()
         
+        #MENU
         self.ui.actionAdd_Host.triggered.connect(self.__showDialog_in)
         self.ui.actionRemove_Host.triggered.connect(self.__showDialog_out)
         self.ui.actionQuit.triggered.connect(self.quit_prog)
@@ -96,6 +98,7 @@ class Main(QtGui.QMainWindow):
         self.ui.actionLoad_Configuration.triggered.connect(self.Option.load_settings)
         self.ui.actionSave_Configuration.triggered.connect(self.Option.save_settings)
         self.ui.actionAbout.triggered.connect(self.About.mostra)
+        
         print("host presenti {}".format(self.ui.gridLayout.count()))   
         
         self.combo = Combo_Quit(self)

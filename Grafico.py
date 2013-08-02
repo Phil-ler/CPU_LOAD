@@ -1,7 +1,6 @@
 '''
-Created on 04/apr/2013
-
-@author: phil
+Widget che disegna a video l'andamento del carico della CPU designata
+@author: Filippo Verucchi
 '''
 from PyQt4 import QtCore, QtGui, Qt
 import Core
@@ -19,14 +18,14 @@ class Grafico(QtGui.QWidget):
    
     def setNextPoint (self,punto):
         '''
-    Setta la lista aggiornata dentro la variabile interna, dedicata al disegno del grafico
-    '''
+        Setta la lista aggiornata dentro la variabile interna, dedicata al disegno del grafico
+        '''
         self.__coda=punto
         
     def paintEvent(self, event):
         '''
-    Paint event della classe grafico
-    '''
+        Paint event della classe grafico
+        '''
     
         qp = QtGui.QPainter()
         qp.begin(self)
@@ -42,8 +41,8 @@ class Grafico(QtGui.QWidget):
 
     def drawGrid(self,event,qp):
         '''
-    Disegna la griglia di fondo del grafico
-    '''
+        Disegna la griglia di fondo del grafico
+        '''
         qp.setBrush(Qt.QBrush(QtCore.Qt.black)) #"#c56c00"
         qp.drawRect(0,0,self.width(),self.height())
         qp.setPen(QtCore.Qt.white)
@@ -53,11 +52,12 @@ class Grafico(QtGui.QWidget):
         qp.drawText(0,self.height()*0.25,"75")
         qp.drawText(0,self.height()*0.05,"100")
         
-        '''
-    Disegna l'andamento del grafico
-    @param qp: QPainter
-    '''
+       
     def drawline (self,event,qp):
+        '''
+        Disegna l'andamento del grafico
+        @param qp: QPainter
+        '''
         y_init = self.__coda[0]
         x_init= -1
         #print("altezza= {}".format(self.height()))

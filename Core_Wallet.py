@@ -8,6 +8,7 @@ from Core import *
 from Analizzatore import Analizzatore
 import time
 from PyQt4 import QtCore, QtGui
+import monitoraggio
 import Pyro4
  
 try:
@@ -27,11 +28,9 @@ class Core_Wallet(QtCore.QObject):
     valore_generico = QtCore.pyqtSignal(float)
     connection_lost = QtCore.pyqtSignal(str,str)
     connection_ok =QtCore.pyqtSignal()
+    
     def __init__(self,timer,IP):
-        '''
-        Constructor
-        '''
-        
+     
         QtCore.QObject.__init__(self)
         
         self.core = []
@@ -68,6 +67,9 @@ class Core_Wallet(QtCore.QObject):
             self.core.append(Core(i))
             print("Core creato n°",i)
     
+        #Creazione zona monitoraggio
+        self.Monitor = monitoraggio.Monitoraggio()
+        
    
 
     def fill (self,percent):
@@ -128,7 +130,7 @@ class Core_Wallet(QtCore.QObject):
                 #return percent
             except Pyro4.errors.ConnectionClosedError:
                 self.set_Stop()
-                self.connection_lost.emit(self.IP,"Persa la connessione col server - Il collegamento verrà rimosso")
+                self.connection_lost.emit(self.IP,"Persa la connessione col server - Il collegamento verr� rimosso")
                 #self.ERRORE("Persa la connessione col server")
                 
                 return

@@ -58,8 +58,10 @@ class Ui_MainWindow(object):
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
+        
         self.actionAdd_Host = QtGui.QAction(MainWindow)
         self.actionAdd_Host.setObjectName(_fromUtf8("actionAdd_Host"))
+        
         self.actionRemove_Host = QtGui.QAction(MainWindow)
         self.actionRemove_Host.setObjectName(_fromUtf8("actionRemove_Host"))
         self.actionQuit = QtGui.QAction(MainWindow)
@@ -70,20 +72,25 @@ class Ui_MainWindow(object):
         self.actionSave_Configuration.setObjectName(_fromUtf8("actionSave_Configuration"))
         self.actionLoad_Configuration = QtGui.QAction(MainWindow)
         self.actionLoad_Configuration.setObjectName(_fromUtf8("actionLoad_Configuration"))
+        
         self.actionAbout = QtGui.QAction(MainWindow)
         self.actionAbout.setObjectName(_fromUtf8("actionAbout"))
+        
         self.menuFile.addAction(self.actionAdd_Host)
         self.menuFile.addAction(self.actionRemove_Host)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionQuit)
         self.menuSettings.addAction(self.actionGeneral_Options)
+        
         self.menuSettings.addSeparator()
         self.menuSettings.addAction(self.actionSave_Configuration)
         self.menuSettings.addAction(self.actionLoad_Configuration)
+        
         self.menu.addAction(self.actionAbout)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuSettings.menuAction())
         self.menubar.addAction(self.menu.menuAction())
+        
         
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -100,4 +107,3 @@ class Ui_MainWindow(object):
         self.actionSave_Configuration.setText(_translate("MainWindow", "Save Configuration", None))
         self.actionLoad_Configuration.setText(_translate("MainWindow", "Load Configuration", None))
         self.actionAbout.setText(_translate("MainWindow", "About", None))
-

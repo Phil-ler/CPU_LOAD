@@ -18,11 +18,8 @@ class Analizzatore():
     Classe che legge, tramite la libreria psutil, i valori di carico della CPU
     '''
     
-
     def __init__(self):
-        '''
-        Constructor
-        '''
+       
         self.carico_core = []
         
         self.generic = []        
@@ -30,8 +27,7 @@ class Analizzatore():
         
     def get_n_core (self):
         '''
-        Ritorna il numero di Core di cui Ã¨ composta la CPU
-        return: Il numero di Core dell'host connesso
+        Ritorna il numero di Core di cui é composta la CPU
         '''
     
         return self.N_CORES
@@ -47,6 +43,7 @@ class Analizzatore():
     def get_generic (self,timer):
         '''
         Ritorna la lista contenente la media dei valori di tutti i core dell'HOST
+        @return: Carico generico
         '''
     
         self.generic = psutil.cpu_percent(interval=timer, percpu=False)
@@ -54,15 +51,13 @@ class Analizzatore():
    
         
    
-class Dati_Server ():
+class _Dati_Server ():
    
     '''
     Classe che raccoglie i dati del server per la connessione
     ''' 
     def __init__(self,Daemon,Thread,NS):
-        '''
-        Constructor
-        '''
+    
         self.Daemon= Daemon
         self.Thread = Thread
         self.NS = NS
@@ -118,7 +113,7 @@ def main():
         uri=daemon.register(A)
     
         ns.register("CPU_LOAD",uri)
-        D = Dati_Server(daemon,nsThread,ns)
+        D = _Dati_Server(daemon,nsThread,ns)
         signal.signal(signal.SIGINT, D.signal_handler)
     
         print ("Object uri = {0}".format(uri))
