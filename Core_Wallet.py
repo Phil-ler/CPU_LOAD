@@ -10,6 +10,8 @@ import time
 from PyQt4 import QtCore, QtGui
 import monitoraggio
 import Pyro4
+import paramiko
+import socket
  
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -29,49 +31,154 @@ class Core_Wallet(QtCore.QObject):
     connection_lost = QtCore.pyqtSignal(str,str)
     connection_ok =QtCore.pyqtSignal()
     
-    def __init__(self,timer,IP):
+    def __init__(self,timer,address,ID,passwd):
      
         QtCore.QObject.__init__(self)
         
         self.core = []
         self.win_core = []
         self.timer = timer
-        self.start_T=True
         #print("Prima del naming")
-        self.IP = IP
+        self.address = address
+        self.ID = ID
+        self.passwd = passwd
         Pyro4.COMMTIMEOUT = 3
-        if (IP == "LOCAL"):
-            self.analizzatore = Analizzatore()
-        else:
-            try:
-                Pyro4.config.COMMTIMEOUT = 1.5  
-                #host =str(IP)
-                ns = Pyro4.naming.locateNS(str(IP))
-                #ns._pyroTimeout = 4
-                #localizza il DNS nell'IP che gli passo, ovvero sulla macchina server
-                print("cercato il nameserver")
-                uri=ns.lookup("CPU_LOAD")
-                print("URI PRESO {}".format(uri))
-                (preuri,posturi) = uri.asString().split(sep="@")
-                (address, port ) = posturi.split(sep=":")
-                uri =(preuri +"@"+ str(IP) +":" + port)
-               
-                self.analizzatore = Pyro4.Proxy(uri)
-                #print ("Numero CORE ",thing.get_n_core())
-            except Pyro4.errors.NamingError:
-                print("NameServer non trovato")
-                return
-           
+        self.getInfoHost() 
+            
         self.__Num_Cores= self.analizzatore.get_n_core()
         for i in range(self.__Num_Cores):
             self.core.append(Core(i))
-            print("Core creato nÂ°",i)
+            print("Core creato n°",i)
     
         #Creazione zona monitoraggio
-        self.Monitor = monitoraggio.Monitoraggio()
+        #self.Monitor = monitoraggio.Monitoraggio(self.__Num_Cores,address)
         
-   
+        #inizializzazione parametri utili per la lettura dei carichi di host
+        
+        self.authOk= False
+        self.connection_Ok= False
+        
 
+    def getInfoHost(self):
+            
+        if (self.address == "LOCAL"):
+            self.analizzatore = Analizzatore()
+            self.start_T=True
+        else:
+            print("NO LOCAL")
+            self.ConnectHost()
+            
+    def OpenServerConnection(self):
+        '''
+        '''
+        print("Inizio Connessione")
+        print("ID = "+str(self.ID))
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        try:
+            if str(self.address).__contains__("@"):
+                (username,hostname) = str(self.address).split("@")
+                print("User = {}, host = {}".format(username,hostname))
+                print("Tentativo connessione")
+                ssh.connect(str(hostname),username=username, password= str(self.passwd),timeout = 5,allow_agent=False)
+                addressToConnect = hostname
+                
+            else:
+                ssh.connect(str(self.address), password = str(self.passwd),timeout=5)
+                addressToConnect = self.address
+            print("Connessione a "+str(hostname))
+            self.authOk=True
+            sftp = ssh.open_sftp()
+            print("Aperta connessione sftp")     
+            print("Passo Analizzatore")
+            sftp.put("Analizzatore.py","./Analizzatore.py") 
+            print("Passo Pyro4")
+            sftp.put("Pyro4.tar.gz","./Pyro4.tar.gz") 
+            print("Estraggo Pyro4")
+            stdin, stdout, stderr= ssh.exec_command("tar -xzvf Pyro4.tar.gz")
+            time.sleep(5)
+            
+            
+            stdin, stdout, stderr= ssh.exec_command("echo $$; exec python3 Analizzatore.py --id {}".format(self.ID))
+            print("Esecuzione Analizzatore")
+            self.remotePID= int(stdout.readline())
+            print("PID Analizzatore {}".format(self.remotePID))
+            
+            time.sleep(5)
+
+            #sftp.remove("Analizzatore.py")
+            
+            
+            sftp.close()
+            ssh.close()
+           
+            
+            return addressToConnect
+        
+        except (paramiko.AuthenticationException, socket.error) as e:
+            self.authOk= False
+            ssh.close()
+            print("connessione fallita:")
+            print(e)
+    
+    def closeSSHConnection(self):
+        '''
+        Metodo che si occupa di chiudere la connessione in corso con l'host, stoppando ed eliminando il file in
+        esecuzione che permette la registrazione dell'host stesso in rete allo scopo di ottenere le informazioni
+        necessarie per visualizzare i carichi della CPU.
+        @raise e: ritorna un'eccezione in caso di errore di connessione (password errata, indirizzo errato o altro).
+        '''
+        ssh= paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        try:
+            if str(self.address).__contains__("@"):
+                (username,hostname)= str(self.address).split("@")
+                ssh.connect(str(hostname),username= username, password= str(self.passwd), timeout= 5,allow_agent=False)
+            else:
+                ssh.connect(str(self.address), password= str(self.password), timeout= 5)
+            
+            
+            print("Pid da cancellare"+str(self.remotePID))
+            ssh.exec_command ("kill -s 15 {}".format(self.remotePID))
+            time.sleep(2)
+            
+            ssh.close()
+
+        except (paramiko.AuthenticationException, socket.error) as e:
+            ssh.close()
+            print("connessione fallita: autenticazione non riuscita") + "\n" + str(e)
+
+     
+    def ConnectHost(self):
+        '''
+        Reperisce il pyroObject remoto registrato sul NameServer per ottenere le info sull'Host
+        '''        
+        pyroObject = str(self.OpenServerConnection())
+        
+        if (self.authOk == True):
+            try:
+                ns = Pyro4.naming.locateNS()
+                print("trovato NS")
+                AnalizzatoreUri = ns.lookup("CPU_LOAD"+str(self.ID))
+                print("CPUAnalyzer URI found at {}".format(AnalizzatoreUri))
+                
+                (uri,hostname) = AnalizzatoreUri.asString().split("@")
+                (address,port) = hostname.split(":")
+                AnalizzatoreUri = (uri+"@"+pyroObject+":"+port)
+                
+                print(AnalizzatoreUri)
+                
+                self.analizzatore = Pyro4.Proxy(AnalizzatoreUri)
+                self.connection_2_ok=True
+                self.start_T=True
+                
+            except Pyro4.errors.NamingError as E:
+                self.connection_2_ok=False
+                self.start_T=False
+                print(str(E))
+                self.closeSSHConnection()
+                return
+    
     def fill (self,percent):
         '''
         Quando i valori dei core sono stati letti, questa funzione viene chiamata per riempire i vari campi di lettura
@@ -130,7 +237,7 @@ class Core_Wallet(QtCore.QObject):
                 #return percent
             except Pyro4.errors.ConnectionClosedError:
                 self.set_Stop()
-                self.connection_lost.emit(self.IP,"Persa la connessione col server - Il collegamento verrà  rimosso")
+                self.connection_lost.emit(self.address,"Persa la connessione col server - Il collegamento verrà  rimosso")
                 #self.ERRORE("Persa la connessione col server")
                 
                 return

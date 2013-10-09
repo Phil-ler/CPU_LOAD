@@ -12,6 +12,10 @@ from PyQt4 import QtGui, Qt
 import INTRO_GUI
 import sys
 import About
+import Pyro4
+import time
+import threading
+import socket
 
 from Host_Widget import Host_Widget
 import argparse 
@@ -70,8 +74,34 @@ class Combo_Quit(QtGui.QWidget):
             print("Nome host".format(self.point_main.ui.host_w[i].IP))
             if (self.point_main.ui.host_w[i].IP != "LOCAL"):
                 self.combo.addItem(self.point_main.ui.host_w[i].IP)
+
+def startNameServer():
+    '''
+    Questa funzione ha il compito di permettere permettere il collegamento con host esterni: fa partire un
+    nameserver che verra' usato per registrare gli URI degli host esterni a cui ci si vuole collegare.
+    '''
+    print("Staring NS")
+    try:
+        Pyro4.naming.startNSloop()
+    except socket.error:
+        print("Server already started!!!")
+        sys.exit(0)
+
+
+def StartNameServerLoop():
+    '''
+     Questa funzione ha il compito di far partire il nameserver all'interno di un thread parallelo di tipo
+    "demone" il quale si chiudera' automaticamente alla chiusura dell'applicazione
+    '''
+    
+    NSThread = threading.Thread(target = startNameServer, args = [])
+    NSThread.setDaemon(True)
+    NSThread.start()
+
         
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 class Main(QtGui.QMainWindow):
     '''
     Classi Main
@@ -79,6 +109,10 @@ class Main(QtGui.QMainWindow):
     
     '''
     def __init__(self):
+        
+        
+        self.__ID = 1
+        
         
         super(Main, self).__init__()
         self.setCentralWidget(QtGui.QWidget(self))
@@ -103,13 +137,20 @@ class Main(QtGui.QMainWindow):
         
         self.combo = Combo_Quit(self)
         self.dialogbox = Qt.QErrorMessage()
-        #self.freq
+        
+        #Start Nameserver
+        Pyro4.config.HOST= "0.0.0.0"
+        StartNameServerLoop()
+        time.sleep(0.5)
+    
         
     '''
     Terminazione programma
     '''
     def quit_prog (self):
+        self.elimina_host()
         print("Programma terminato con successo")
+        QtGui.QApplication.processEvents()
         sys.exit(0)  
     
     '''
@@ -140,7 +181,10 @@ class Main(QtGui.QMainWindow):
     def __showDialog_in(self):
         
         text, ok = QtGui.QInputDialog.getText(self, 'Input Dialog', 
-            'Ip da aggungere:')
+            'Inserire [user@]host:')
+        
+        passwd, ok = QtGui.QInputDialog.getText(self, 'Input Dialog',"Inserire password per {}".format(text) , mode=2)
+        
         
         if ok:
             if (text==""):
@@ -148,46 +192,44 @@ class Main(QtGui.QMainWindow):
                 self.dialogbox.showMessage("Immettere un IP o un nome per il DNS")
             else:
                 print("Creazione collegamento a {}".format(text))
-                self.crea_conn(text)
+                self.crea_conn(text,passwd)
             
     '''
     Crea la connessione del programma a un server di monitoraggio
     @param IP: Indirizzo o nome riconosciuto dal DNS del server    
     '''         
-    def crea_conn (self,IP):       
+    def crea_conn (self,IP,passwd):       
+            i = self.__ID
             try:
+                
                 if (IP == ""):
                     raise Exception.MissingInputError
                 
                 print("IP=",IP)
                 
-                ctrl = False
-                for i in range (len(self.ui.host_w)):
-                    if (IP == self.ui.host_w[i].IP):
-                        ctrl = True
-                if (ctrl):
-                    self.dialogbox.showMessage("Host {} gia presente in elenco".format(IP))
-                    return
                 
-                new_host = Host_Widget(IP,self)
+                new_host = Host_Widget(IP,self,self.__ID,passwd)
+                self.__ID+=1
                 self.ui.host_w.append(new_host)
                 self.ui.gridLayout.addWidget(new_host)    
                 print("host presenti {}".format(self.ui.gridLayout.count()))   
             except AttributeError:
                 self.dialogbox.showMessage("IP non corretto o Server {} non attivo".format(IP))
-                print("Errore")
+                self.__ID=i
+                print("Errore cane")
+   
     
     def __showDialog_out(self):
         self.combo.update_host_list()
         
         self.combo.show()
-    '''
-    Cancella dall'elenco un IP terminandone la connessione
-    @param IP: Indirizzo del server da togliere
-    @param msg: Messaggio da visualizzare tramite da DialogBox
-    '''
+    
     def elimina_host (self,IP,msg):
-        
+        '''
+        Cancella dall'elenco un IP terminandone la connessione
+        @param IP: Indirizzo del server da togliere
+        @param msg: Messaggio da visualizzare tramite da DialogBox
+        '''
         
         if (IP==""):
                 print("Errore")
@@ -200,11 +242,13 @@ class Main(QtGui.QMainWindow):
                 
                 if (i_ip!=-1):
                     
+                    self.ui.host_w[i_ip].local.Host_Cores.closeSSHConnection()
                     widget = self.ui.gridLayout.itemAt(i_ip)
                     
                     widget.widget().setParent(None)
                     self.ui.host_w[i_ip].local.Host_Cores.set_Stop()
                     self.ui.host_w.pop(i_ip)
+                    
                     
                     print(msg)
                     if (msg != "NO_MSG"):

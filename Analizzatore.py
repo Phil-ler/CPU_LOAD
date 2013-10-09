@@ -6,11 +6,11 @@ Created on 15/apr/2013
 '''
 
 import Pyro4
-import threading
-import time
+import argparse
 import signal
 import sys
 import psutil
+import socket
 
 
 class Analizzatore():
@@ -24,6 +24,8 @@ class Analizzatore():
         
         self.generic = []        
         self.N_CORES=psutil.NUM_CPUS
+    
+    
         
     def get_n_core (self):
         '''
@@ -49,80 +51,77 @@ class Analizzatore():
         self.generic = psutil.cpu_percent(interval=timer, percpu=False)
         return self.generic
    
-        
-   
-class _Dati_Server ():
-   
-    '''
-    Classe che raccoglie i dati del server per la connessione
-    ''' 
-    def __init__(self,Daemon,Thread,NS):
-    
-        self.Daemon= Daemon
-        self.Thread = Thread
-        self.NS = NS
-    
-    def signal_handler(self,signal, frame):
-        '''
-        Chiude il server quando viene mandato il segnale di CTRL-C
-        '''
-    
-        print ("Chiusura Server")
-        #self.Thread.join(0.1)
-        #print(self.NS.list())
-        #self.Daemon.shutdown()
-        self.Thread._stop()
-        print("Server Chiuso!")
-        
-        sys.exit(0)
 
-def startNSserverLoop():
+    def get_Hostname(self):
+        '''
+        Metodo che ritorna l'hostname della macchina locale.
+        @return: hostname locale
+        '''
+        return socket.gethostname()
+   
+
+def stopConnection_handler(signal, frame):
     '''
-    Starta il server
+    Metodo utilizzato dal main per chiudere correttamente la comunicazione con il nameserver e la macchina locale
+    @param signal: parametro utilizzato dal signal handler per identificare il segnale di macchina catturato
+    @param frame: frame che contiene l'applicazione in esecuzione da terminare
     '''
-    NSThread = threading.Thread(target=Pyro4.naming.startNSloop,args=[])
-    NSThread.start()
-    return NSThread
+    print("Closing connection")
+    ns.remove(pyroObjName)
+    sys.exit(0)
+
 
 def main():
-    """
-    Funzione principale per avviare il server.
-    Fa partire un Name Server Pyro e ci registra sopra un oggetto ServerProcessor
+   
+    '''
+    Metodo main del file server per la connessione remota.
+    '''
+    global ns
+    global pyroObjName
+    
+    
+    parser= argparse.ArgumentParser(description="Startup value settings")
+    parser.add_argument("-i","--id", help="Set id for pyro object registration ")
+    args = parser.parse_args()
 
-    """ 
-    
-    
-    IP = "0.0.0.0"
-    
-    print(" IP RANGE =,",IP)
-    #analizer = Analizer.Analizer("")
-    A=Analizzatore()
-    
-    
-    Pyro4.config.HOST = IP
+    if args.id != None:
+        ID= str(args.id)
+    else:
+        ID= ""
+    print("Lettura ID"+str(ID))
+    analizzatore =Analizzatore()
     try:
-        nsThread=startNSserverLoop()
-        time.sleep(1)
-        ns=Pyro4.naming.locateNS("localhost")
-    
-        print(ns)
-        ns.ping()
-        print(ns)
-    
-        daemon=Pyro4.Daemon()
-        uri=daemon.register(A)
-    
-        ns.register("CPU_LOAD",uri)
-        D = _Dati_Server(daemon,nsThread,ns)
-        signal.signal(signal.SIGINT, D.signal_handler)
-    
-        print ("Object uri = {0}".format(uri))
+        ns= Pyro4.naming.locateNS()
+        pyroObjName= "CPU_LOAD"+str(ID)
+
+        daemon= Pyro4.Daemon()
+        try:
+            Analizzatore_uri=ns.lookup(pyroObjName)
+            ns.remove(pyroObjName)
+        except:
+            pass
+
+        Analizzatore_uri= daemon.register(analizzatore)
+        print (ID)
+        ns.register(pyroObjName, Analizzatore_uri)
+
+        print ("CPU_LOAD uri = {0}".format(Analizzatore_uri))
         print ("Ready")
-    
+
+        signal.signal(signal.SIGINT, stopConnection_handler )
+        signal.signal(signal.SIGTERM, stopConnection_handler)
+
         daemon.requestLoop()
-    except Pyro4.errors.CommunicationError:
-        print("Error! IP Range not correct, Server not started !!!")
-    
+
+    except Pyro4.naming.NamingError as e:
+        print (e)
+
+
 if __name__ == "__main__":
-    
-    main()
+    __doc__='''
+    Questo e' il file server necessario alla comunicazione remota, eseguendolo viene registrato sulla macchina remota
+    un pyro object rappresentante l'oggetto addetto alla lettura dei carichi il quale viene poi registrato in rete
+    sul nameserver per renderlo reperibile dal programma principale con funzione di client.
+@author: Filippo Verucchi
+    '''
+    main() 

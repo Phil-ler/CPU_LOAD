@@ -10,22 +10,23 @@ Classe Host_Widget, estende un Button in quanto facendosi click sopra, si apre l
 '''
 class Host_Widget (QtGui.QPushButton):
     
-    def __init__(self,IP,Main):
+    def __init__(self,IP,Main,ID,passwd = None):
         super(Host_Widget, self).__init__()
         self.Main = Main
         self.IP=IP
+        self.ID=ID
         self.timer = self.Main.freq
         self.ping_True = False
-        self.local = Host.Host(self.IP,self.timer)
+        self.local = Host.Host(self.IP,self.timer,ID, passwd)
         
-       
         self.clicked.connect(self.show_window)
+        
         self.local.Host_Cores.valore_generico.connect(self.show_generic_load)
         self.carico = 0
-        
+       
         self.local.Host_Cores.connection_lost.connect(self.Main.elimina_host)
         self.local.Host_Cores.connection_ok.connect(self.Ping_ON)
-    
+        print("lol")
     
     def set_freq (self,freq):
         '''
@@ -72,7 +73,7 @@ class Host_Widget (QtGui.QPushButton):
   
         qp.drawRect(0,0,self.width(),self.height())
         qp.setPen(QtCore.Qt.black)
-        qp.drawText(20,20, "{} - {}".format(self.IP,self.carico))
+        qp.drawText(20,20, "{}) {} -> {}".format(self.ID,self.IP,self.carico))
     
        
     def show_window(self):

@@ -39,9 +39,11 @@ class Ui_frmHost(object):
         #frmHost.settitle("CPU")
         self.verticalLayout = QtGui.QVBoxLayout(frmHost)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        '''
         self.cmdMonitor = QtGui.QPushButton(frmHost)
         self.cmdMonitor.setObjectName(_fromUtf8("cmdMonitor"))
         self.verticalLayout.addWidget(self.cmdMonitor)
+        '''
         for self.core in range (psutil.NUM_CPUS):
         
             lcdNumber = QtGui.QLCDNumber(frmHost)
@@ -62,7 +64,9 @@ class Ui_frmHost(object):
     def retranslateUi(self, frmHost):
                                 
         frmHost.setWindowTitle(_translate("frmHost", "{}", None))
+        '''
         self.cmdMonitor.setText(_translate("frmHost","Monitoraggio", None))
+        '''
         for but in self.cmd:
             but.setText(_translate("frmHost", but.objectName(), None))
 

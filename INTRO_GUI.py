@@ -8,7 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import main
+
 import Host_Widget
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         
        
-        host = Host_Widget.Host_Widget("LOCAL",MainWindow)
+        host = Host_Widget.Host_Widget("LOCAL",MainWindow,0)
         self.host_w.append(host)
         self.gridLayout.addWidget(host)
         
