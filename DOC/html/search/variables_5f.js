@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['_5fencoding',['_encoding',['../namespaceABOUT__GUI.html#a045ae4e601acbdc085ed5fa75a96bc04',1,'ABOUT_GUI._encoding()'],['../namespaceCORE__GUI.html#aafa4d1703c58a0e36d6dc4e169d60524',1,'CORE_GUI._encoding()'],['../namespaceCPU__GUI.html#ae1930c9c577f07674b038297798270e2',1,'CPU_GUI._encoding()'],['../namespaceINTRO__GUI.html#ac689fa0f88e255337e3403f0b8f9df66',1,'INTRO_GUI._encoding()'],['../namespaceOPTION__GUI.html#ac5400c1b7aa9407005167fedfe3936d2',1,'OPTION_GUI._encoding()']]],
+  ['_5ffromutf8',['_fromUtf8',['../namespaceABOUT__GUI.html#a3a2a37630756412459ae6772ca77c78a',1,'ABOUT_GUI._fromUtf8()'],['../namespaceCore.html#a1ecedf7374c8c8dda109a8f5c6789a58',1,'Core._fromUtf8()'],['../namespaceCORE__GUI.html#a8af57c8f528607c6dd4f222d76c1baa5',1,'CORE_GUI._fromUtf8()'],['../namespaceCore__Wallet.html#a28fcc3200de7f8d612a1c8c13930d84f',1,'Core_Wallet._fromUtf8()'],['../namespaceCPU__GUI.html#a0e7bff7db08ec0a3140065d72ed89230',1,'CPU_GUI._fromUtf8()'],['../namespaceINTRO__GUI.html#a723563ff5ae14425bda5fa9eb36e76d1',1,'INTRO_GUI._fromUtf8()'],['../namespaceOPTION__GUI.html#ad4bac2da89f7228795208b91538903b7',1,'OPTION_GUI._fromUtf8()']]]
+];

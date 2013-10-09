@@ -1,0 +1,15 @@
+import paramiko
+ssh = paramiko.SSHClient()
+
+#mette yes in automatico alla connesione
+ssh.set_missing_host_key_policy(
+    paramiko.AutoAddPolicy())
+ssh.connect('127.0.0.1', username='jesse', 
+    password='lol')
+
+mandare file
+ftp = ssh.open_sftp()
+ftp.get('localfile.py', 'remotefile.py')
+ftp.close()
+
+
