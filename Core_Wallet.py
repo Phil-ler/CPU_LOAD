@@ -44,7 +44,9 @@ class Core_Wallet(QtCore.QObject):
         self.passwd = passwd
         Pyro4.COMMTIMEOUT = 3
         self.getInfoHost() 
-            
+        
+        print("Connessione eseguita")
+        time.sleep(2)
         self.__Num_Cores= self.analizzatore.get_n_core()
         for i in range(self.__Num_Cores):
             self.core.append(Core(i))
@@ -104,7 +106,7 @@ class Core_Wallet(QtCore.QObject):
             self.remotePID= int(stdout.readline())
             print("PID Analizzatore {}".format(self.remotePID))
             
-            time.sleep(5)
+            time.sleep(1)
 
             #sftp.remove("Analizzatore.py")
             
@@ -137,7 +139,7 @@ class Core_Wallet(QtCore.QObject):
             else:
                 ssh.connect(str(self.address), password= str(self.password), timeout= 5)
             
-            
+            self.host = hostname
             print("Pid da cancellare"+str(self.remotePID))
             ssh.exec_command ("kill -s 15 {}".format(self.remotePID))
             '''
@@ -165,14 +167,15 @@ class Core_Wallet(QtCore.QObject):
                 print("trovato NS")
                 AnalizzatoreUri = ns.lookup("CPU_LOAD"+str(self.ID))
                 print("CPUAnalyzer URI found at {}".format(AnalizzatoreUri))
-                
+                '''
                 (uri,hostname) = AnalizzatoreUri.asString().split("@")
                 (address,port) = hostname.split(":")
                 AnalizzatoreUri = (uri+"@"+pyroObject+":"+port)
-                
+                '''
                 print(AnalizzatoreUri)
-                
+                print("DIO")
                 self.analizzatore = Pyro4.Proxy(AnalizzatoreUri)
+                print("Cane")
                 self.connection_2_ok=True
                 self.start_T=True
                 

@@ -83,6 +83,7 @@ def startNameServer():
     '''
     print("Staring NS")
     try:
+        
         Pyro4.naming.startNSloop()
     except socket.error:
         print("Server already started!!!")
@@ -140,7 +141,9 @@ class Main(QtGui.QMainWindow):
         self.dialogbox = Qt.QErrorMessage()
         
         #Start Nameserver
+        
         Pyro4.config.HOST= "0.0.0.0"
+        
         StartNameServerLoop()
         time.sleep(0.5)
     
