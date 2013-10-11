@@ -28,7 +28,7 @@ class Combo_Quit(QtGui.QWidget):
     def __init__(self,main):
         
         super(Combo_Quit, self).__init__()
-        self.IP = 0
+        self.ID = 0
         self.point_main = main
         self.__initUI()
         
@@ -51,14 +51,14 @@ class Combo_Quit(QtGui.QWidget):
             
     def __onActivated(self, text):
         
-        self.IP=text
-        print(self.IP)   
+        self.ID, spam = str(text).split(")")
+        print(self.ID)   
     
     def __Ok_click(self):
-        if (self.IP != 0 and self.IP !="<seleziona host>"):
+        if (self.ID != 0 and self.ID !="<seleziona host>"):
             self.hide()
             print("finestra chiusa, vado dentro a elimina Host")
-            self.point_main.elimina_host(self.IP,"Host eliminato da Utente")
+            self.point_main.elimina_host(self.ID,"Host eliminato da Utente")
             
     '''
     Classe che aggiorna la ComboBox per la scelta dell'host da eliminare
@@ -71,9 +71,10 @@ class Combo_Quit(QtGui.QWidget):
         
         self.combo.addItem("<seleziona host>")
         for i in range(len(self.point_main.ui.host_w)):
-            print("Nome host".format(self.point_main.ui.host_w[i].IP))
+            print("Nome host".format(self.point_main.ui.host_w[i].ID))
             if (self.point_main.ui.host_w[i].IP != "LOCAL"):
-                self.combo.addItem(self.point_main.ui.host_w[i].IP)
+                host = str(str(self.point_main.ui.host_w[i].ID)+") " +self.point_main.ui.host_w[i].IP )
+                self.combo.addItem(host)
 
 def startNameServer():
     '''
@@ -148,7 +149,7 @@ class Main(QtGui.QMainWindow):
     Terminazione programma
     '''
     def quit_prog (self):
-        self.elimina_host()
+        #self.elimina_host()
         print("Programma terminato con successo")
         QtGui.QApplication.processEvents()
         sys.exit(0)  
@@ -224,41 +225,44 @@ class Main(QtGui.QMainWindow):
         
         self.combo.show()
     
-    def elimina_host (self,IP,msg):
+    def elimina_host (self,ID,msg):
         '''
         Cancella dall'elenco un IP terminandone la connessione
         @param IP: Indirizzo del server da togliere
         @param msg: Messaggio da visualizzare tramite da DialogBox
         '''
         
-        if (IP==""):
+        if (ID==""):
                 print("Errore")
         else:
-                print("indirizzo da cancellare {}".format(IP))
-                i_ip = -1
+                print("ID da cancellare {}".format(ID))
+                i_id = -1
                 for i in range(len(self.ui.host_w)):
-                    if (self.ui.host_w[i].IP==IP):
-                        i_ip = i
-                
-                if (i_ip!=-1):
                     
-                    self.ui.host_w[i_ip].local.Host_Cores.closeSSHConnection()
-                    widget = self.ui.gridLayout.itemAt(i_ip)
+                    if (int(self.ui.host_w[i].ID)==int(ID)):
+                        i_id = i
+                print("indice -> {}".format(i_id))
+                if (i_id!=-1):
                     
+                    #AZZ
+                    
+                    
+                    widget = self.ui.gridLayout.itemAt(i_id)
                     widget.widget().setParent(None)
-                    self.ui.host_w[i_ip].local.Host_Cores.set_Stop()
-                    self.ui.host_w.pop(i_ip)
+                    self.ui.host_w[i_id].local.Host_Cores.set_Stop()
+                    self.ui.host_w[i_id].local.Host_Cores.closeSSHConnection()
+                    self.ui.host_w.pop(i_id)
                     
                     
                     print(msg)
                     if (msg != "NO_MSG"):
                         self.dialogbox.showMessage(msg)
                         #self.dialogbox.show()
-                        print("IP removed {}".format(IP))
+                        print("IP removed {}".format(ID))
                         print("Tolto 1 IP, rimanenti host ={}".format(self.ui.gridLayout.count()))
                     
                 else:
-                    print("IP non trovato")
+                    print("ID non trovato")
     
    
     def closeEvent(self,event):    

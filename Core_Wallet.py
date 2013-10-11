@@ -140,6 +140,10 @@ class Core_Wallet(QtCore.QObject):
             
             print("Pid da cancellare"+str(self.remotePID))
             ssh.exec_command ("kill -s 15 {}".format(self.remotePID))
+            '''
+            ssh.exec_command("rm -r Pyro4*")
+            ssh.exec_command("rm -r Analizzatore.py")
+            '''
             time.sleep(2)
             
             ssh.close()
