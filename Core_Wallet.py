@@ -48,6 +48,7 @@ class Core_Wallet(QtCore.QObject):
         print("Connessione eseguita")
         time.sleep(2)
         self.__Num_Cores= self.analizzatore.get_n_core()
+        self.core = []
         for i in range(self.__Num_Cores):
             self.core.append(Core(i))
             print("Core creato n°",i)
@@ -86,14 +87,15 @@ class Core_Wallet(QtCore.QObject):
                 addressToConnect = hostname
                 
             else:
-                ssh.connect(str(self.address), password = str(self.passwd),timeout=5)
+                ssh.connect(str(self.address), password = str(self.passwd),timeout=5,allow_agent=False)
                 addressToConnect = self.address
-            print("Connessione a "+str(hostname))
+            #print("Connessione a "+str(hostname))
             self.authOk=True
             sftp = ssh.open_sftp()
             print("Aperta connessione sftp")     
             print("Passo Analizzatore")
-            sftp.put("Analizzatore.py","./Analizzatore.py") 
+            sftp.put("Analizzatore.py","./Analizzatore.py")
+             
             print("Passo Pyro4")
             sftp.put("Pyro4.tar.gz","./Pyro4.tar.gz") 
             print("Estraggo Pyro4")
@@ -137,16 +139,16 @@ class Core_Wallet(QtCore.QObject):
                 (username,hostname)= str(self.address).split("@")
                 ssh.connect(str(hostname),username= username, password= str(self.passwd), timeout= 5,allow_agent=False)
             else:
-                ssh.connect(str(self.address), password= str(self.password), timeout= 5)
+                ssh.connect(str(self.address), password= str(self.passwd), timeout= 5,allow_agent=False)
             
             self.host = hostname
             print("Pid da cancellare"+str(self.remotePID))
             ssh.exec_command ("kill -s 15 {}".format(self.remotePID))
-            '''
+            
             ssh.exec_command("rm -r Pyro4*")
             ssh.exec_command("rm -r Analizzatore.py")
-            '''
-            time.sleep(2)
+            
+            time.sleep(1)
             
             ssh.close()
 

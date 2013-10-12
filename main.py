@@ -115,7 +115,10 @@ class Main(QtGui.QMainWindow):
         
         self.__ID = 1
         
+        Pyro4.config.HOST= "0.0.0.0"
         
+        StartNameServerLoop()
+        time.sleep(0.5)
         super(Main, self).__init__()
         self.setCentralWidget(QtGui.QWidget(self))
         self.freq = 0.05
@@ -142,10 +145,7 @@ class Main(QtGui.QMainWindow):
         
         #Start Nameserver
         
-        Pyro4.config.HOST= "0.0.0.0"
         
-        StartNameServerLoop()
-        time.sleep(0.5)
     
         
     '''

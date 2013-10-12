@@ -23,14 +23,14 @@ class Host(QtGui.QMainWindow):
         super(Host, self).__init__()
         
         self.setCentralWidget(QtGui.QWidget(self))
-        self.ui = CPU_GUI.Ui_frmHost()
-        self.ui.setupUi(self.centralWidget())
         self.timer=timer # selec
         self.ID = ID
         self.Host_Cores = Core_Wallet(self.timer,IP,ID,passwd)
         self.carico_generico = []
         self.setWindowIcon(QtGui.QIcon('Icon.ico'))
         self.num_Cores = self.Host_Cores.get_N_cores()
+        self.ui = CPU_GUI.Ui_frmHost()
+        self.ui.setupUi(self.centralWidget(),self.num_Cores)
         self.monitor = monitoraggio.Monitoraggio(IP,self.num_Cores)
         self.setWindowTitle("Core Pool {}".format(IP))
         '''

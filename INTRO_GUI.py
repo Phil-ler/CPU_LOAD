@@ -36,9 +36,11 @@ class Ui_MainWindow(object):
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         MainWindow.setCentralWidget(self.centralwidget)
         
+        
        
         host = Host_Widget.Host_Widget("LOCAL",MainWindow,0)
         self.host_w.append(host)
+        
         self.gridLayout.addWidget(host)
         
         #self.lcd.append(lcdNumber)

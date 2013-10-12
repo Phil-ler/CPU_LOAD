@@ -26,9 +26,9 @@ except AttributeError:
 
 class Ui_frmHost(object):
 
-    def setupUi(self, frmHost):
+    def setupUi(self, frmHost,N_CORE):
         frmHost.setObjectName(_fromUtf8("frmHost"))
-        frmHost.setMinimumSize(200,700)
+        frmHost.setMinimumSize(400,200)
         #-----------------
         self.ncore=0
         #self.lcd_name="lcd{}".format(self.ncore)
@@ -44,7 +44,7 @@ class Ui_frmHost(object):
         self.cmdMonitor.setObjectName(_fromUtf8("cmdMonitor"))
         self.verticalLayout.addWidget(self.cmdMonitor)
         '''
-        for self.core in range (psutil.NUM_CPUS):
+        for self.core in range (N_CORE):
         
             lcdNumber = QtGui.QLCDNumber(frmHost)
             lcdNumber.setObjectName(_fromUtf8("lcd{}".format(self.core))) 

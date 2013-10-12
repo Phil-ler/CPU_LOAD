@@ -93,11 +93,13 @@ def main():
     analizzatore =Analizzatore()
     try:
         #Pyro4.config.HOST= "0.0.0.0"
-        ns= Pyro4.naming.locateNS("10.1.1.3")
+        ns= Pyro4.naming.locateNS()
+        ns= Pyro4.naming.locateNS("192.168.1.104")
         print("NS ->{}".format(ns))
         pyroObjName= "CPU_LOAD"+str(ID)
 
-        daemon= Pyro4.Daemon(analizzatore.get_Hostname())
+        #daemon= Pyro4.Daemon()
+        daemon= Pyro4.Daemon("192.168.1.106")
         try:
             Analizzatore_uri=ns.lookup(pyroObjName)
             ns.remove(pyroObjName)
