@@ -152,7 +152,9 @@ class Main(QtGui.QMainWindow):
     Terminazione programma
     '''
     def quit_prog (self):
-        #self.elimina_host()
+       
+        self.Clear_list()
+        
         print("Programma terminato con successo")
         QtGui.QApplication.processEvents()
         sys.exit(0)  
@@ -162,15 +164,11 @@ class Main(QtGui.QMainWindow):
     '''
     def Clear_list (self):
         n_host=len(self.ui.host_w)
-        for i in range(n_host,0,-1):
-            print("I= ",i-1)
-            if (self.ui.host_w[i-1].IP != "LOCAL"):
-                
-                IP = self.ui.host_w[i-1].IP
-                self.elimina_host(IP, "NO_MSG")
-            else:
-                print("Il local non si cancella, I=",i-1)
-    
+        
+        for i in range (n_host):
+            if self.ui.host_w[i].ID !=0 :
+                self.elimina_host(self.ui.host_w[i].ID, "NO_MSG")
+       
     '''
     Setta la frequenza del timer di aggiornamento dati, lo setta a tutti gli host presenti nell'elenco
     @param timer: numero in float che indica la frequenza di aggiornamento
