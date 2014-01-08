@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.6"/>
+<title>CPU LOAD:  File sorgente Host.py</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Icon.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CPU LOAD
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.6 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="pages.html"><span>Pagine&#160;collegate</span></a></li>
+      <li><a href="annotated.html"><span>Classi</span></a></li>
+      <li class="current"><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Elenco&#160;dei&#160;file</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tutto</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classi</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Funzioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pagine</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Host.py</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment"># -*- coding: iso-8859-15 -*-</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="stringliteral">Created on 20/mar/2013</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="stringliteral"></span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="stringliteral">In questo modulo é presente</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">from</span> Core_Wallet <span class="keyword">import</span> Core_Wallet</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtCore,QtGui</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">import</span> CPU_GUI</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">import</span> monitoraggio</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">class </span><a class="code" href="namespace_host.html">Host</a>(QtGui.QMainWindow):</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="stringliteral">    Classe della finestra principale dell&#39;host in questione</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="stringliteral">    @author Filippo Verucchi</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    chiusura =QtCore.pyqtSignal()</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_host_1_1_host.html">   20</a></span>&#160;    <span class="keyword">def </span>__init__(self,IP,timer,ID,passwd = None):</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        super(Host, self).__init__()</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        self.setCentralWidget(QtGui.QWidget(self))</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        self.<a class="code" href="class_host_1_1_host.html#a09bd78bdc017a0436c297dc23514ac75">timer</a>=timer <span class="comment"># selec</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        self.<a class="code" href="class_host_1_1_host.html#a301985948809224651f7cacd65eb25f6">ID</a> = ID</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        self.<a class="code" href="class_host_1_1_host.html#a6f30d55df28c5cdfb6fc004a463ebbd9">Host_Cores</a> = <a class="code" href="class_core___wallet_1_1_core___wallet.html">Core_Wallet</a>(self.<a class="code" href="class_host_1_1_host.html#a09bd78bdc017a0436c297dc23514ac75">timer</a>,IP,ID,passwd)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        self.<a class="code" href="class_host_1_1_host.html#a942c397f0d720b9184db053639f39fd7">carico_generico</a> = []</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        self.setWindowIcon(QtGui.QIcon(<span class="stringliteral">&#39;Icon.ico&#39;</span>))</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        self.<a class="code" href="class_host_1_1_host.html#a3d8efd656393f6e0a573157a8beff9d9">num_Cores</a> = self.Host_Cores.get_N_cores()</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        self.<a class="code" href="class_host_1_1_host.html#a88b16a6108b6997dcb709a179033c904">ui</a> = <a class="code" href="class_c_p_u___g_u_i_1_1_ui__frm_host.html">CPU_GUI.Ui_frmHost</a>()</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        self.ui.setupUi(self.centralWidget(),self.<a class="code" href="class_host_1_1_host.html#a3d8efd656393f6e0a573157a8beff9d9">num_Cores</a>)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="comment">#self.monitor = monitoraggio.Monitoraggio(IP,self.num_Cores)</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        self.setWindowTitle(<span class="stringliteral">&quot;Core Pool {}&quot;</span>.format(IP))</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="stringliteral">        self.ui.cmdMonitor.clicked.connect(self.monitor.show)</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="comment">#connettore pulsanti</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="comment">#mostreranno le finestre dedicate a ogni singolo Core</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="comment">#print( self.num_Cores)</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range (self.<a class="code" href="class_host_1_1_host.html#a3d8efd656393f6e0a573157a8beff9d9">num_Cores</a>):   </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            self.ui.cmd[i].clicked.connect(self.Host_Cores.core[i].show)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="comment">#crezione thread</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        self.<a class="code" href="class_host_1_1_host.html#a20415feb81a251cb7ed8121d4750a2a5">_thread</a>=QtCore.QThread(self)</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        self._thread.setTerminationEnabled(<span class="keyword">True</span>)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        self.Host_Cores.moveToThread(self.<a class="code" href="class_host_1_1_host.html#a20415feb81a251cb7ed8121d4750a2a5">_thread</a>) <span class="comment">#muovo la classe Core_Wallet dentro al thread</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        self._thread.started.connect(self.Host_Cores.Run,2) <span class="comment">#funzione che parte nel thread</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        self.Host_Cores.ritorno_dati.connect(self.<a class="code" href="class_host_1_1_host.html#a4c4fe3d83f9d2e1876ffc0ed3dd03eb9">riempi</a>) <span class="comment">#quando dentro Core_Wallet viene lanciato il segnale che son pronti i dati mostra dentro i LED    </span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="comment">#dati da monitorare</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        self.<a class="code" href="class_host_1_1_host.html#a6e70e8e2a0a427477433dba85c2f0793">monitor_data</a> = []</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="comment">#print(&quot;FINE HOST&quot;)</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">#def clear_monitor (self):</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">#    self.monitor_data = []</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">def </span><a class="code" href="class_host_1_1_host.html#ac6ed102d8bd53577656b46774d4e3f59">set_timer</a> (self,timer):</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="stringliteral">        Setta il timer di aggiornamento a tutte le istanze Core presenti nel programma</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="stringliteral">        @param timer: Float che indica la frequenza</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        self.<a class="code" href="class_host_1_1_host.html#a09bd78bdc017a0436c297dc23514ac75">timer</a> = timer</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        </div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="class_host_1_1_host.html#ac6ed102d8bd53577656b46774d4e3f59">   67</a></span>&#160;        self.Host_Cores.set_timer(self.<a class="code" href="class_host_1_1_host.html#a09bd78bdc017a0436c297dc23514ac75">timer</a>)</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">def </span><a class="code" href="class_host_1_1_host.html#abff99942569201fa5a4ba0abd554ff42">start_thread</a> (self):</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="stringliteral">        Starta il tread di lettura</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        self._thread.start()</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">def </span><a class="code" href="class_host_1_1_host.html#a1b33c02a7faea687d30200e4d2dc1bc4">stop_thread</a> (self):</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="class_host_1_1_host.html#abff99942569201fa5a4ba0abd554ff42">   76</a></span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="stringliteral">        Ferma il tread di lettura</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        self._thread.stop()</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">def </span><a class="code" href="class_host_1_1_host.html#ac9f26dacdb4aefa361e4a102e85b7b4a">closeEvent</a>(self,event):</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="class_host_1_1_host.html#a1b33c02a7faea687d30200e4d2dc1bc4">   83</a></span>&#160;<span class="stringliteral">        Override di closeEvent, chiude tutte le finestre attive e termina le comunicazioni</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range (self.<a class="code" href="class_host_1_1_host.html#a3d8efd656393f6e0a573157a8beff9d9">num_Cores</a>):</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            self.Host_Cores.core[i].hide()</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="comment">#self.monitor.hide()</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        print(<span class="stringliteral">&quot;Finestre secondarie Chiuse&quot;</span>)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        QtGui.QMainWindow.closeEvent(self,event)</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="class_host_1_1_host.html#ac9f26dacdb4aefa361e4a102e85b7b4a">   90</a></span>&#160;        self.chiusura.emit()</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;       </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">def </span><a class="code" href="class_host_1_1_host.html#a4c4fe3d83f9d2e1876ffc0ed3dd03eb9">riempi</a>(self,carico):    </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="stringliteral">        Funzione che riceve i dati letti del processore</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="stringliteral">        @param carico: Lista di valori contenenti i valori letti dalla CPU</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span> </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(self.<a class="code" href="class_host_1_1_host.html#a3d8efd656393f6e0a573157a8beff9d9">num_Cores</a>):</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            self.ui.lcd[i].display(carico[i])</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            self.Host_Cores.core[i].traccia()</div>
+<div class="ttc" id="class_core___wallet_1_1_core___wallet_html"><div class="ttname"><a href="class_core___wallet_1_1_core___wallet.html">Core_Wallet.Core_Wallet</a></div><div class="ttdoc">Classe che raccoglie i dati da tutti i core presenti nell&#39;Host e li cede alla classe Host per essere ...</div><div class="ttdef"><b>Definition:</b> <a href="_core___wallet_8py_source.html#l00030">Core_Wallet.py:30</a></div></div>
+<div class="ttc" id="class_host_1_1_host_html_a3d8efd656393f6e0a573157a8beff9d9"><div class="ttname"><a href="class_host_1_1_host.html#a3d8efd656393f6e0a573157a8beff9d9">Host.Host.num_Cores</a></div><div class="ttdeci">num_Cores</div><div class="ttdef"><b>Definition:</b> <a href="_host_8py_source.html#l00032">Host.py:32</a></div></div>
+<div class="ttc" id="class_host_1_1_host_html_ac9f26dacdb4aefa361e4a102e85b7b4a"><div class="ttname"><a href="class_host_1_1_host.html#ac9f26dacdb4aefa361e4a102e85b7b4a">Host.Host.closeEvent</a></div><div class="ttdeci">def closeEvent</div><div class="ttdoc">Override di closeEvent, chiude tutte le finestre attive e termina le comunicazioni. </div><div class="ttdef"><b>Definition:</b> <a href="_host_8py_source.html#l00090">Host.py:90</a></div></div>
+<div class="ttc" id="namespace_host_html"><div class="ttname"><a href="namespace_host.html">Host</a></div><div class="ttdef"><b>Definition:</b> <a href="_host_8py_source.html#l00001">Host.py:1</a></div></div>
+<div class="ttc" id="class_host_1_1_host_html_a09bd78bdc017a0436c297dc23514ac75"><div class="ttname"><a href="class_host_1_1_host.html#a09bd78bdc017a0436c297dc23514ac75">Host.Host.timer</a></div><div class="ttdeci">timer</div><div class="ttdef"><b>Definition:</b> <a href="_host_8py_source.html#l00027">Host.py:27</a></div></div>
+<div class="ttc" id="class_c_p_u___g_u_i_1_1_ui__frm_host_html"><div class="ttname"><a href="class_c_p_u___g_u_i_1_1_ui__frm_host.html">CPU_GUI.Ui_frmHost</a></div><div class="ttdef"><b>Definition:</b> <a href="_c_p_u___g_u_i_8py_source.html#l00027">CPU_GUI.py:27</a></div></div>
+<div class="ttc" id="class_host_1_1_host_html_a1b33c02a7faea687d30200e4d2dc1bc4"><div class="ttname"><a href="class_host_1_1_host.html#a1b33c02a7faea687d30200e4d2dc1bc4">Host.Host.stop_thread</a></div><div class="ttdeci">def stop_thread</div><div class="ttdoc">Ferma il tread di lettura. </div><div class="ttdef"><b>Definition:</b> <a href="_host_8py_source.html#l00083">Host.py:83</a></div></div>
+<div class="ttc" id="class_host_1_1_host_html_a6e70e8e2a0a427477433dba85c2f0793"><div class="ttname"><a href="class_host_1_1_host.html#a6e70e8e2a0a427477433dba85c2f0793">Host.Host.monitor_data</a></div><div class="ttdeci">monitor_data</div><div class="ttdef"><b>Definition:</b> <a href="_host_8py_source.html#l00056">Host.py:56</a></div></div>
+<div class="ttc" id="class_host_1_1_host_html_a301985948809224651f7cacd65eb25f6"><div class="ttname"><a href="class_host_1_1_host.html#a301985948809224651f7cacd65eb25f6">Host.Host.ID</a></div><div class="ttdeci">ID</div><div class="ttdef"><b>Definition:</b> <a href="_host_8py_source.html#l00028">Host.py:28</a></div></div>
+<div class="ttc" id="class_host_1_1_host_html_ac6ed102d8bd53577656b46774d4e3f59"><div class="ttname"><a href="class_host_1_1_host.html#ac6ed102d8bd53577656b46774d4e3f59">Host.Host.set_timer</a></div><div class="ttdeci">def set_timer</div><div class="ttdoc">Setta il timer di aggiornamento a tutte le istanze Core presenti nel programma. </div><div class="ttdef"><b>Definition:</b> <a href="_host_8py_source.html#l00067">Host.py:67</a></div></div>
+<div class="ttc" id="class_host_1_1_host_html_a88b16a6108b6997dcb709a179033c904"><div class="ttname"><a href="class_host_1_1_host.html#a88b16a6108b6997dcb709a179033c904">Host.Host.ui</a></div><div class="ttdeci">ui</div><div class="ttdef"><b>Definition:</b> <a href="_host_8py_source.html#l00033">Host.py:33</a></div></div>
+<div class="ttc" id="class_host_1_1_host_html_a942c397f0d720b9184db053639f39fd7"><div class="ttname"><a href="class_host_1_1_host.html#a942c397f0d720b9184db053639f39fd7">Host.Host.carico_generico</a></div><div class="ttdeci">carico_generico</div><div class="ttdef"><b>Definition:</b> <a href="_host_8py_source.html#l00030">Host.py:30</a></div></div>
+<div class="ttc" id="class_host_1_1_host_html_abff99942569201fa5a4ba0abd554ff42"><div class="ttname"><a href="class_host_1_1_host.html#abff99942569201fa5a4ba0abd554ff42">Host.Host.start_thread</a></div><div class="ttdeci">def start_thread</div><div class="ttdoc">Starta il tread di lettura. </div><div class="ttdef"><b>Definition:</b> <a href="_host_8py_source.html#l00076">Host.py:76</a></div></div>
+<div class="ttc" id="class_host_1_1_host_html_a4c4fe3d83f9d2e1876ffc0ed3dd03eb9"><div class="ttname"><a href="class_host_1_1_host.html#a4c4fe3d83f9d2e1876ffc0ed3dd03eb9">Host.Host.riempi</a></div><div class="ttdeci">def riempi</div><div class="ttdoc">Funzione che riceve i dati letti del processore. </div><div class="ttdef"><b>Definition:</b> <a href="_host_8py_source.html#l00104">Host.py:104</a></div></div>
+<div class="ttc" id="class_host_1_1_host_html_a6f30d55df28c5cdfb6fc004a463ebbd9"><div class="ttname"><a href="class_host_1_1_host.html#a6f30d55df28c5cdfb6fc004a463ebbd9">Host.Host.Host_Cores</a></div><div class="ttdeci">Host_Cores</div><div class="ttdef"><b>Definition:</b> <a href="_host_8py_source.html#l00029">Host.py:29</a></div></div>
+<div class="ttc" id="class_host_1_1_host_html_a20415feb81a251cb7ed8121d4750a2a5"><div class="ttname"><a href="class_host_1_1_host.html#a20415feb81a251cb7ed8121d4750a2a5">Host.Host._thread</a></div><div class="ttdeci">_thread</div><div class="ttdef"><b>Definition:</b> <a href="_host_8py_source.html#l00048">Host.py:48</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato Mar 7 Gen 2014 17:17:57 per CPU LOAD da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.6
+</small></address>
+</body>
+</html>

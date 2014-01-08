@@ -3,8 +3,6 @@
 Created on 20/mar/2013
 
 In questo modulo é presente
-
-@author: phil
 '''
 
 from Core_Wallet import Core_Wallet
@@ -14,9 +12,10 @@ import monitoraggio
 
 
 class Host(QtGui.QMainWindow):
-    """
+    '''
     Classe della finestra principale dell'host in questione
-    """
+    @author Filippo Verucchi
+    '''
     chiusura =QtCore.pyqtSignal()
     def __init__(self,IP,timer,ID,passwd = None):
         
@@ -31,7 +30,7 @@ class Host(QtGui.QMainWindow):
         self.num_Cores = self.Host_Cores.get_N_cores()
         self.ui = CPU_GUI.Ui_frmHost()
         self.ui.setupUi(self.centralWidget(),self.num_Cores)
-        self.monitor = monitoraggio.Monitoraggio(IP,self.num_Cores)
+        #self.monitor = monitoraggio.Monitoraggio(IP,self.num_Cores)
         self.setWindowTitle("Core Pool {}".format(IP))
         '''
         self.ui.cmdMonitor.clicked.connect(self.monitor.show)
@@ -42,11 +41,8 @@ class Host(QtGui.QMainWindow):
         #print( self.num_Cores)
         for i in range (self.num_Cores):   
             self.ui.cmd[i].clicked.connect(self.Host_Cores.core[i].show)
-            
         
-       
         #crezione thread
-        
         self._thread=QtCore.QThread(self)
         self._thread.setTerminationEnabled(True)
         self.Host_Cores.moveToThread(self._thread) #muovo la classe Core_Wallet dentro al thread
@@ -56,10 +52,10 @@ class Host(QtGui.QMainWindow):
         
         #dati da monitorare
         self.monitor_data = []
-        print("FINE HOST")
+        #print("FINE HOST")
         
-    def clear_monitor (self):
-        self.monitor_data = []
+    #def clear_monitor (self):
+    #    self.monitor_data = []
     
     def set_timer (self,timer):
         '''
@@ -70,18 +66,22 @@ class Host(QtGui.QMainWindow):
         
         self.Host_Cores.set_timer(self.timer)
             
-         
     def start_thread (self):
-    
-    
+        '''
+        Starta il tread di lettura
+        '''
         self._thread.start()
 
     def stop_thread (self):
-    
+        '''
+        Ferma il tread di lettura
+        '''
         self._thread.stop()
     
     def closeEvent(self,event):
-        
+        '''
+        Override di closeEvent, chiude tutte le finestre attive e termina le comunicazioni
+        '''
         for i in range (self.num_Cores):
             self.Host_Cores.core[i].hide()
         #self.monitor.hide()
@@ -95,24 +95,7 @@ class Host(QtGui.QMainWindow):
         Funzione che riceve i dati letti del processore
         @param carico: Lista di valori contenenti i valori letti dalla CPU
         ''' 
-        '''
-        if (self.monitor.check_monitor()!= False):
-            #controllo tipo di monitor
-            if (self.monitor.check_type() == 1):
-                self.monitor.Inc_letture(carico)
-            
-            #----------------------------------
-            print("Ora{}".format(self.monitor.currentTime()))
-            print("Partenza{}".format(self.monitor.get_begin_timer()))
-            #if (self.monitor.currentTime() >= self.monitor.get_begin_timer()):
-            #    print("PORCO DIO")
-            #----------------------------------
-            if ((self.monitor.check_type() == 2) and (self.monitor.currentTime() >= self.monitor.get_begin_timer())):
-                
-                print("DIOCANE")
-                self.monitor.Time_Letture(carico)
-                
-        '''
+        
         for i in range(self.num_Cores):
             
             self.ui.lcd[i].display(carico[i])

@@ -48,7 +48,7 @@ class Ui_MainWindow(object):
         
         self.lbl_velocità = QtGui.QLabel ("Velocità di aggiornamento 3")
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 512, 27))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 512, 40))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuFile = QtGui.QMenu(self.menubar)
         self.menuFile.setObjectName(_fromUtf8("menuFile"))

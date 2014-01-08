@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.6"/>
+<title>CPU LOAD:  File sorgente Analizzatore.py</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Icon.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CPU LOAD
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.6 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="pages.html"><span>Pagine&#160;collegate</span></a></li>
+      <li><a href="annotated.html"><span>Classi</span></a></li>
+      <li class="current"><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Elenco&#160;dei&#160;file</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tutto</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classi</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Funzioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pagine</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Analizzatore.py</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment"># -*- coding: iso-8859-15 -*-</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="stringliteral">Created on 15/apr/2013</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="stringliteral"></span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="stringliteral">@author: phil</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">import</span> Pyro4</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">import</span> argparse</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">import</span> signal</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">import</span> sys</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">import</span> psutil</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">import</span> socket</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="stringliteral">Questo e&#39; il file server necessario alla comunicazione remota, eseguendolo viene registrato sulla macchina remota</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="stringliteral">un pyro object rappresentante l&#39;oggetto addetto alla lettura dei carichi il quale viene poi registrato in rete</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="stringliteral">sul nameserver per renderlo reperibile dal programma principale con funzione di client.</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">class </span><a class="code" href="namespace_analizzatore.html">Analizzatore</a>():</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="stringliteral">    Classe che legge, tramite la libreria psutil, i valori di carico della CPU</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="stringliteral">    @author Filippo Verucchi</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">def </span>__init__(self):</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_analizzatore_1_1_analizzatore.html">   27</a></span>&#160;       </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        self.<a class="code" href="class_analizzatore_1_1_analizzatore.html#a06011cb865e206438afbf44c46fe06f7">carico_core</a> = []</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        self.<a class="code" href="class_analizzatore_1_1_analizzatore.html#ac209649643109340881065df6602acf0">generic</a> = []        </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        self.<a class="code" href="class_analizzatore_1_1_analizzatore.html#a7319123600a2db7fe845e3e5ac6b5c94">N_CORES</a>=psutil.NUM_CPUS</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">def </span><a class="code" href="class_analizzatore_1_1_analizzatore.html#a1c46668752a18fe931744675c1247d9d">get_n_core</a> (self):</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="stringliteral">        Ritorna il numero di Core di cui é composta la CPU</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="stringliteral">        @retval Numero dei CPU_Cores della macchina.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">return</span> self.<a class="code" href="class_analizzatore_1_1_analizzatore.html#a7319123600a2db7fe845e3e5ac6b5c94">N_CORES</a></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_analizzatore_1_1_analizzatore.html#a1c46668752a18fe931744675c1247d9d">   43</a></span>&#160;    <span class="keyword">def </span><a class="code" href="class_analizzatore_1_1_analizzatore.html#ab25bf8cf6430eb09e173251bcebf83ca">get_cores_values</a> (self):</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="stringliteral">        Ritorna la lista contenente i valori attuali di tutti i core</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="stringliteral">        @retval lista valori letti</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        self.<a class="code" href="class_analizzatore_1_1_analizzatore.html#a06011cb865e206438afbf44c46fe06f7">carico_core</a> = psutil.cpu_percent(percpu=<span class="keyword">True</span>)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">return</span> self.<a class="code" href="class_analizzatore_1_1_analizzatore.html#a06011cb865e206438afbf44c46fe06f7">carico_core</a></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="class_analizzatore_1_1_analizzatore.html#ab25bf8cf6430eb09e173251bcebf83ca">   52</a></span>&#160;    <span class="keyword">def </span><a class="code" href="class_analizzatore_1_1_analizzatore.html#a100e95a93f9044db8f3def7a5880b874">get_generic</a> (self,timer):</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="stringliteral">        Ritorna la lista contenente la media dei valori di tutti i core dell&#39;HOST</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="stringliteral">        @param timer: Frequenza di lettura CPU</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="stringliteral">        @return Carico generico</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        self.<a class="code" href="class_analizzatore_1_1_analizzatore.html#ac209649643109340881065df6602acf0">generic</a> = psutil.cpu_percent(interval=timer, percpu=<span class="keyword">False</span>)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">return</span> self.<a class="code" href="class_analizzatore_1_1_analizzatore.html#ac209649643109340881065df6602acf0">generic</a></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;   </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">def </span><a class="code" href="class_analizzatore_1_1_analizzatore.html#ab0dfdfd80dc6a206af06bb4e99c297c8">get_IP</a>(self):</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="class_analizzatore_1_1_analizzatore.html#a100e95a93f9044db8f3def7a5880b874">   63</a></span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="stringliteral">        Metodo che ritorna l&#39;ip della macchina locale.</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="stringliteral">        @retval: IP della macchina connessa in rete</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        s.connect((<span class="stringliteral">&quot;8.8.8.8&quot;</span>,80))</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        IP = str(s.getsockname()[0])</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        s.close()</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        print(IP)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">return</span> IP</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="class_analizzatore_1_1_analizzatore.html#ab0dfdfd80dc6a206af06bb4e99c297c8">   73</a></span>&#160;    </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">def </span><a class="code" href="class_analizzatore_1_1_analizzatore.html#a3512e1b0ead49a0ae9b15f492d6bc981">get_Hostname</a>(self):</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="stringliteral">        Metodo che ritorna l&#39;hostname della macchina locale.</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="stringliteral">        @retval: hostname locale</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">return</span> socket.gethostname()</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;   </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">def </span>stopConnection_handler(signal, frame):</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="stringliteral">    Metodo utilizzato dal main per chiudere correttamente la comunicazione con il nameserver e la macchina locale</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="stringliteral">    @param signal: parametro utilizzato dal signal handler per identificare il segnale di macchina catturato</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="class_analizzatore_1_1_analizzatore.html#a3512e1b0ead49a0ae9b15f492d6bc981">   87</a></span>&#160;<span class="stringliteral">    @param frame: frame che contiene l&#39;applicazione in esecuzione da terminare</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    print(<span class="stringliteral">&quot;Closing connection&quot;</span>)</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    ns.remove(pyroObjName)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    sys.exit(0)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">def </span><a class="code" href="namespacemain.html">main</a>():</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;   </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="stringliteral">    Metodo main del file server per la connessione remota.</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">global</span> ns</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">global</span> pyroObjName</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    parser= argparse.ArgumentParser(description=<span class="stringliteral">&quot;Startup value settings&quot;</span>)</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    parser.add_argument(<span class="stringliteral">&quot;-i&quot;</span>,<span class="stringliteral">&quot;--id&quot;</span>, help=<span class="stringliteral">&quot;Set id for pyro object registration &quot;</span>)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    parser.add_argument(<span class="stringliteral">&quot;-n&quot;</span>,<span class="stringliteral">&quot;--ns&quot;</span>, help=<span class="stringliteral">&quot;Set the nameserver address (IP)&quot;</span>)</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    args = parser.parse_args()</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">if</span> args.id != <span class="keywordtype">None</span>:</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        ID= str(args.id)</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        ID= <span class="stringliteral">&quot;&quot;</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">if</span> args.ns != <span class="keywordtype">None</span>:</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        NS_ID = str(args.ns)</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        NS_ID = <span class="stringliteral">&quot;&quot;</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    print(<span class="stringliteral">&quot;Lettura ID&quot;</span>+str(ID))</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    analizzatore =<a class="code" href="class_analizzatore_1_1_analizzatore.html">Analizzatore</a>()</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordflow">try</span>:</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="comment">#Pyro4.config.HOST= &quot;0.0.0.0&quot;</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keywordflow">if</span> NS_ID != <span class="stringliteral">&quot;&quot;</span>:</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            print(<span class="stringliteral">&quot;Numero id definito &quot;</span>+NS_ID)</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            ns= Pyro4.naming.locateNS(NS_ID)</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            ns= Pyro4.naming.locateNS()</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        print(<span class="stringliteral">&quot;NS -&gt;{}&quot;</span>.format(ns))</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        pyroObjName= <span class="stringliteral">&quot;CPU_LOAD&quot;</span>+str(ID)</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="comment">#daemon= Pyro4.Daemon()</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        daemon= Pyro4.Daemon(analizzatore.get_IP())</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keywordflow">try</span>:</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            Analizzatore_uri=ns.lookup(pyroObjName)</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            ns.remove(pyroObjName)</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <span class="keywordflow">except</span>:</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="keywordflow">pass</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        Analizzatore_uri= daemon.register(analizzatore)</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        ns.register(pyroObjName, Analizzatore_uri)</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keywordflow">print</span> (<span class="stringliteral">&quot;CPU_LOAD uri = {0}&quot;</span>.format(Analizzatore_uri))</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="keywordflow">print</span> (<span class="stringliteral">&quot;Ready&quot;</span>)</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        signal.signal(signal.SIGINT, stopConnection_handler )</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        signal.signal(signal.SIGTERM, stopConnection_handler)</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        daemon.requestLoop()</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">except</span> Pyro4.naming.NamingError <span class="keyword">as</span> e:</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">print</span> (e)</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="keywordflow">if</span> __name__ == <span class="stringliteral">&quot;__main__&quot;</span>:</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    __doc__=<span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="stringliteral">    Questo e&#39; il file server necessario alla comunicazione remota, eseguendolo viene registrato sulla macchina remota</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="stringliteral">    un pyro object rappresentante l&#39;oggetto addetto alla lettura dei carichi il quale viene poi registrato in rete</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="stringliteral">    sul nameserver per renderlo reperibile dal programma principale con funzione di client.</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="stringliteral">@author: Filippo Verucchi</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <a class="code" href="namespacemain.html">main</a>() </div>
+<div class="ttc" id="class_analizzatore_1_1_analizzatore_html_a06011cb865e206438afbf44c46fe06f7"><div class="ttname"><a href="class_analizzatore_1_1_analizzatore.html#a06011cb865e206438afbf44c46fe06f7">Analizzatore.Analizzatore.carico_core</a></div><div class="ttdeci">carico_core</div><div class="ttdef"><b>Definition:</b> <a href="_analizzatore_8py_source.html#l00031">Analizzatore.py:31</a></div></div>
+<div class="ttc" id="class_analizzatore_1_1_analizzatore_html_a7319123600a2db7fe845e3e5ac6b5c94"><div class="ttname"><a href="class_analizzatore_1_1_analizzatore.html#a7319123600a2db7fe845e3e5ac6b5c94">Analizzatore.Analizzatore.N_CORES</a></div><div class="ttdeci">N_CORES</div><div class="ttdef"><b>Definition:</b> <a href="_analizzatore_8py_source.html#l00034">Analizzatore.py:34</a></div></div>
+<div class="ttc" id="class_analizzatore_1_1_analizzatore_html_a3512e1b0ead49a0ae9b15f492d6bc981"><div class="ttname"><a href="class_analizzatore_1_1_analizzatore.html#a3512e1b0ead49a0ae9b15f492d6bc981">Analizzatore.Analizzatore.get_Hostname</a></div><div class="ttdeci">def get_Hostname</div><div class="ttdoc">Metodo che ritorna l&#39;hostname della macchina locale. </div><div class="ttdef"><b>Definition:</b> <a href="_analizzatore_8py_source.html#l00087">Analizzatore.py:87</a></div></div>
+<div class="ttc" id="class_analizzatore_1_1_analizzatore_html_ab25bf8cf6430eb09e173251bcebf83ca"><div class="ttname"><a href="class_analizzatore_1_1_analizzatore.html#ab25bf8cf6430eb09e173251bcebf83ca">Analizzatore.Analizzatore.get_cores_values</a></div><div class="ttdeci">def get_cores_values</div><div class="ttdoc">Ritorna la lista contenente i valori attuali di tutti i core. </div><div class="ttdef"><b>Definition:</b> <a href="_analizzatore_8py_source.html#l00052">Analizzatore.py:52</a></div></div>
+<div class="ttc" id="class_analizzatore_1_1_analizzatore_html"><div class="ttname"><a href="class_analizzatore_1_1_analizzatore.html">Analizzatore.Analizzatore</a></div><div class="ttdoc">Questo e&#39; il file server necessario alla comunicazione remota, eseguendolo viene registrato sulla mac...</div><div class="ttdef"><b>Definition:</b> <a href="_analizzatore_8py_source.html#l00027">Analizzatore.py:27</a></div></div>
+<div class="ttc" id="class_analizzatore_1_1_analizzatore_html_ab0dfdfd80dc6a206af06bb4e99c297c8"><div class="ttname"><a href="class_analizzatore_1_1_analizzatore.html#ab0dfdfd80dc6a206af06bb4e99c297c8">Analizzatore.Analizzatore.get_IP</a></div><div class="ttdeci">def get_IP</div><div class="ttdoc">Metodo che ritorna l&#39;ip della macchina locale. </div><div class="ttdef"><b>Definition:</b> <a href="_analizzatore_8py_source.html#l00073">Analizzatore.py:73</a></div></div>
+<div class="ttc" id="class_analizzatore_1_1_analizzatore_html_ac209649643109340881065df6602acf0"><div class="ttname"><a href="class_analizzatore_1_1_analizzatore.html#ac209649643109340881065df6602acf0">Analizzatore.Analizzatore.generic</a></div><div class="ttdeci">generic</div><div class="ttdef"><b>Definition:</b> <a href="_analizzatore_8py_source.html#l00033">Analizzatore.py:33</a></div></div>
+<div class="ttc" id="namespace_analizzatore_html"><div class="ttname"><a href="namespace_analizzatore.html">Analizzatore</a></div><div class="ttdef"><b>Definition:</b> <a href="_analizzatore_8py_source.html#l00001">Analizzatore.py:1</a></div></div>
+<div class="ttc" id="class_analizzatore_1_1_analizzatore_html_a1c46668752a18fe931744675c1247d9d"><div class="ttname"><a href="class_analizzatore_1_1_analizzatore.html#a1c46668752a18fe931744675c1247d9d">Analizzatore.Analizzatore.get_n_core</a></div><div class="ttdeci">def get_n_core</div><div class="ttdoc">Ritorna il numero di Core di cui é composta la CPU. </div><div class="ttdef"><b>Definition:</b> <a href="_analizzatore_8py_source.html#l00043">Analizzatore.py:43</a></div></div>
+<div class="ttc" id="namespacemain_html"><div class="ttname"><a href="namespacemain.html">main</a></div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00001">main.py:1</a></div></div>
+<div class="ttc" id="class_analizzatore_1_1_analizzatore_html_a100e95a93f9044db8f3def7a5880b874"><div class="ttname"><a href="class_analizzatore_1_1_analizzatore.html#a100e95a93f9044db8f3def7a5880b874">Analizzatore.Analizzatore.get_generic</a></div><div class="ttdeci">def get_generic</div><div class="ttdoc">Ritorna la lista contenente la media dei valori di tutti i core dell&#39;HOST. </div><div class="ttdef"><b>Definition:</b> <a href="_analizzatore_8py_source.html#l00063">Analizzatore.py:63</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato Mar 7 Gen 2014 17:17:57 per CPU LOAD da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.6
+</small></address>
+</body>
+</html>

@@ -56,6 +56,7 @@ class Grafico(QtGui.QWidget):
     def drawline (self,event,qp):
         '''
         Disegna l'andamento del grafico
+        @param event
         @param qp: QPainter
         '''
         y_init = self.__coda[0]

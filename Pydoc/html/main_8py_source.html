@@ -1,0 +1,428 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.6"/>
+<title>CPU LOAD:  File sorgente main.py</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Icon.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">CPU LOAD
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.6 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="pages.html"><span>Pagine&#160;collegate</span></a></li>
+      <li><a href="annotated.html"><span>Classi</span></a></li>
+      <li class="current"><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Elenco&#160;dei&#160;file</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tutto</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classi</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Funzioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pagine</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">main.py</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment"># -*- coding: iso-8859-15 -*-</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="stringliteral">Created on 09/apr/2013</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="stringliteral"></span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="stringliteral">Modulo Principale che contiene il main() del programma</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="stringliteral"></span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="stringliteral">@author: phil</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="stringliteral"></span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">import</span> Option</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui, Qt</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">import</span> INTRO_GUI</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">import</span> sys</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">import</span> About</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">import</span> Pyro4</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">import</span> time</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">import</span> threading</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">import</span> socket</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">#import progress_win</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">from</span> Host_Widget <span class="keyword">import</span> Host_Widget</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">import</span> argparse </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;   </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">class </span>Combo_Quit(QtGui.QWidget):</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="stringliteral">    Classe di tipo Qwidget che gestisce la gui per l&#39;eliminazione di un Host dall&#39;elenco</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="stringliteral">    @author Filippo Verucchi</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classmain_1_1_combo___quit.html">   30</a></span>&#160;    <span class="keyword">def </span>__init__(self,main):</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        super(Combo_Quit, self).__init__()</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        self.<a class="code" href="classmain_1_1_combo___quit.html#adda22059a49d0ad1e2f1e0f1ffc588a2">ID</a> = 0</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        self.<a class="code" href="classmain_1_1_combo___quit.html#a1aba962ecbbb03f93503c4d8ceae96d6">point_main</a> = main</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        self.<a class="code" href="classmain_1_1_combo___quit.html#ab7abcffc6d660b96d6e8661a38574d01">__initUI</a>()</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">def </span>__initUI(self):      </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        layout = QtGui.QHBoxLayout(self)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        self.setLayout(layout)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        self.<a class="code" href="classmain_1_1_combo___quit.html#abd16372305ad245dc562d3cec4618630">combo</a> = QtGui.QComboBox(self)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        self.setWindowIcon(QtGui.QIcon(<span class="stringliteral">&#39;Icon.ico&#39;</span>))</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        cmd_delete = QtGui.QPushButton(<span class="stringliteral">&quot;Elimina Host&quot;</span>)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        cmd_delete.clicked.connect(self.<a class="code" href="classmain_1_1_combo___quit.html#a20a0f521524da3514306e7f202fd73ee">__Ok_click</a>)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        layout.addWidget(self.<a class="code" href="classmain_1_1_combo___quit.html#abd16372305ad245dc562d3cec4618630">combo</a>)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        layout.addWidget(cmd_delete)</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="comment">#combo.move(50, 50)        </span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        self.combo.activated[str].connect(self.<a class="code" href="classmain_1_1_combo___quit.html#aac313439d23a813502eaf9892701dfd8">__onActivated</a>)        </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;         </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        self.setGeometry(100,100,200,100)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        self.setWindowTitle(<span class="stringliteral">&#39;Elimina Host&#39;</span>)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        self.<a class="code" href="classmain_1_1_combo___quit.html#aee727c6b34eb0e87d496ded441ffb91b">update_host_list</a>()</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">def </span>__onActivated(self, text):</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        self.<a class="code" href="classmain_1_1_combo___quit.html#adda22059a49d0ad1e2f1e0f1ffc588a2">ID</a>, spam = str(text).split(<span class="stringliteral">&quot;)&quot;</span>)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        print(self.<a class="code" href="classmain_1_1_combo___quit.html#adda22059a49d0ad1e2f1e0f1ffc588a2">ID</a>)   </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">def </span>__Ok_click(self):</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">if</span> (self.<a class="code" href="classmain_1_1_combo___quit.html#adda22059a49d0ad1e2f1e0f1ffc588a2">ID</a> != 0 <span class="keywordflow">and</span> self.<a class="code" href="classmain_1_1_combo___quit.html#adda22059a49d0ad1e2f1e0f1ffc588a2">ID</a> !=<span class="stringliteral">&quot;&lt;seleziona host&gt;&quot;</span>):</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            self.hide()</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            print(<span class="stringliteral">&quot;finestra chiusa, vado dentro a elimina Host&quot;</span>)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            self.point_main.elimina_host(self.<a class="code" href="classmain_1_1_combo___quit.html#adda22059a49d0ad1e2f1e0f1ffc588a2">ID</a>,<span class="stringliteral">&quot;Host eliminato da Utente&quot;</span>)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">def </span><a class="code" href="classmain_1_1_combo___quit.html#aee727c6b34eb0e87d496ded441ffb91b">update_host_list</a> (self):</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="stringliteral">        Aggiorna l&#39;elenco degli host connessi al nameserver</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        print(<span class="stringliteral">&quot;Update list&quot;</span>)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="comment">#delete all items</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classmain_1_1_combo___quit.html#aee727c6b34eb0e87d496ded441ffb91b">   71</a></span>&#160;        self.combo.clear()</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        self.combo.addItem(<span class="stringliteral">&quot;&lt;seleziona host&gt;&quot;</span>)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(len(self.point_main.ui.host_w)):</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            print(<span class="stringliteral">&quot;Nome host&quot;</span>.format(self.point_main.ui.host_w[i].ID))</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keywordflow">if</span> (self.point_main.ui.host_w[i].IP != <span class="stringliteral">&quot;LOCAL&quot;</span>):</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                host = str(str(self.point_main.ui.host_w[i].ID)+<span class="stringliteral">&quot;) &quot;</span> +self.point_main.ui.host_w[i].IP )</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                self.combo.addItem(host)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">def </span>startNameServer():</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="stringliteral">    Questa funzione ha il compito di permettere permettere il collegamento con host esterni: fa partire un</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="stringliteral">    nameserver che verra&#39; usato per registrare gli URI degli host esterni a cui ci si vuole collegare.</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    print(<span class="stringliteral">&quot;Staring NS&quot;</span>)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">try</span>:</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        Pyro4.naming.startNSloop()</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">except</span> socket.error:</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        print(<span class="stringliteral">&quot;Server already started!!!&quot;</span>)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        sys.exit(0)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">def </span>StartNameServerLoop():</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="stringliteral">     Questa funzione ha il compito di far partire il nameserver all&#39;interno di un thread parallelo di tipo</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="stringliteral">    &quot;demone&quot; il quale si chiudera&#39; automaticamente alla chiusura dell&#39;applicazione</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    NSThread = threading.Thread(target = startNameServer, args = [])</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    NSThread.setDaemon(<span class="keyword">True</span>)</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    NSThread.start()</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">#//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">class </span><a class="code" href="classmain_1_1_main.html">Main</a>(QtGui.QMainWindow):</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="stringliteral">    Classi Main</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="stringliteral">    Qui viene inizializzato il programma</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="stringliteral">    @author Filippo Verucchi</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keyword">def </span>__init__(self):</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        self.__ID = 1</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        </div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="classmain_1_1_main.html">  119</a></span>&#160;        Pyro4.config.HOST= <span class="stringliteral">&quot;0.0.0.0&quot;</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        StartNameServerLoop()</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        time.sleep(0.5)</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        super(Main, self).__init__()</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        self.setCentralWidget(QtGui.QWidget(self))</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        self.<a class="code" href="classmain_1_1_main.html#a2437c483d3c5e9f479e66fe7825e1c5f">freq</a> = 0.05</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        self.<a class="code" href="classmain_1_1_main.html#a9b679d7f9aa96ac65ca9f2a5889317d4">id_removed</a> = []</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        self.<a class="code" href="classmain_1_1_main.html#a29c1ef8524ba8e6ed5f056966c11fb4a">ui</a> = <a class="code" href="class_i_n_t_r_o___g_u_i_1_1_ui___main_window.html">INTRO_GUI.Ui_MainWindow</a>()</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        self.ui.setupUi(self)</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        self.setWindowIcon(QtGui.QIcon(<span class="stringliteral">&#39;Icon.ico&#39;</span>))</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        self.<a class="code" href="classmain_1_1_main.html#ad4d993d07933801784b72246477729b1">Option</a> = <a class="code" href="class_option_1_1_option.html">Option.Option</a>(self)</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        self.<a class="code" href="classmain_1_1_main.html#a1bab3b072c33e829a5c6c5aab477893e">About</a> = <a class="code" href="class_about_1_1_about.html">About.About</a>()</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="comment">#self.progress = progress_win.ProgressGui()</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="comment">#MENU</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        self.ui.actionAdd_Host.triggered.connect(self.<a class="code" href="classmain_1_1_main.html#acb045ae5a28f61e9a1088da017d81c50">__showDialog_in</a>)</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        self.ui.actionRemove_Host.triggered.connect(self.<a class="code" href="classmain_1_1_main.html#a6c96fcbd72ea0dff2fbe6106f24093dc">__showDialog_out</a>)</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        self.ui.actionQuit.triggered.connect(self.<a class="code" href="classmain_1_1_main.html#acaba63f64f658b937e893dffd12dc9ca">quit_prog</a>)</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        self.ui.actionGeneral_Options.triggered.connect(self.Option.show)</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        self.ui.actionLoad_Configuration.triggered.connect(self.Option.load_settings)</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        self.ui.actionSave_Configuration.triggered.connect(self.Option.save_settings)</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        self.ui.actionAbout.triggered.connect(self.About.mostra)</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        print(<span class="stringliteral">&quot;host presenti {}&quot;</span>.format(self.ui.gridLayout.count()))   </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        self.<a class="code" href="classmain_1_1_main.html#a053b55b7343ac2b570c65ecac58987d9">combo</a> = <a class="code" href="classmain_1_1_combo___quit.html">Combo_Quit</a>(self)</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        self.<a class="code" href="classmain_1_1_main.html#a82eb6e26a97f504064ace1edd4004add">dialogbox</a> = Qt.QErrorMessage()</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="comment">#Start Nameserver</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keyword">def </span><a class="code" href="classmain_1_1_main.html#acaba63f64f658b937e893dffd12dc9ca">quit_prog</a>(self):</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="stringliteral">        Termina il programma</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        self.<a class="code" href="classmain_1_1_main.html#a60eb7354b0ea20193da8b07470303adb">Clear_list</a>()</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        print(<span class="stringliteral">&quot;Programma terminato con successo&quot;</span>)</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        QtGui.QApplication.processEvents()</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        sys.exit(0)    </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keyword">def </span><a class="code" href="classmain_1_1_main.html#a60eb7354b0ea20193da8b07470303adb">Clear_list</a> (self):</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno"><a class="line" href="classmain_1_1_main.html#acaba63f64f658b937e893dffd12dc9ca">  161</a></span>&#160;<span class="stringliteral">        Vuota la lista degli host monitorati</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        n_host=len(self.ui.host_w)</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range (n_host):</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            <span class="keywordflow">if</span> self.ui.host_w[i].ID !=0 <span class="keywordflow">and</span> self.ui.host_w[i].ID <span class="keywordflow">in</span> self.<a class="code" href="classmain_1_1_main.html#a9b679d7f9aa96ac65ca9f2a5889317d4">id_removed</a>:</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                self.<a class="code" href="classmain_1_1_main.html#a7f488e6154b1ea986389d702e3ebb297">elimina_host</a>(self.ui.host_w[i].ID, <span class="stringliteral">&quot;NO_MSG&quot;</span>)</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keyword">def </span><a class="code" href="classmain_1_1_main.html#a4b04f35e6bdd49a40c059c21872f70e3">set_Timer</a> (self,timer):</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="classmain_1_1_main.html#a60eb7354b0ea20193da8b07470303adb">  170</a></span>&#160;<span class="stringliteral">        Setta la frequenza del timer di aggiornamento dati, lo setta a tutti gli host presenti nell&#39;elenco</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="stringliteral">        @param timer numero in float che indica la frequenza di aggiornamento</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        print(<span class="stringliteral">&quot;SetTimer = &quot;</span>,timer)</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        self.<a class="code" href="classmain_1_1_main.html#a2437c483d3c5e9f479e66fe7825e1c5f">freq</a> = timer</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range (len(self.ui.host_w)):</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            self.ui.host_w[i].set_freq(self.<a class="code" href="classmain_1_1_main.html#a2437c483d3c5e9f479e66fe7825e1c5f">freq</a>)</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keyword">def </span>__showDialog_in(self):</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        text, ok = QtGui.QInputDialog.getText(self, <span class="stringliteral">&#39;Input Dialog&#39;</span>, </div>
+<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="classmain_1_1_main.html#a4b04f35e6bdd49a40c059c21872f70e3">  181</a></span>&#160;            <span class="stringliteral">&#39;Inserire [user@]host:&#39;</span>)</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        passwd, ok = QtGui.QInputDialog.getText(self, <span class="stringliteral">&#39;Input Dialog&#39;</span>,<span class="stringliteral">&quot;Inserire password per {}&quot;</span>.format(text) , mode=2)</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="keywordflow">if</span> ok:</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            <span class="keywordflow">if</span> (text==<span class="stringliteral">&quot;&quot;</span>):</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                print(<span class="stringliteral">&quot;Error NO IP&quot;</span>)</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                self.dialogbox.showMessage(<span class="stringliteral">&quot;Immettere un IP o un nome per il DNS&quot;</span>)</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                print(<span class="stringliteral">&quot;Creazione collegamento a {}&quot;</span>.format(text))</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                self.<a class="code" href="classmain_1_1_main.html#abb634390bbd4755cf93ff10555a8a29f">crea_conn</a>(text,passwd)</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                    </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keyword">def </span><a class="code" href="classmain_1_1_main.html#abb634390bbd4755cf93ff10555a8a29f">crea_conn</a> (self,IP,passwd):</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="stringliteral">        Crea la connessione del programma a un server di monitoraggio</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="stringliteral">        @param IP Indirizzo o nome riconosciuto dal DNS del server    </span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="stringliteral">        @param passwd Password d&#39;accesso dell&#39;utente </span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        i = self.<a class="code" href="classmain_1_1_main.html#a032473a184ce07ae5861503ce42c092c">__ID</a></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        <span class="keywordflow">try</span>:        </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            <span class="keywordflow">if</span> (IP == <span class="stringliteral">&quot;&quot;</span>):</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                <span class="keywordflow">print</span> (IP)</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                <span class="keywordflow">raise</span> Exception.MissingInputError</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            print(<span class="stringliteral">&quot;IP=&quot;</span>,IP)</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            print(<span class="stringliteral">&quot;ID=&quot;</span>,i)</div>
+<div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="classmain_1_1_main.html#abb634390bbd4755cf93ff10555a8a29f">  209</a></span>&#160;            <span class="keywordflow">if</span> (passwd == <span class="stringliteral">&quot;&quot;</span>):</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;                passwd, ok = QtGui.QInputDialog.getText(self, <span class="stringliteral">&#39;Input Dialog&#39;</span>,<span class="stringliteral">&quot;Inserire password per {}&quot;</span>.format(IP) , mode=2)</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            new_host = <a class="code" href="class_host___widget_1_1_host___widget.html">Host_Widget</a>(IP,self,self.<a class="code" href="classmain_1_1_main.html#a032473a184ce07ae5861503ce42c092c">__ID</a>,passwd)</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            self.<a class="code" href="classmain_1_1_main.html#a032473a184ce07ae5861503ce42c092c">__ID</a>+=1</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            self.ui.host_w.append(new_host)</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;            self.ui.gridLayout.addWidget(new_host)    </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;            <span class="comment">#print(&quot;host presenti {}&quot;.format(self.ui.gridLayout.count()))</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        <span class="keywordflow">except</span> AttributeError:</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                self.dialogbox.showMessage(<span class="stringliteral">&quot;IP non corretto o Server {} non attivo&quot;</span>.format(IP))</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                self.<a class="code" href="classmain_1_1_main.html#a032473a184ce07ae5861503ce42c092c">__ID</a>=i</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                print(<span class="stringliteral">&quot;IP non corretto o Server {} non attivo&quot;</span>.format(IP))</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;   </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keyword">def </span>__showDialog_out(self):</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        self.combo.update_host_list()</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        self.combo.show()</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keyword">def </span><a class="code" href="classmain_1_1_main.html#a7f488e6154b1ea986389d702e3ebb297">elimina_host</a> (self,ID,msg):</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="stringliteral">        Cancella dall&#39;elenco un IP terminandone la connessione</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="stringliteral">        @param ID: Indirizzo del server da togliere</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="stringliteral">        @param msg: Messaggio da visualizzare tramite da DialogBox</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="stringliteral">        &#39;&#39;&#39;</span>    </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="keywordflow">if</span> (ID==<span class="stringliteral">&quot;&quot;</span>):</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                print(<span class="stringliteral">&quot;Errore&quot;</span>)</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                print(<span class="stringliteral">&quot;ID da cancellare {}&quot;</span>.format(ID))</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                i_id = -1</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(len(self.ui.host_w)):</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                    </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                    <span class="keywordflow">if</span> (int(self.ui.host_w[i].ID)==int(ID)):</div>
+<div class="line"><a name="l00245"></a><span class="lineno"><a class="line" href="classmain_1_1_main.html#a7f488e6154b1ea986389d702e3ebb297">  245</a></span>&#160;                        i_id = i</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                print(<span class="stringliteral">&quot;indice -&gt; {}&quot;</span>.format(i_id))</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                <span class="keywordflow">if</span> (i_id!=-1):</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                    widget = self.ui.gridLayout.itemAt(i_id)</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                    widget.widget().setParent(<span class="keywordtype">None</span>)</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                    self.ui.host_w[i_id].local.Host_Cores.set_Stop()</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                    self.ui.host_w[i_id].local.Host_Cores.closeSSHConnection()</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                    self.ui.host_w.pop(i_id)</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                    self.id_removed.append(ID)</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                    </div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                    print(msg)</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                    <span class="keywordflow">if</span> (msg != <span class="stringliteral">&quot;NO_MSG&quot;</span>):</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                        self.dialogbox.showMessage(msg)</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                        <span class="comment">#self.dialogbox.show()</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                        print(<span class="stringliteral">&quot;IP removed {}&quot;</span>.format(ID))</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                        print(<span class="stringliteral">&quot;Tolto 1 IP, rimanenti host ={}&quot;</span>.format(self.ui.gridLayout.count()))</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                    </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                    print(<span class="stringliteral">&quot;ID non trovato&quot;</span>)</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;   </div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keyword">def </span>closeEvent(self,event):    </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        self.<a class="code" href="classmain_1_1_main.html#acaba63f64f658b937e893dffd12dc9ca">quit_prog</a>()</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        sys.exit(0)</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="keyword">def </span><a class="code" href="namespacemain.html">main</a>():</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    parser = argparse.ArgumentParser(description=<span class="stringliteral">&#39;Aggiunta di argomenti da startUp&#39;</span>)    </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    parser.add_argument(<span class="stringliteral">&quot;-a&quot;</span>,<span class="stringliteral">&quot;--address&quot;</span>,nargs=<span class="stringliteral">&quot;+&quot;</span>, help=<span class="stringliteral">&quot;Imposta gli IP da caricare all&#39;esecuzione del programma&quot;</span>)</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    parser.add_argument(<span class="stringliteral">&quot;-c&quot;</span>,<span class="stringliteral">&quot;--config&quot;</span>,help=<span class="stringliteral">&quot;Imposta il file di configurazione da caricare all&#39;avvio&quot;</span>)</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    parser.add_argument(<span class="stringliteral">&quot;-t&quot;</span>,<span class="stringliteral">&quot;--timer&quot;</span>,help=<span class="stringliteral">&quot;Imposta il timer di aggiornamento dei valori&quot;</span>)</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    args = parser.parse_args()</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    print(args.address)</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    print(args.config)</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    print(<span class="stringliteral">&quot;CIAO&quot;</span>)</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    </div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    app = QtGui.QApplication(sys.argv)</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    intro = <a class="code" href="classmain_1_1_main.html">Main</a>()</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="comment">#usiamo gli argomenti</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keywordflow">if</span> (args.address != <span class="keywordtype">None</span>):</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        lista_IP = args.address</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range (len(lista_IP)):</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            intro.crea_conn(lista_IP[i],<span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <span class="comment">#NEED LOAD A CFGfile</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="keywordflow">if</span> (args.config != <span class="keywordtype">None</span>):</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        cfg = args.config</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        intro.Option.load_settings(cfg)</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    intro.show()</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keywordflow">if</span> (args.timer != <span class="keywordtype">None</span>):</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        timer = args.timer</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        intro.set_Timer(timer)</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        </div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    sys.exit(app.exec_())</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="keywordflow">if</span> __name__ == <span class="stringliteral">&#39;__main__&#39;</span>:</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <a class="code" href="namespacemain.html">main</a>()</div>
+<div class="ttc" id="class_option_1_1_option_html"><div class="ttname"><a href="class_option_1_1_option.html">Option.Option</a></div><div class="ttdoc">Classe Option, finestra di dialogo che gestisce le impostazioni del programma. </div><div class="ttdef"><b>Definition:</b> <a href="_option_8py_source.html#l00016">Option.py:16</a></div></div>
+<div class="ttc" id="classmain_1_1_combo___quit_html_abd16372305ad245dc562d3cec4618630"><div class="ttname"><a href="classmain_1_1_combo___quit.html#abd16372305ad245dc562d3cec4618630">main.Combo_Quit.combo</a></div><div class="ttdeci">combo</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00042">main.py:42</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html_ad4d993d07933801784b72246477729b1"><div class="ttname"><a href="classmain_1_1_main.html#ad4d993d07933801784b72246477729b1">main.Main.Option</a></div><div class="ttdeci">Option</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00138">main.py:138</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html_abb634390bbd4755cf93ff10555a8a29f"><div class="ttname"><a href="classmain_1_1_main.html#abb634390bbd4755cf93ff10555a8a29f">main.Main.crea_conn</a></div><div class="ttdeci">def crea_conn</div><div class="ttdoc">Crea la connessione del programma a un server di monitoraggio. </div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00209">main.py:209</a></div></div>
+<div class="ttc" id="classmain_1_1_combo___quit_html_ab7abcffc6d660b96d6e8661a38574d01"><div class="ttname"><a href="classmain_1_1_combo___quit.html#ab7abcffc6d660b96d6e8661a38574d01">main.Combo_Quit.__initUI</a></div><div class="ttdeci">def __initUI</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00039">main.py:39</a></div></div>
+<div class="ttc" id="classmain_1_1_combo___quit_html_aac313439d23a813502eaf9892701dfd8"><div class="ttname"><a href="classmain_1_1_combo___quit.html#aac313439d23a813502eaf9892701dfd8">main.Combo_Quit.__onActivated</a></div><div class="ttdeci">def __onActivated</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00056">main.py:56</a></div></div>
+<div class="ttc" id="class_i_n_t_r_o___g_u_i_1_1_ui___main_window_html"><div class="ttname"><a href="class_i_n_t_r_o___g_u_i_1_1_ui___main_window.html">INTRO_GUI.Ui_MainWindow</a></div><div class="ttdef"><b>Definition:</b> <a href="_i_n_t_r_o___g_u_i_8py_source.html#l00027">INTRO_GUI.py:27</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html_a6c96fcbd72ea0dff2fbe6106f24093dc"><div class="ttname"><a href="classmain_1_1_main.html#a6c96fcbd72ea0dff2fbe6106f24093dc">main.Main.__showDialog_out</a></div><div class="ttdeci">def __showDialog_out</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00234">main.py:234</a></div></div>
+<div class="ttc" id="classmain_1_1_combo___quit_html_a20a0f521524da3514306e7f202fd73ee"><div class="ttname"><a href="classmain_1_1_combo___quit.html#a20a0f521524da3514306e7f202fd73ee">main.Combo_Quit.__Ok_click</a></div><div class="ttdeci">def __Ok_click</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00061">main.py:61</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html_a4b04f35e6bdd49a40c059c21872f70e3"><div class="ttname"><a href="classmain_1_1_main.html#a4b04f35e6bdd49a40c059c21872f70e3">main.Main.set_Timer</a></div><div class="ttdeci">def set_Timer</div><div class="ttdoc">Setta la frequenza del timer di aggiornamento dati, lo setta a tutti gli host presenti nell&#39;elenco...</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00181">main.py:181</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html_a053b55b7343ac2b570c65ecac58987d9"><div class="ttname"><a href="classmain_1_1_main.html#a053b55b7343ac2b570c65ecac58987d9">main.Main.combo</a></div><div class="ttdeci">combo</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00153">main.py:153</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html_a82eb6e26a97f504064ace1edd4004add"><div class="ttname"><a href="classmain_1_1_main.html#a82eb6e26a97f504064ace1edd4004add">main.Main.dialogbox</a></div><div class="ttdeci">dialogbox</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00154">main.py:154</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html_a1bab3b072c33e829a5c6c5aab477893e"><div class="ttname"><a href="classmain_1_1_main.html#a1bab3b072c33e829a5c6c5aab477893e">main.Main.About</a></div><div class="ttdeci">About</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00139">main.py:139</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html_a9b679d7f9aa96ac65ca9f2a5889317d4"><div class="ttname"><a href="classmain_1_1_main.html#a9b679d7f9aa96ac65ca9f2a5889317d4">main.Main.id_removed</a></div><div class="ttdeci">id_removed</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00132">main.py:132</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html_a7f488e6154b1ea986389d702e3ebb297"><div class="ttname"><a href="classmain_1_1_main.html#a7f488e6154b1ea986389d702e3ebb297">main.Main.elimina_host</a></div><div class="ttdeci">def elimina_host</div><div class="ttdoc">Cancella dall&#39;elenco un IP terminandone la connessione. </div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00245">main.py:245</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html_a29c1ef8524ba8e6ed5f056966c11fb4a"><div class="ttname"><a href="classmain_1_1_main.html#a29c1ef8524ba8e6ed5f056966c11fb4a">main.Main.ui</a></div><div class="ttdeci">ui</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00134">main.py:134</a></div></div>
+<div class="ttc" id="classmain_1_1_combo___quit_html_adda22059a49d0ad1e2f1e0f1ffc588a2"><div class="ttname"><a href="classmain_1_1_combo___quit.html#adda22059a49d0ad1e2f1e0f1ffc588a2">main.Combo_Quit.ID</a></div><div class="ttdeci">ID</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00035">main.py:35</a></div></div>
+<div class="ttc" id="class_about_1_1_about_html"><div class="ttname"><a href="class_about_1_1_about.html">About.About</a></div><div class="ttdoc">QDialog About. </div><div class="ttdef"><b>Definition:</b> <a href="_about_8py_source.html#l00014">About.py:14</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html_a60eb7354b0ea20193da8b07470303adb"><div class="ttname"><a href="classmain_1_1_main.html#a60eb7354b0ea20193da8b07470303adb">main.Main.Clear_list</a></div><div class="ttdeci">def Clear_list</div><div class="ttdoc">Vuota la lista degli host monitorati. </div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00170">main.py:170</a></div></div>
+<div class="ttc" id="classmain_1_1_combo___quit_html_aee727c6b34eb0e87d496ded441ffb91b"><div class="ttname"><a href="classmain_1_1_combo___quit.html#aee727c6b34eb0e87d496ded441ffb91b">main.Combo_Quit.update_host_list</a></div><div class="ttdeci">def update_host_list</div><div class="ttdoc">Aggiorna l&#39;elenco degli host connessi al nameserver. </div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00071">main.py:71</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html_acb045ae5a28f61e9a1088da017d81c50"><div class="ttname"><a href="classmain_1_1_main.html#acb045ae5a28f61e9a1088da017d81c50">main.Main.__showDialog_in</a></div><div class="ttdeci">def __showDialog_in</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00187">main.py:187</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html_acaba63f64f658b937e893dffd12dc9ca"><div class="ttname"><a href="classmain_1_1_main.html#acaba63f64f658b937e893dffd12dc9ca">main.Main.quit_prog</a></div><div class="ttdeci">def quit_prog</div><div class="ttdoc">Termina il programma. </div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00161">main.py:161</a></div></div>
+<div class="ttc" id="classmain_1_1_combo___quit_html_a1aba962ecbbb03f93503c4d8ceae96d6"><div class="ttname"><a href="classmain_1_1_combo___quit.html#a1aba962ecbbb03f93503c4d8ceae96d6">main.Combo_Quit.point_main</a></div><div class="ttdeci">point_main</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00036">main.py:36</a></div></div>
+<div class="ttc" id="class_host___widget_1_1_host___widget_html"><div class="ttname"><a href="class_host___widget_1_1_host___widget.html">Host_Widget.Host_Widget</a></div><div class="ttdoc">Created on 26/apr/2013 Classe Host_Widget, estende un Button in quanto facendosi click sopra...</div><div class="ttdef"><b>Definition:</b> <a href="_host___widget_8py_source.html#l00012">Host_Widget.py:12</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html_a032473a184ce07ae5861503ce42c092c"><div class="ttname"><a href="classmain_1_1_main.html#a032473a184ce07ae5861503ce42c092c">main.Main.__ID</a></div><div class="ttdeci">__ID</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00123">main.py:123</a></div></div>
+<div class="ttc" id="namespacemain_html"><div class="ttname"><a href="namespacemain.html">main</a></div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00001">main.py:1</a></div></div>
+<div class="ttc" id="classmain_1_1_combo___quit_html"><div class="ttname"><a href="classmain_1_1_combo___quit.html">main.Combo_Quit</a></div><div class="ttdoc">Classe di tipo Qwidget che gestisce la gui per l&#39;eliminazione di un Host dall&#39;elenco. </div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00030">main.py:30</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html"><div class="ttname"><a href="classmain_1_1_main.html">main.Main</a></div><div class="ttdoc">Classi Main Qui viene inizializzato il programma. </div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00119">main.py:119</a></div></div>
+<div class="ttc" id="classmain_1_1_main_html_a2437c483d3c5e9f479e66fe7825e1c5f"><div class="ttname"><a href="classmain_1_1_main.html#a2437c483d3c5e9f479e66fe7825e1c5f">main.Main.freq</a></div><div class="ttdeci">freq</div><div class="ttdef"><b>Definition:</b> <a href="main_8py_source.html#l00131">main.py:131</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato Mar 7 Gen 2014 17:17:57 per CPU LOAD da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.6
+</small></address>
+</body>
+</html>

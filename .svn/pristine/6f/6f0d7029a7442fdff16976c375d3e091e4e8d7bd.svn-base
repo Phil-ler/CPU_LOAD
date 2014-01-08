@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout"/>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>512</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>Host</string>
+    </property>
+    <addaction name="actionAdd_Host"/>
+    <addaction name="actionRemove_Host"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="actionGeneral_Options"/>
+    <addaction name="separator"/>
+    <addaction name="actionSave_Configuration"/>
+    <addaction name="actionLoad_Configuration"/>
+   </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>?</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuSettings"/>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAdd_Host">
+   <property name="text">
+    <string>Add Host</string>
+   </property>
+  </action>
+  <action name="actionRemove_Host">
+   <property name="text">
+    <string>Remove Host</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionGeneral_Options">
+   <property name="text">
+    <string>General Options</string>
+   </property>
+  </action>
+  <action name="actionSave_Configuration">
+   <property name="text">
+    <string>Save Configuration</string>
+   </property>
+  </action>
+  <action name="actionLoad_Configuration">
+   <property name="text">
+    <string>Load Configuration</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

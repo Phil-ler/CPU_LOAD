@@ -12,6 +12,7 @@ import monitoraggio
 import Pyro4
 import paramiko
 import socket
+
  
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -23,12 +24,13 @@ class Core_Wallet(QtCore.QObject):
  
     '''
     Classe che raccoglie i dati da tutti i core presenti nell'Host e li cede alla classe Host per essere visualizzati e alla classe Grafico per essere disegnati
-    Inoltre crea la connessione con il server designato se il nome dell'Host Ã¨ diverso da LOCAL, altrimenti esegue solo una scansione locale senza l'utilizzo del server
+    Inoltre crea la connessione con il server designato se il nome dell'Host è diverso da LOCAL, altrimenti esegue solo una scansione locale senza l'utilizzo del nameserver
+    @author Filippo Verucchi
     ''' 
     #Raccolta segnali
     ritorno_dati = QtCore.pyqtSignal(list)
     valore_generico = QtCore.pyqtSignal(float)
-    connection_lost = QtCore.pyqtSignal(str,str)
+    connection_lost = QtCore.pyqtSignal(int,str)
     connection_ok =QtCore.pyqtSignal()
     
     def __init__(self,timer,address,ID,passwd):
@@ -45,7 +47,6 @@ class Core_Wallet(QtCore.QObject):
         Pyro4.COMMTIMEOUT = 3
         self.getInfoHost() 
         
-        print("Connessione eseguita")
         time.sleep(2)
         self.__Num_Cores= self.analizzatore.get_n_core()
         self.core = []
@@ -57,13 +58,29 @@ class Core_Wallet(QtCore.QObject):
         #self.Monitor = monitoraggio.Monitoraggio(self.__Num_Cores,address)
         
         #inizializzazione parametri utili per la lettura dei carichi di host
-        
         self.authOk= False
         self.connection_Ok= False
         
+    def get_IP(self):
+        '''
+        Metodo che ritorna l'ip della macchina locale.
+        @return hostname locale
+        '''
+        s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8",80))
+        IP = str(s.getsockname()[0])
+        s.close()
+        print(IP)
+        return IP
+        
 
+    
     def getInfoHost(self):
-            
+        '''
+	Funzione che attiva il monitoraggio della macchina. 
+	Se si esegue il monitoraggio Offline viene dichiarata un istanza Analizzatore,
+	altrimenti ci si connette alla macchina remota
+	'''
         if (self.address == "LOCAL"):
             self.analizzatore = Analizzatore()
             self.start_T=True
@@ -73,8 +90,10 @@ class Core_Wallet(QtCore.QObject):
             
     def OpenServerConnection(self):
         '''
+        Si tenta di instaurare una connessione all'host remoto.
+        Vengono passati alla macchina remota, tramite le paramiko, tutti i moduli necessari per la funzionalità del programma
         '''
-        print("Inizio Connessione")
+        
         print("ID = "+str(self.ID))
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -83,36 +102,32 @@ class Core_Wallet(QtCore.QObject):
                 (username,hostname) = str(self.address).split("@")
                 print("User = {}, host = {}".format(username,hostname))
                 print("Tentativo connessione")
+                
                 ssh.connect(str(hostname),username=username, password= str(self.passwd),timeout = 5,allow_agent=False)
                 addressToConnect = hostname
                 
             else:
                 ssh.connect(str(self.address), password = str(self.passwd),timeout=5,allow_agent=False)
                 addressToConnect = self.address
-            #print("Connessione a "+str(hostname))
+            print("Connessione a "+str(hostname))
             self.authOk=True
+            
+            IP_NS = self.get_IP()
             sftp = ssh.open_sftp()
             print("Aperta connessione sftp")     
             print("Passo Analizzatore")
             sftp.put("Analizzatore.py","./Analizzatore.py")
-             
             print("Passo Pyro4")
             sftp.put("Pyro4.tar.gz","./Pyro4.tar.gz") 
             print("Estraggo Pyro4")
             stdin, stdout, stderr= ssh.exec_command("tar -xzvf Pyro4.tar.gz")
             time.sleep(5)
-            
-            
-            stdin, stdout, stderr= ssh.exec_command("echo $$; exec python3 Analizzatore.py --id {}".format(self.ID))
+            stdin, stdout, stderr= ssh.exec_command("echo $$; exec python3 Analizzatore.py --id {} --ns {}".format(self.ID,IP_NS))
             print("Esecuzione Analizzatore")
             self.remotePID= int(stdout.readline())
             print("PID Analizzatore {}".format(self.remotePID))
-            
             time.sleep(1)
-
             #sftp.remove("Analizzatore.py")
-            
-            
             sftp.close()
             ssh.close()
            
@@ -130,7 +145,7 @@ class Core_Wallet(QtCore.QObject):
         Metodo che si occupa di chiudere la connessione in corso con l'host, stoppando ed eliminando il file in
         esecuzione che permette la registrazione dell'host stesso in rete allo scopo di ottenere le informazioni
         necessarie per visualizzare i carichi della CPU.
-        @raise e: ritorna un'eccezione in caso di errore di connessione (password errata, indirizzo errato o altro).
+        Questa funzione viene chiamata anche in caso di errore di autenticazione (password errata, indirizzo errato o altro).
         '''
         ssh= paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -166,7 +181,7 @@ class Core_Wallet(QtCore.QObject):
         if (self.authOk == True):
             try:
                 ns = Pyro4.naming.locateNS()
-                print("trovato NS")
+                print("authOk")
                 AnalizzatoreUri = ns.lookup("CPU_LOAD"+str(self.ID))
                 print("CPUAnalyzer URI found at {}".format(AnalizzatoreUri))
                 '''
@@ -175,9 +190,7 @@ class Core_Wallet(QtCore.QObject):
                 AnalizzatoreUri = (uri+"@"+pyroObject+":"+port)
                 '''
                 print(AnalizzatoreUri)
-                print("DIO")
                 self.analizzatore = Pyro4.Proxy(AnalizzatoreUri)
-                print("Cane")
                 self.connection_2_ok=True
                 self.start_T=True
                 
@@ -200,6 +213,7 @@ class Core_Wallet(QtCore.QObject):
     def get_N_cores (self):
         '''
         Ritorna il numero di core presenti nell'Host
+        @return Numero di Cores
         '''
         return self.__Num_Cores
     
@@ -246,7 +260,7 @@ class Core_Wallet(QtCore.QObject):
                 #return percent
             except Pyro4.errors.ConnectionClosedError:
                 self.set_Stop()
-                self.connection_lost.emit(self.address,"Persa la connessione col server - Il collegamento verrà  rimosso")
+                self.connection_lost.emit(self.ID,"Persa la connessione col server - Il collegamento verrà  rimosso")
                 #self.ERRORE("Persa la connessione col server")
                 
                 return

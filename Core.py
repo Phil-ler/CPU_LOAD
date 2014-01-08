@@ -15,6 +15,7 @@ except AttributeError:
 class Core(QtGui.QMainWindow):
     '''
     Classe che identifica un singolo Core della CPU
+    @author Filippo Verucchi
     '''
     limite_nodi= 50
     S_Test =QtCore.pyqtSignal(float)
@@ -87,7 +88,8 @@ class Core(QtGui.QMainWindow):
            
     def traccia (self):
         '''
-        segnala al grafico il prossimo punto da disegnare, passando anche i precedenti
+        Segnala al grafico il prossimo punto da disegnare, passando anche i precedenti
+        
         ''' 
         if (len(self.perc_carico) >= self.limite_nodi):
             coda_da_disegnare = self.perc_carico[len(self.perc_carico)-self.limite_nodi:len(self.perc_carico)]
@@ -95,8 +97,5 @@ class Core(QtGui.QMainWindow):
         
         else :
             self.ui.grafico.setNextPoint(self.perc_carico)
-        
         self.ui.grafico.repaint()
         #print ("Core #=",self.number," carico= ",self.perc_carico," colore= ",self.colore)
-        
-        

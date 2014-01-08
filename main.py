@@ -23,6 +23,7 @@ import argparse
 class Combo_Quit(QtGui.QWidget):
     '''
     Classe di tipo Qwidget che gestisce la gui per l'eliminazione di un Host dall'elenco
+    @author Filippo Verucchi
     '''
     
     def __init__(self,main):
@@ -60,11 +61,10 @@ class Combo_Quit(QtGui.QWidget):
             print("finestra chiusa, vado dentro a elimina Host")
             self.point_main.elimina_host(self.ID,"Host eliminato da Utente")
             
-    '''
-    Classe che aggiorna la ComboBox per la scelta dell'host da eliminare
-    ''' 
     def update_host_list (self):
-        
+        '''
+        Aggiorna l'elenco degli host connessi al nameserver
+        '''
         print("Update list")
         #delete all items
         self.combo.clear()
@@ -108,7 +108,7 @@ class Main(QtGui.QMainWindow):
     '''
     Classi Main
     Qui viene inizializzato il programma
-    
+    @author Filippo Verucchi
     '''
     def __init__(self):
         
@@ -122,12 +122,15 @@ class Main(QtGui.QMainWindow):
         super(Main, self).__init__()
         self.setCentralWidget(QtGui.QWidget(self))
         self.freq = 0.05
+        self.id_removed = []
+        
         self.ui = INTRO_GUI.Ui_MainWindow()
         self.ui.setupUi(self)
         self.setWindowIcon(QtGui.QIcon('Icon.ico'))
         
         self.Option = Option.Option(self)
         self.About = About.About()
+        #self.progress = progress_win.ProgressGui()
         
         #MENU
         self.ui.actionAdd_Host.triggered.connect(self.__showDialog_in)
@@ -144,81 +147,78 @@ class Main(QtGui.QMainWindow):
         self.dialogbox = Qt.QErrorMessage()
         
         #Start Nameserver
-        
-        
-    
-        
-    '''
-    Terminazione programma
-    '''
-    def quit_prog (self):
-       
+    def quit_prog(self):
+        '''
+        Termina il programma
+        '''
         self.Clear_list()
-        
         print("Programma terminato con successo")
         QtGui.QApplication.processEvents()
-        sys.exit(0)  
-    
-    '''
-    Vuota la lista degli IP
-    '''
+        QtGui.QApplication.setWindowIcon(QtGui.QIcon("Icon.png"))
+        sys.exit(0)    
     def Clear_list (self):
+        '''
+        Vuota la lista degli host monitorati
+        '''
         n_host=len(self.ui.host_w)
-        
         for i in range (n_host):
-            if self.ui.host_w[i].ID !=0 :
+            if self.ui.host_w[i].ID !=0 and self.ui.host_w[i].ID in self.id_removed:
                 self.elimina_host(self.ui.host_w[i].ID, "NO_MSG")
-       
-    '''
-    Setta la frequenza del timer di aggiornamento dati, lo setta a tutti gli host presenti nell'elenco
-    @param timer: numero in float che indica la frequenza di aggiornamento
-    '''
+    
     def set_Timer (self,timer):
-        
+        '''
+        Setta la frequenza del timer di aggiornamento dati, lo setta a tutti gli host presenti nell'elenco
+        @param timer numero in float che indica la frequenza di aggiornamento
+        '''
         print("SetTimer = ",timer)
         self.freq = timer
         for i in range (len(self.ui.host_w)):
             self.ui.host_w[i].set_freq(self.freq)
-     
+            
     def __showDialog_in(self):
         
         text, ok = QtGui.QInputDialog.getText(self, 'Input Dialog', 
-            'Inserire [user@]host:')
+            'Inserire user@host:')
         
         passwd, ok = QtGui.QInputDialog.getText(self, 'Input Dialog',"Inserire password per {}".format(text) , mode=2)
         
         
         if ok:
             if (text==""):
-                print("Errore")
+                print("Error NO IP")
                 self.dialogbox.showMessage("Immettere un IP o un nome per il DNS")
             else:
                 print("Creazione collegamento a {}".format(text))
                 self.crea_conn(text,passwd)
+                    
+    def crea_conn (self,IP,passwd):
+        '''
+        Crea la connessione del programma a un server di monitoraggio
+        @param IP Indirizzo o nome riconosciuto dal DNS del server    
+        @param passwd Password d'accesso dell'utente 
+        '''
+        
+        i = self.__ID
+        try:        
+            if (IP == ""):
+                print (IP)
+                raise Exception.MissingInputError
             
-    '''
-    Crea la connessione del programma a un server di monitoraggio
-    @param IP: Indirizzo o nome riconosciuto dal DNS del server    
-    '''         
-    def crea_conn (self,IP,passwd):       
-            i = self.__ID
-            try:
-                
-                if (IP == ""):
-                    raise Exception.MissingInputError
-                
-                print("IP=",IP)
-                
-                
-                new_host = Host_Widget(IP,self,self.__ID,passwd)
-                self.__ID+=1
-                self.ui.host_w.append(new_host)
-                self.ui.gridLayout.addWidget(new_host)    
-                print("host presenti {}".format(self.ui.gridLayout.count()))   
-            except AttributeError:
+            print("IP=",IP)
+            print("ID=",i)
+            if (passwd == ""):
+                passwd, ok = QtGui.QInputDialog.getText(self, 'Input Dialog',"Inserire password per {}".format(IP) , mode=2)
+
+            new_host = Host_Widget(IP,self,self.__ID,passwd)
+            self.__ID+=1
+            self.ui.host_w.append(new_host)
+            self.ui.gridLayout.addWidget(new_host)    
+            #print("host presenti {}".format(self.ui.gridLayout.count()))
+        
+        except AttributeError:
                 self.dialogbox.showMessage("IP non corretto o Server {} non attivo".format(IP))
                 self.__ID=i
-                print("Errore cane")
+                print("IP non corretto o Server {} non attivo".format(IP))
    
     
     def __showDialog_out(self):
@@ -229,31 +229,28 @@ class Main(QtGui.QMainWindow):
     def elimina_host (self,ID,msg):
         '''
         Cancella dall'elenco un IP terminandone la connessione
-        @param IP: Indirizzo del server da togliere
+        @param ID: Indirizzo del server da togliere
         @param msg: Messaggio da visualizzare tramite da DialogBox
-        '''
+        '''    
         
         if (ID==""):
                 print("Errore")
         else:
                 print("ID da cancellare {}".format(ID))
                 i_id = -1
+                
                 for i in range(len(self.ui.host_w)):
                     
                     if (int(self.ui.host_w[i].ID)==int(ID)):
                         i_id = i
                 print("indice -> {}".format(i_id))
                 if (i_id!=-1):
-                    
-                    #AZZ
-                    
-                    
                     widget = self.ui.gridLayout.itemAt(i_id)
                     widget.widget().setParent(None)
                     self.ui.host_w[i_id].local.Host_Cores.set_Stop()
                     self.ui.host_w[i_id].local.Host_Cores.closeSSHConnection()
                     self.ui.host_w.pop(i_id)
-                    
+                    self.id_removed.append(ID)
                     
                     print(msg)
                     if (msg != "NO_MSG"):
@@ -270,10 +267,9 @@ class Main(QtGui.QMainWindow):
         self.quit_prog()
         sys.exit(0)
         
-    
+
+
 def main():
-   
-    
     parser = argparse.ArgumentParser(description='Aggiunta di argomenti da startUp')    
     parser.add_argument("-a","--address",nargs="+", help="Imposta gli IP da caricare all'esecuzione del programma")
     parser.add_argument("-c","--config",help="Imposta il file di configurazione da caricare all'avvio")
@@ -284,15 +280,15 @@ def main():
     
     
     print("CIAO")
+    
     app = QtGui.QApplication(sys.argv)
     intro = Main()
     
     #usiamo gli argomenti
-    #LISTA IP
     if (args.address != None):
         lista_IP = args.address
         for i in range (len(lista_IP)):
-            intro.crea_conn(lista_IP[i])
+            intro.crea_conn(lista_IP[i],"")
     #NEED LOAD A CFGfile
     if (args.config != None):
         cfg = args.config

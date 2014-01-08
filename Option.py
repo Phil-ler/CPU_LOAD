@@ -2,7 +2,7 @@
 '''
 Created on 29/apr/2013
 
-@author: phil
+
 '''
 from PyQt4 import QtGui, Qt
 import OPTION_GUI
@@ -10,9 +10,8 @@ import configparser
 class Option(QtGui.QDialog):
    
     '''
-    Classe Option
-    
-    Finestra di dialogo che gestisce le impostazioni del programma     
+    Classe Option, fseinestra di dialogo che gestisce le impostazioni del programma     
+    @author: Filippo Verucchi
     '''
 
     def __init__(self,Main):
@@ -24,19 +23,19 @@ class Option(QtGui.QDialog):
         self.__IP_list =[]
         self.__timer = self.MainPadre.freq
         self.config = configparser.ConfigParser()
-        self.setWindowIcon(QtGui.QIcon('Icon.ico'))
+        
         #self.__timer
     
     def set_Opt_Timer(self,timer):
         '''
-        Setta il timer di aggiornamento preso dal valore della SpinBox
+        Setta il timer di aggiornamento della lettura dei dati
+        @param timer Frequenza di aggiornamento
         '''
         self.__timer = timer
         self.ui.doubleSpinBox.setValue(timer)
         self.MainPadre.set_Timer(self.__timer)
     
     def accept (self):
-        
         '''
         Tasto Ok dell'interfaccia
         Salva nel programma il valore del timer selezionato
@@ -50,6 +49,7 @@ class Option(QtGui.QDialog):
     def load_settings (self,file = None):
         '''
         Caricamento Impostazioni, legge da file il timer e gli host salvati
+        #@param file file di configurazione
         '''
         self.__timer =0
         self.__IP_list = []
@@ -98,7 +98,7 @@ class Option(QtGui.QDialog):
                         k = IP.rfind("'")
                         print("Indici j{} k{} ".format(j,k))
                         print(IP[j+1:k])
-                        self.MainPadre.crea_conn(IP[j+1:k])
+                        self.MainPadre.crea_conn(IP[j+1:k],"")
                 else:
                     IP = self.__IP_list
                     l = len(IP)
@@ -109,12 +109,10 @@ class Option(QtGui.QDialog):
         except KeyError:
             self.MainPadre.dialogbox.showMessage("File di configurazione Corrotto o Errato")
     
-    '''
-    Salva su File .cfg il timer in uso e gli IP dei server monitorati
-    '''
-    
     def save_settings (self):
-        
+        '''
+        Salva su File .cfg il timer in uso e gli IP dei server monitorati
+        '''
         self.config['Timer'] = {'Timer': str(self.__timer)}
         self.__IP_list = []
         

@@ -1,0 +1,19 @@
+'''
+        REPARTO MONITOR
+        if (self.monitor.check_monitor()!= False):
+            #controllo tipo di monitor
+            if (self.monitor.check_type() == 1):
+                self.monitor.Inc_letture(carico)
+            
+            #----------------------------------
+            print("Ora{}".format(self.monitor.currentTime()))
+            print("Partenza{}".format(self.monitor.get_begin_timer()))
+            #if (self.monitor.currentTime() >= self.monitor.get_begin_timer()):
+            #    
+            #----------------------------------
+            if ((self.monitor.check_type() == 2) and (self.monitor.currentTime() >= self.monitor.get_begin_timer())):
+                
+               
+                self.monitor.Time_Letture(carico)
+        END MONITOR
+        '''
