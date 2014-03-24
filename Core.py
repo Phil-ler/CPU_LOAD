@@ -19,6 +19,7 @@ class Core(QtGui.QMainWindow):
     '''
     limite_nodi= 50
     S_Test =QtCore.pyqtSignal(float)
+    
     def __init__(self,n):
        
         super(Core, self).__init__()

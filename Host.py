@@ -8,7 +8,7 @@ In questo modulo é presente
 from Core_Wallet import Core_Wallet
 from PyQt4 import QtCore,QtGui
 import CPU_GUI
-import monitoraggio
+#import monitoraggio
 
 
 class Host(QtGui.QMainWindow):
@@ -51,7 +51,7 @@ class Host(QtGui.QMainWindow):
         self.Host_Cores.ritorno_dati.connect(self.riempi) #quando dentro Core_Wallet viene lanciato il segnale che son pronti i dati mostra dentro i LED    
         
         #dati da monitorare
-        self.monitor_data = []
+        #self.monitor_data = []
         #print("FINE HOST")
         
     #def clear_monitor (self):
@@ -69,12 +69,14 @@ class Host(QtGui.QMainWindow):
     def start_thread (self):
         '''
         Starta il tread di lettura
+        
         '''
         self._thread.start()
 
     def stop_thread (self):
         '''
         Ferma il tread di lettura
+        
         '''
         self._thread.stop()
     

@@ -40,13 +40,7 @@ class Ui_MainWindow(object):
        
         host = Host_Widget.Host_Widget("LOCAL",MainWindow,0)
         self.host_w.append(host)
-        
-        self.gridLayout.addWidget(host)
-        
-        #self.lcd.append(lcdNumber)
-        # self.verticalLayout.addWidget(lcdNumber)n
-        
-        self.lbl_velocità = QtGui.QLabel ("Velocità di aggiornamento 3")
+        self.gridLayout.addWidget(host) 
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 512, 40))
         self.menubar.setObjectName(_fromUtf8("menubar"))
@@ -74,7 +68,8 @@ class Ui_MainWindow(object):
         self.actionSave_Configuration.setObjectName(_fromUtf8("actionSave_Configuration"))
         self.actionLoad_Configuration = QtGui.QAction(MainWindow)
         self.actionLoad_Configuration.setObjectName(_fromUtf8("actionLoad_Configuration"))
-        
+        self.actionDoc = QtGui.QAction(MainWindow)
+        self.actionDoc.setObjectName(_fromUtf8("actionDoc"))        
         self.actionAbout = QtGui.QAction(MainWindow)
         self.actionAbout.setObjectName(_fromUtf8("actionAbout"))
         
@@ -82,13 +77,15 @@ class Ui_MainWindow(object):
         self.menuFile.addAction(self.actionRemove_Host)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionQuit)
-        self.menuSettings.addAction(self.actionGeneral_Options)
         
+        self.menuSettings.addAction(self.actionGeneral_Options)
         self.menuSettings.addSeparator()
         self.menuSettings.addAction(self.actionSave_Configuration)
         self.menuSettings.addAction(self.actionLoad_Configuration)
         
         self.menu.addAction(self.actionAbout)
+        self.menu.addSeparator()
+        self.menu.addAction(self.actionDoc)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuSettings.menuAction())
         self.menubar.addAction(self.menu.menuAction())
@@ -109,3 +106,4 @@ class Ui_MainWindow(object):
         self.actionSave_Configuration.setText(_translate("MainWindow", "Save Configuration", None))
         self.actionLoad_Configuration.setText(_translate("MainWindow", "Load Configuration", None))
         self.actionAbout.setText(_translate("MainWindow", "About", None))
+        self.actionDoc.setText(_translate("MainWindow", "Documentazione", None))

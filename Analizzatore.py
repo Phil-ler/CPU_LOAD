@@ -128,8 +128,6 @@ def main():
         
         print("NS ->{}".format(ns))
         pyroObjName= "CPU_LOAD"+str(ID)
-
-        #daemon= Pyro4.Daemon()
         daemon= Pyro4.Daemon(analizzatore.get_IP())
         try:
             Analizzatore_uri=ns.lookup(pyroObjName)

@@ -39,6 +39,7 @@ class Host_Widget (QtGui.QPushButton):
     def Ping_ON (self):
         '''
         Se la connessione è attiva fa partire il thread
+        
         '''
         
         self.ping_True= True
@@ -46,6 +47,7 @@ class Host_Widget (QtGui.QPushButton):
     def Ping_Off (self):
         '''
         Se la connessione cade blocca il thread di aggiornamento
+        
         '''
         self.ping_True = False
     
@@ -79,6 +81,7 @@ class Host_Widget (QtGui.QPushButton):
     def show_window(self):
         '''
         Mostra la finestra con le informazioni dell'host
+        
         ''' 
         self.local.start_thread()
         self.local.Host_Cores.set_Start()
@@ -87,6 +90,7 @@ class Host_Widget (QtGui.QPushButton):
     def show_generic_load (self,carico):
         '''
         Dato il carico generico dell'host, lo mostra a video
+        
         '''
         self.carico= carico
         self.repaint()

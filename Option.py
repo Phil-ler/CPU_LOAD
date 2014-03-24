@@ -49,7 +49,7 @@ class Option(QtGui.QDialog):
     def load_settings (self,file = None):
         '''
         Caricamento Impostazioni, legge da file il timer e gli host salvati
-        #@param file file di configurazione
+        @param file file di configurazione
         '''
         self.__timer =0
         self.__IP_list = []
@@ -110,8 +110,10 @@ class Option(QtGui.QDialog):
             self.MainPadre.dialogbox.showMessage("File di configurazione Corrotto o Errato")
     
     def save_settings (self):
+        
         '''
-        Salva su File .cfg il timer in uso e gli IP dei server monitorati
+        Salva su File .cfg il timer in uso e gli IP dei server monitorati.
+        l'estensione predefinita è .cfg
         '''
         self.config['Timer'] = {'Timer': str(self.__timer)}
         self.__IP_list = []

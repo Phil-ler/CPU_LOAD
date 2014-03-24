@@ -8,6 +8,7 @@ import Core
 class Grafico(QtGui.QWidget):
     '''
     Widget dedicato al disegno del grafico del carico di un singolo core
+    Viene designato un grafico tempo-carico
     '''
 
 
@@ -19,12 +20,14 @@ class Grafico(QtGui.QWidget):
     def setNextPoint (self,punto):
         '''
         Setta la lista aggiornata dentro la variabile interna, dedicata al disegno del grafico
+        @param prossimo punto da disegnare
         '''
         self.__coda=punto
         
     def paintEvent(self, event):
         '''
         Paint event della classe grafico
+        Chiamato da solo ogni volta che viene disegnato qualcosa
         '''
     
         qp = QtGui.QPainter()
@@ -42,6 +45,9 @@ class Grafico(QtGui.QWidget):
     def drawGrid(self,event,qp):
         '''
         Disegna la griglia di fondo del grafico
+        Vengono mostrare 4 rette mostranti i valori del 25%, 50%, 75%, 100% del carico
+        @param event
+        @param Oggetto QPainter
         '''
         qp.setBrush(Qt.QBrush(QtCore.Qt.black)) #"#c56c00"
         qp.drawRect(0,0,self.width(),self.height())
@@ -51,9 +57,17 @@ class Grafico(QtGui.QWidget):
         qp.drawText(0,self.height()*0.75,"25")
         qp.drawText(0,self.height()*0.25,"75")
         qp.drawText(0,self.height()*0.05,"100")
+        pen = QtGui.QPen(QtCore.Qt.cyan, 2, QtCore.Qt.SolidLine)
+        qp.setPen(pen)
+        #qp.setPen(QtCore.Qt.DashDotLine)
+        qp.drawLine(0,self.height()*0.5,self.width(),self.height()*0.5)
+        qp.drawLine(0,self.height()*0.75,self.width(),self.height()*0.75)
+        qp.drawLine(0,self.height()*0.25,self.width(),self.height()*0.25)
+        qp.drawLine(0,self.height()*0.05,self.width(),self.height()*0.05)
         
        
     def drawline (self,event,qp):
+       
         '''
         Disegna l'andamento del grafico
         @param event

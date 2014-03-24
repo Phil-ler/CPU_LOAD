@@ -8,7 +8,7 @@ from Core import *
 from Analizzatore import Analizzatore
 import time
 from PyQt4 import QtCore, QtGui
-import monitoraggio
+#import monitoraggio
 import Pyro4
 import paramiko
 import socket
@@ -175,6 +175,7 @@ class Core_Wallet(QtCore.QObject):
     def ConnectHost(self):
         '''
         Reperisce il pyroObject remoto registrato sul NameServer per ottenere le info sull'Host
+        L'uri richiesto viene trovato tramite la combinazione di nome CPU_LOAD+id(valore incrementale)
         '''        
         pyroObject = str(self.OpenServerConnection())
         
@@ -201,7 +202,7 @@ class Core_Wallet(QtCore.QObject):
                 self.closeSSHConnection()
                 return
     
-    def fill (self,percent):
+    def _fill (self,percent):
         '''
         Quando i valori dei core sono stati letti, questa funzione viene chiamata per riempire i vari campi di lettura
         '''    
@@ -238,7 +239,8 @@ class Core_Wallet(QtCore.QObject):
      
     def Run(self):
         '''
-        Funzione legge dalla classe Analizzatore i carichi delle CPU secondo il timer dato e riempe i campi di lettura con la funzione "fill"
+        Funzione legge dalla classe Analizzatore i carichi delle CPU secondo il timer dato e riempe i campi di lettura
+        Viene eseguita finche il thread rimane attivo
         '''
     
         while(self.start_T):
@@ -250,7 +252,7 @@ class Core_Wallet(QtCore.QObject):
                 media =self.analizzatore.get_generic(self.timer)
                 print(percent)
                 #riempi ogni singolo Core
-                self.fill(percent) 
+                self._fill(percent) 
             
                 #emette il segnale, ritornando percent
                 self.ritorno_dati.emit(percent)
@@ -260,7 +262,7 @@ class Core_Wallet(QtCore.QObject):
                 #return percent
             except Pyro4.errors.ConnectionClosedError:
                 self.set_Stop()
-                self.connection_lost.emit(self.ID,"Persa la connessione col server - Il collegamento verrà  rimosso")
+                self.connection_lost.emit(self.ID,"Persa la connessione col server - Il collegamento verrà rimosso")
                 #self.ERRORE("Persa la connessione col server")
                 
                 return

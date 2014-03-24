@@ -16,9 +16,34 @@ import Pyro4
 import time
 import threading
 import socket
-
+import webbrowser
 from Host_Widget import Host_Widget
 import argparse 
+   
+   
+def startNameServer():
+    '''
+    Questa funzione ha il compito di permettere permettere il collegamento con host esterni: fa partire un
+    nameserver che verra' usato per registrare gli URI degli host esterni a cui ci si vuole collegare.
+    '''
+    print("Staring NS")
+    try:
+        
+        Pyro4.naming.startNSloop()
+    except socket.error:
+        print("Server already started!!!")
+        sys.exit(0)
+
+
+def StartNameServerLoop():
+    '''
+     Questa funzione ha il compito di far partire il nameserver all'interno di un thread parallelo di tipo
+    "demone" il quale si chiudera' automaticamente alla chiusura dell'applicazione
+    '''
+    
+    NSThread = threading.Thread(target = startNameServer, args = [])
+    NSThread.setDaemon(True)
+    NSThread.start()
    
 class Combo_Quit(QtGui.QWidget):
     '''
@@ -76,29 +101,6 @@ class Combo_Quit(QtGui.QWidget):
                 host = str(str(self.point_main.ui.host_w[i].ID)+") " +self.point_main.ui.host_w[i].IP )
                 self.combo.addItem(host)
 
-def startNameServer():
-    '''
-    Questa funzione ha il compito di permettere permettere il collegamento con host esterni: fa partire un
-    nameserver che verra' usato per registrare gli URI degli host esterni a cui ci si vuole collegare.
-    '''
-    print("Staring NS")
-    try:
-        
-        Pyro4.naming.startNSloop()
-    except socket.error:
-        print("Server already started!!!")
-        sys.exit(0)
-
-
-def StartNameServerLoop():
-    '''
-     Questa funzione ha il compito di far partire il nameserver all'interno di un thread parallelo di tipo
-    "demone" il quale si chiudera' automaticamente alla chiusura dell'applicazione
-    '''
-    
-    NSThread = threading.Thread(target = startNameServer, args = [])
-    NSThread.setDaemon(True)
-    NSThread.start()
 
         
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -130,7 +132,6 @@ class Main(QtGui.QMainWindow):
         
         self.Option = Option.Option(self)
         self.About = About.About()
-        #self.progress = progress_win.ProgressGui()
         
         #MENU
         self.ui.actionAdd_Host.triggered.connect(self.__showDialog_in)
@@ -140,6 +141,7 @@ class Main(QtGui.QMainWindow):
         self.ui.actionLoad_Configuration.triggered.connect(self.Option.load_settings)
         self.ui.actionSave_Configuration.triggered.connect(self.Option.save_settings)
         self.ui.actionAbout.triggered.connect(self.About.mostra)
+        self.ui.actionDoc.triggered.connect(self._ShowDoc)
         
         print("host presenti {}".format(self.ui.gridLayout.count()))   
         
@@ -153,16 +155,21 @@ class Main(QtGui.QMainWindow):
         '''
         self.Clear_list()
         print("Programma terminato con successo")
-        QtGui.QApplication.processEvents()
-        QtGui.QApplication.setWindowIcon(QtGui.QIcon("Icon.png"))
+        
         sys.exit(0)    
+    
+    def _ShowDoc(self):
+        webbrowser.open("fie:///html/index.html")
+    
     def Clear_list (self):
         '''
-        Vuota la lista degli host monitorati
+        Vuota la lista degli host monitorati.
+        Usata per caricare una nuova configurazione.
         '''
+        print ("Vuota lista")
         n_host=len(self.ui.host_w)
         for i in range (n_host):
-            if self.ui.host_w[i].ID !=0 and self.ui.host_w[i].ID in self.id_removed:
+            if self.ui.host_w[i].ID !=0 and self.ui.host_w[i].ID not in self.id_removed:
                 self.elimina_host(self.ui.host_w[i].ID, "NO_MSG")
     
     def set_Timer (self,timer):
@@ -176,7 +183,6 @@ class Main(QtGui.QMainWindow):
             self.ui.host_w[i].set_freq(self.freq)
             
     def __showDialog_in(self):
-        
         text, ok = QtGui.QInputDialog.getText(self, 'Input Dialog', 
             'Inserire user@host:')
         
@@ -230,15 +236,15 @@ class Main(QtGui.QMainWindow):
         '''
         Cancella dall'elenco un IP terminandone la connessione
         @param ID: Indirizzo del server da togliere
-        @param msg: Messaggio da visualizzare tramite da DialogBox
+        @param msg: Messaggio da visualizzare tramite da DialogBox, con NO_MSG la finestra
         '''    
-        
+        print ("elimina host")
         if (ID==""):
                 print("Errore")
         else:
                 print("ID da cancellare {}".format(ID))
                 i_id = -1
-                
+               
                 for i in range(len(self.ui.host_w)):
                     
                     if (int(self.ui.host_w[i].ID)==int(ID)):
@@ -255,7 +261,6 @@ class Main(QtGui.QMainWindow):
                     print(msg)
                     if (msg != "NO_MSG"):
                         self.dialogbox.showMessage(msg)
-                        #self.dialogbox.show()
                         print("IP removed {}".format(ID))
                         print("Tolto 1 IP, rimanenti host ={}".format(self.ui.gridLayout.count()))
                     
@@ -263,10 +268,11 @@ class Main(QtGui.QMainWindow):
                     print("ID non trovato")
     
    
-    def closeEvent(self,event):    
+    def closeEvent(self,event):
         self.quit_prog()
+        #time.sleep(3)
         sys.exit(0)
-        
+    
 
 
 def main():
@@ -301,4 +307,7 @@ def main():
         
     sys.exit(app.exec_())
 if __name__ == '__main__':
+    '''
+    @mainpage asd
+    '''
     main()
